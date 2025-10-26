@@ -46,6 +46,25 @@ header {
 }
 
 /* 主体内容 */
+.server-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #007aff;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin: 0 auto 16px;
+    padding: 8px 14px;
+    width: fit-content;
+}
+.server-status .divider {
+    color: #aaa;
+}
+
 main {
     flex: 1;
     overflow-y: auto;

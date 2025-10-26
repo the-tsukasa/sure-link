@@ -23,6 +23,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            overflow: hidden;
         }
         h1 {
             font-size: 2rem;
@@ -35,6 +36,10 @@
         @keyframes glow {
             from { text-shadow: 0 0 10px #66e3ff; }
             to { text-shadow: 0 0 20px #9e7bff; }
+        }
+        p {
+            color: #9bbad1;
+            margin-bottom: 2rem;
         }
         button {
             background: linear-gradient(90deg, var(--brand), var(--brand-2));
@@ -50,11 +55,68 @@
             transform: scale(1.05);
             opacity: 0.9;
         }
+
+        /* 淡出动画 */
+        .fade-out {
+            animation: fadeOut 0.8s ease forwards;
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: scale(0.98); }
+        }
+
+        /* Toast 提示 */
+        #toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: var(--fg);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        #toast.show { opacity: 1; }
     </style>
 </head>
+
 <body>
 <h1>すれ違いが、つながりになる。</h1>
 <p>共感でつながる新しい世界へ</p>
-<button onclick="location.href='nickname.html'">始める</button>
+<button id="startBtn">始める</button>
+<div id="toast">位置情報を取得中...</div>
+
+<script>
+    const btn = document.getElementById("startBtn");
+    const toast = document.getElementById("toast");
+
+    btn.addEventListener("click", () => {
+        toast.textContent = "位置情報を取得中...";
+        toast.classList.add("show");
+
+        // 请求位置信息
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    toast.textContent = "位置情報が許可されました";
+                    setTimeout(() => {
+                        document.body.classList.add("fade-out");
+                        setTimeout(() => location.href = "nickname.html", 800);
+                    }, 1200);
+                },
+                (err) => {
+                    toast.textContent = "位置情報の許可が必要です";
+                    setTimeout(() => toast.classList.remove("show"), 2500);
+                }
+            );
+        } else {
+            toast.textContent = "位置情報がサポートされていません。";
+        }
+    });
+</script>
 </body>
 </html>

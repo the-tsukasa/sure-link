@@ -19,7 +19,11 @@
 <header>Sure Link</header>
 
 <main>
-    <h2>現在オンライン人数：<span id="onlineCount">0</span>人</h2>
+    <div class="server-status">
+        <span id="userCount">現在オンライン人数：0人</span>
+        <span class="divider">｜</span>
+        <span id="serverState">サーバー：🟡 接続中...</span>
+    </div>
 
     <section id="messageBoard">
         <h3>掲示板</h3>
@@ -28,6 +32,7 @@
         <ul id="msgList"></ul>
     </section>
 </main>
+
 
 <nav>
     <a href="index.html" class="active">

@@ -12,28 +12,24 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const server = http.createServer(app);
 
-// CORS允许GitHub Pages访问
+// ===== Middleware =====
 app.use(cors());
 app.use(express.json());
 
+// ===== 静态资源 =====
+app.use(express.static(path.join(__dirname, "public")));
 
-
-// 根路径 → 返回 welcome.html（初始页面）
+// 根路径 → welcome.html
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "welcome.html"));
 });
 
-// 静态文件目录（让 public 文件夹可访问）
-app.use(express.static(path.join(__dirname, "public")));
-
-// 启动 socket.io
+// ===== 启动 Socket.io =====
 const io = new Server(server, {
-    cors: {
-        origin: "*", // 可改成具体前端域名
-    },
+    cors: { origin: "*" },
 });
 
-// 保存所有用户的位置信息
+// ===== 用户位置 =====
 const users = {};
 
 function calcDistance(lat1, lng1, lat2, lng2) {
@@ -50,11 +46,15 @@ function calcDistance(lat1, lng1, lat2, lng2) {
     return R * c;
 }
 
-// socket.io 逻辑
+// ===== Socket.io逻辑 =====
 io.on("connection", (socket) => {
     console.log(`🟢 ${socket.id} connected`);
     users[socket.id] = null;
 
+    // === 更新在线人数 ===
+    io.emit("onlineCount", io.engine.clientsCount);
+
+    // === 位置信息更新 ===
     socket.on("updateLocation", (pos) => {
         users[socket.id] = pos;
         io.emit("updateUsers", users);
@@ -70,18 +70,27 @@ io.on("connection", (socket) => {
         }
     });
 
+    // === 聊天信息处理 ===
+    socket.on("chatMessage", (msg) => {
+        const user = socket.id.slice(0, 5);
+        io.emit("chatMessage", { user, text: msg });
+    });
+
+    // === 断开连接 ===
     socket.on("disconnect", () => {
         console.log(`🔴 ${socket.id} disconnected`);
         delete users[socket.id];
         io.emit("updateUsers", users);
+        io.emit("onlineCount", io.engine.clientsCount);
     });
 });
 
-// 测试用API
+// ===== 测试API =====
 app.get("/api/test", (req, res) => {
     res.json({ message: "Sure-Link backend is running ✅" });
 });
 
+// ===== 启动服务器 =====
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`🌍 Server running on port ${PORT}`);
