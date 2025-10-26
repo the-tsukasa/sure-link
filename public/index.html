@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- ===== PWA 基本信息 ===== -->
     <meta name="theme-color" content="#ffffff">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- ===== iOS 兼容 ===== -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="manifest" href="manifest.json" />
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-title" content="Sure Link">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512.png">
+
     <title>Sure Link</title>
-    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- ===== CSS & Scripts ===== -->
+    <link rel="stylesheet" href="/css/style.css">
     <script defer src="/socket.io/socket.io.js"></script>
-    <script defer src="js/app.js"></script>
+    <script defer src="/js/app.js"></script>
     <script src="https://kit.fontawesome.com/a2e0b6a3f1.js" crossorigin="anonymous"></script>
 </head>
+
 
 <body>
 <header>Sure Link</header>
