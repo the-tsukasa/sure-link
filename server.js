@@ -1,90 +1,88 @@
+// server.js
 import express from "express";
-import { createServer } from "http";
+import http from "http";
 import { Server } from "socket.io";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-const server = createServer(app);
-const io = new Server(server);
+const server = http.createServer(app);
 
-app.use(express.static("public"));
+// CORS允许GitHub Pages访问
+app.use(cors());
+app.use(express.json());
 
-let onlineUsers = 0;
-let users = {}; // 存储在线用户及其位置
 
-// ✅ 添加昵称池
-const nicknames = [
-    "Yuki", "Taro", "Mika", "Ken", "Sora",
-    "Hana", "Riku", "Aoi", "Kazu", "Mio",
-    "Ren", "Yuna", "Sho", "Haru", "Rio"
-];
 
+// 根路径 → 返回 welcome.html（初始页面）
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "welcome.html"));
+});
+
+// 静态文件目录（让 public 文件夹可访问）
+app.use(express.static(path.join(__dirname, "public")));
+
+// 启动 socket.io
+const io = new Server(server, {
+    cors: {
+        origin: "*", // 可改成具体前端域名
+    },
+});
+
+// 保存所有用户的位置信息
+const users = {};
+
+function calcDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371000;
+    const φ1 = (lat1 * Math.PI) / 180;
+    const φ2 = (lat2 * Math.PI) / 180;
+    const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+    const Δλ = ((lng2 - lng1) * Math.PI) / 180;
+
+    const a =
+        Math.sin(Δφ / 2) ** 2 +
+        Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+// socket.io 逻辑
 io.on("connection", (socket) => {
-    onlineUsers++;
-    io.emit("onlineCount", onlineUsers);
+    console.log(`🟢 ${socket.id} connected`);
+    users[socket.id] = null;
 
-    // 每个连接随机分配一个昵称
-    const name = nicknames[Math.floor(Math.random() * nicknames.length)];
-    users[socket.id] = { name, lat: null, lng: null };
-
-    console.log(`🟢 ${name} さんが接続しました。現在オンライン: ${onlineUsers}人`);
-
-    // 📍 位置更新事件
-    socket.on("updateLocation", (loc) => {
-        users[socket.id].lat = loc.lat;
-        users[socket.id].lng = loc.lng;
+    socket.on("updateLocation", (pos) => {
+        users[socket.id] = pos;
         io.emit("updateUsers", users);
 
-        // 检查距离，50m内则触发 encounter
-        for (const id in users) {
-            if (id !== socket.id && users[id].lat) {
-                const dist = getDistance(loc, users[id]);
-                if (dist < 50) {
-                    io.to(socket.id).emit("encounter", {
-                        user: users[id].name,
-                        distance: dist
-                    });
-                    io.to(id).emit("encounter", {
-                        user: users[socket.id].name,
-                        distance: dist
-                    });
+        for (const [id, u] of Object.entries(users)) {
+            if (id !== socket.id && u) {
+                const d = calcDistance(pos.lat, pos.lng, u.lat, u.lng);
+                if (d < 50) {
+                    io.to(id).emit("encounter", { user: socket.id, distance: d });
+                    io.to(socket.id).emit("encounter", { user: id, distance: d });
                 }
             }
         }
     });
 
-    // 💬 聊天消息事件
-    socket.on("chatMessage", (text) => {
-        const user = users[socket.id]?.name || "匿名";
-        io.emit("chatMessage", { user, text, id: socket.id });
-    });
-
-
-
-    // ❌ 用户断开连接
     socket.on("disconnect", () => {
-        console.log(`🔴 ${users[socket.id]?.name || "Unknown"} さんが退出しました。`);
-        onlineUsers--;
+        console.log(`🔴 ${socket.id} disconnected`);
         delete users[socket.id];
         io.emit("updateUsers", users);
-        io.emit("onlineCount", onlineUsers);
     });
 });
 
-// 📏 Haversine公式で距離を計算（メートル）
-function getDistance(a, b) {
-    const R = 6371000;
-    const toRad = (deg) => (deg * Math.PI) / 180;
-    const dLat = toRad(b.lat - a.lat);
-    const dLng = toRad(b.lng - a.lng);
-    const lat1 = toRad(a.lat);
-    const lat2 = toRad(b.lat);
-    const val =
-        Math.sin(dLat / 2) ** 2 +
-        Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
-    return R * 2 * Math.atan2(Math.sqrt(val), Math.sqrt(1 - val));
-}
+// 测试用API
+app.get("/api/test", (req, res) => {
+    res.json({ message: "Sure-Link backend is running ✅" });
+});
 
-const PORT = 3000;
-server.listen(PORT, () =>
-    console.log(`✅ Sure Link running on http://localhost:${PORT}`)
-);
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`🌍 Server running on port ${PORT}`);
+});

@@ -29,5 +29,14 @@
         <ul id="msgList"></ul>
     </section>
 </main>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const name = localStorage.getItem("nickname");
+        if (name) {
+            document.getElementById("welcomeText").textContent = `ようこそ、${name}さん`;
+        }
+    });
+</script>
+
 </body>
 </html>

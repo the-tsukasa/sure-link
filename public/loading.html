@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>入場中...</title>
+    <style>
+        body {
+            background: radial-gradient(circle, #1a2338, #0b1020);
+            color: #fff;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            height: 100vh;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .loader {
+            width: 60px; height: 60px;
+            border: 6px solid rgba(255,255,255,0.2);
+            border-top: 6px solid #66e3ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<div class="loader"></div>
+<p>世界を読み込み中...</p>
+<script>
+    setTimeout(() => {
+        location.href = "index.html";
+    }, 2500);
+</script>
+</body>
+</html>

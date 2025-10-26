@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニックネーム設定</title>
+    <style>
+        body {
+            background: #0b1020;
+            color: white;
+            font-family: 'Noto Sans JP', sans-serif;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            height: 100vh;
+        }
+        input {
+            padding: 10px 16px;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        button {
+            background: linear-gradient(90deg, #66e3ff, #9e7bff);
+            border: none; padding: 10px 24px;
+            color: white; border-radius: 50px;
+            cursor: pointer;
+        }
+        button:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+<h2>ニックネームを入力してください</h2>
+<input id="nickname" type="text" placeholder="例：ツカサ" />
+<div>
+    <button onclick="autoSet()">自動決定</button>
+    <button onclick="start()">確認</button>
+</div>
+
+<script>
+    function autoSet() {
+        const names = ["ユウ", "アオイ", "レン", "ハル", "ミナト"];
+        document.getElementById("nickname").value =
+            names[Math.floor(Math.random() * names.length)];
+    }
+    function start() {
+        const name = document.getElementById("nickname").value.trim();
+        if (!name) return alert("ニックネームを入力してください");
+        localStorage.setItem("nickname", name);
+        location.href = "loading.html";
+    }
+</script>
+</body>
+</html>
