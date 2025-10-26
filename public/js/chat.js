@@ -10,7 +10,7 @@ const nickname = localStorage.getItem("nickname") || "匿名";
 btn.addEventListener("click", sendMsg);
 input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        e.preventDefault(); // 避免换行
+        e.preventDefault();
         sendMsg();
     }
 });
@@ -25,13 +25,12 @@ function sendMsg() {
         text,
     };
 
-    // 本地立即显示（不等服务器回传）
     renderMessage(msgData, true);
     socket.emit("chatMessage", msgData);
     input.value = "";
 }
 
-// ====== 颜色生成器 ======
+// ====== 颜色生成 ======
 function getColorFromName(name) {
     let hash = 0;
     for (let i = 0; i < name.length; i++) {
@@ -41,7 +40,7 @@ function getColorFromName(name) {
     return `hsl(${hue}, 70%, 60%)`;
 }
 
-// ====== 头像节点 ======
+// ====== 创建头像 ======
 function createAvatar(user) {
     const div = document.createElement("div");
     div.className = "avatar";
@@ -52,33 +51,26 @@ function createAvatar(user) {
 
 // ====== 渲染消息 ======
 function renderMessage(data, isLocal = false) {
+    if (!data.text) return;
+
     const li = document.createElement("li");
     li.classList.add("message");
+    if (data.id === socket.id || isLocal) li.classList.add("me");
 
-    // 区分是否为自己
-    const isMe = data.id === socket.id || isLocal;
-    if (isMe) li.classList.add("me");
-
-    // 时间戳
     const timeText = new Date().toLocaleTimeString("ja-JP", {
         hour: "2-digit",
         minute: "2-digit",
     });
 
-    // 头像
     const avatarEl = createAvatar(data.user);
-
-    // 外层容器
     const wrapper = document.createElement("div");
     wrapper.classList.add("bubble-wrapper");
 
-    // 昵称
     const nameRow = document.createElement("div");
     nameRow.classList.add("user-row");
     nameRow.textContent = data.user;
     nameRow.style.color = getColorFromName(data.user);
 
-    // 气泡 + 时间行
     const bubbleLine = document.createElement("div");
     bubbleLine.classList.add("bubble-line");
 
@@ -92,7 +84,6 @@ function renderMessage(data, isLocal = false) {
 
     bubbleLine.appendChild(bubble);
     bubbleLine.appendChild(timeEl);
-
     wrapper.appendChild(nameRow);
     wrapper.appendChild(bubbleLine);
 
@@ -100,22 +91,12 @@ function renderMessage(data, isLocal = false) {
     li.appendChild(wrapper);
     msgList.appendChild(li);
 
-    // 平滑滚动到底部
-    msgList.scrollTo({
-        top: msgList.scrollHeight,
-        behavior: "smooth",
-    });
+    msgList.scrollTo({ top: msgList.scrollHeight, behavior: "smooth" });
 }
 
 // ====== 接收消息 ======
 socket.on("chatMessage", (data) => {
-    // 如果是自己发的消息（本地已显示），不重复
     if (data.id === socket.id) return;
-    renderMessage(data, false);
-});
-socket.on("chatMessage", (data) => {
-    if (data.id !== socket.id) {
-        renderMessage(data);
-        navigator.vibrate?.(20);
-    }
+    renderMessage(data);
+    navigator.vibrate?.(20);
 });

@@ -16,45 +16,46 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(express.json());
 
-// ===== 静态资源 =====
+// ===== Static Files =====
 app.use(express.static(path.join(__dirname, "public")));
 
-// 根路径 → welcome.html
+// Root Path → welcome.html
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "welcome.html"));
 });
 
-// ===== 启动 Socket.io =====
+// ===== Start Socket.io =====
 const io = new Server(server, {
     cors: { origin: "*" },
 });
 
-// ===== 用户位置 =====
+// ===== User Locations =====
 const users = {};
 
 function calcDistance(lat1, lng1, lat2, lng2) {
-    const R = 6371000;
-    const φ1 = (lat1 * Math.PI) / 180;
-    const φ2 = (lat2 * Math.PI) / 180;
-    const Δφ = ((lat2 - lat1) * Math.PI) / 180;
-    const Δλ = ((lng2 - lng1) * Math.PI) / 180;
+    const R = 6371000; // Earth radius in meters
+    const phi1 = (lat1 * Math.PI) / 180;
+    const phi2 = (lat2 * Math.PI) / 180;
+    const dPhi = ((lat2 - lat1) * Math.PI) / 180;
+    const dLambda = ((lng2 - lng1) * Math.PI) / 180;
 
     const a =
-        Math.sin(Δφ / 2) ** 2 +
-        Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) ** 2;
+        Math.sin(dPhi / 2) ** 2 +
+        Math.cos(phi1) * Math.cos(phi2) * Math.sin(dLambda / 2) ** 2;
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
 
-// ===== Socket.io逻辑 =====
+
+// ===== Socket.io Logic =====
 io.on("connection", (socket) => {
     console.log(`🟢 ${socket.id} connected`);
     users[socket.id] = null;
 
-    // === 更新在线人数 ===
+    // === Update Online Count ===
     io.emit("onlineCount", io.engine.clientsCount);
 
-    // === 位置信息更新 ===
+    // === Handle Location Update ===
     socket.on("updateLocation", (pos) => {
         users[socket.id] = pos;
         io.emit("updateUsers", users);
@@ -70,13 +71,12 @@ io.on("connection", (socket) => {
         }
     });
 
-    // === 聊天信息处理 ===
-    socket.on("chatMessage", (msg) => {
-        const user = socket.id.slice(0, 5);
-        io.emit("chatMessage", { user, text: msg });
+    // === Handle Chat Messages ===
+    socket.on("chatMessage", (msgData) => {
+        io.emit("chatMessage", msgData);
     });
 
-    // === 断开连接 ===
+    // === Handle Disconnect ===
     socket.on("disconnect", () => {
         console.log(`🔴 ${socket.id} disconnected`);
         delete users[socket.id];
@@ -85,12 +85,12 @@ io.on("connection", (socket) => {
     });
 });
 
-// ===== 测试API =====
+// ===== Test API =====
 app.get("/api/test", (req, res) => {
     res.json({ message: "Sure-Link backend is running ✅" });
 });
 
-// ===== 启动服务器 =====
+// ===== Start Server =====
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`🌍 Server running on port ${PORT}`);
