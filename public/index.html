@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sure Link - ホーム</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="js/app.js"></script>
+</head>
+<body>
+<header>
+    <h1>Sure Link</h1>
+    <nav>
+        <a href="index.html">🏠 ホーム</a>
+        <a href="chat.html">💬 チャット</a>
+        <a href="map.html">📍 すれ違い</a>
+        <a href="profile.html">👤 マイページ</a>
+    </nav>
+</header>
+
+<main>
+    <h2>現在オンライン人数：<span id="onlineCount">0</span>人</h2>
+
+    <section id="messageBoard">
+        <h3>掲示板</h3>
+        <textarea id="msgInput" placeholder="メッセージを書く..."></textarea>
+        <button id="postBtn">投稿</button>
+        <ul id="msgList"></ul>
+    </section>
+</main>
+</body>
+</html>

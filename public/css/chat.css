@@ -1,0 +1,194 @@
+/* ====== Chat Page Style (chat.css) ====== */
+body {
+    font-family: 'Noto Sans JP', 'Segoe UI', sans-serif;
+    background: #f4f5f7;
+    color: #333;
+    margin: 0;
+}
+
+.chat-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+    overflow: hidden;
+}
+
+/* ====== message list ====== */
+#messages {
+    flex: 1;
+    list-style: none;
+    margin: 0;
+    padding: 24px;
+    overflow-y: auto;
+    background: #f9fafc;
+    scroll-behavior: smooth;
+}
+
+/* ====== each message row ====== */
+/* 外层一条消息是左右布局（头像 + 气泡块） */
+.message {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    max-width: 80%;
+}
+
+/* 自己的消息翻转到右边 */
+.message.me {
+    margin-left: auto;        /* 整个块推到右侧 */
+    flex-direction: row-reverse;
+}
+
+/* 头像样式 */
+.avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    background: #ccc;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* 头像和消息气泡之间的水平间距 */
+.message:not(.me) .avatar {
+    margin-right: 10px;
+}
+.message.me .avatar {
+    margin-left: 10px;
+}
+
+/* 容纳昵称 + 气泡 + 时间 的这个列 */
+.bubble-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+/* 昵称 */
+.user-row {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    color: #0078ff;
+}
+.message.me .user-row {
+    color: #16a34a;
+    text-align: right;
+}
+
+/* 气泡 + 时间戳 的一行 */
+.bubble-line {
+    display: flex;
+    align-items: flex-end;
+    max-width: 100%;
+}
+
+/* 气泡本体 */
+.bubble {
+    display: inline-block;
+    background: #fff;
+    border-radius: 16px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-break: break-word;
+    color: #222;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    max-width: 100%;
+    border-top-left-radius: 6px;
+}
+
+/* 自己的消息气泡（蓝色） */
+.message.me .bubble {
+    background: linear-gradient(135deg, #0078ff, #005fd1);
+    color: #fff;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 6px;
+}
+
+/* 时间戳 */
+.time {
+    font-size: 0.75rem;
+    color: #999;
+    line-height: 1;
+    white-space: nowrap;
+    margin-left: 8px;
+    margin-right: 0;
+    align-self: flex-end;
+}
+
+/* 自己的消息：时间戳应该在气泡左侧 */
+.message.me .bubble-line {
+    flex-direction: row-reverse;   /* 让顺序变成 [time][bubble] */
+}
+
+.message.me .time {
+    margin-left: 0;
+    margin-right: 8px;
+    color: #999;
+    text-align: right;
+}
+
+/* ====== input area ====== */
+.input-area {
+    display: flex;
+    gap: 10px;
+    padding: 14px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    align-items: center;
+}
+
+.input-area input {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 12px 14px;
+    font-size: 15px;
+    background: #fafafa;
+    transition: 0.2s;
+}
+
+.input-area input:focus {
+    outline: none;
+    border-color: #0078ff;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(0,120,255,0.1);
+}
+
+.input-area button {
+    border: none;
+    background: #0078ff;
+    color: white;
+    border-radius: 10px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.1s;
+}
+
+.input-area button:hover {
+    background: #005fd1;
+    transform: translateY(-1px);
+}
+
+/* 滚动条 */
+#messages::-webkit-scrollbar {
+    width: 6px;
+}
+#messages::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 6px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sure Link - すれ違い</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script defer src="js/map.js"></script>
+</head>
+<body>
+<header>
+    <h1>📍 Sure Link</h1>
+    <nav>
+        <a href="index.html">🏠 ホーム</a>
+        <a href="chat.html">💬 チャット</a>
+        <a href="map.html">📍 すれ違い</a>
+        <a href="profile.html">👤 マイページ</a>
+    </nav>
+</header>
+
+<main>
+    <h2>現在地マップ</h2>
+    <div id="map" style="height: 500px; border-radius: 12px;"></div>
+
+    <section id="encounterLog" style="margin-top: 20px;">
+        <h3>すれ違い履歴</h3>
+        <ul id="encounterList"></ul>
+    </section>
+
+    <p id="status" style="margin-top: 12px; font-weight: bold; color: #0078ff;"></p>
+</main>
+
+</body>
+</html>

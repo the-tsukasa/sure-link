@@ -1,0 +1,102 @@
+main {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* ===== プロフィールカード ===== */
+.profile-card {
+    text-align: center;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    padding: 40px 20px;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 2rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+h2 {
+    margin: 8px 0;
+    color: #333;
+}
+
+.status {
+    font-size: 1rem;
+    color: #16a34a;
+    font-weight: 500;
+}
+
+.joined, .encounter {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+/* ===== 一言ボックス ===== */
+.status-box {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.status-box h3 {
+    margin-top: 0;
+}
+
+.status-box textarea {
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1rem;
+    resize: none;
+    margin-top: 10px;
+}
+
+.status-box button {
+    margin-top: 12px;
+    background: #0078ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.status-box button:hover {
+    background: #005fd1;
+}
+
+/* ===== カラー情報 ===== */
+.user-data {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 20px;
+    text-align: center;
+}
+
+.color-preview {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 10px auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}

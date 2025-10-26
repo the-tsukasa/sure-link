@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sure Link - チャット</title>
+    <!-- 通用样式 -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- 聊天专用样式 -->
+    <link rel="stylesheet" href="css/chat.css" />
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="js/chat.js"></script>
+</head>
+
+<body>
+<header>
+    <h1>💬 Sure Link Chat</h1>
+    <nav>
+        <a href="index.html">🏠 ホーム</a>
+        <a href="map.html">📍 すれ違い</a>
+        <a href="chat.html">💬 チャット</a>
+        <a href="profile.html">👤 マイページ</a>
+    </nav>
+</header>
+
+<main>
+    <div class="chat-container">
+        <ul id="messages"></ul>
+
+        <div class="input-area">
+            <input type="text" id="messageInput" placeholder="メッセージを入力..." />
+            <button id="sendBtn">送信</button>
+        </div>
+    </div>
+</main>
+</body>
+</html>
