@@ -1,0 +1,59 @@
+/* ===== PWA 教程 + 测试区块样式 ===== */
+
+.pwa-guide {
+    background: #f9fafc;
+    border-radius: 14px;
+    padding: 20px;
+    margin: 40px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    line-height: 1.7;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* 标题样式 */
+.pwa-guide h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+/* 子标题 */
+.pwa-guide h4 {
+    margin-top: 16px;
+    color: #444;
+    font-size: 1rem;
+}
+
+/* 步骤列表 */
+.pwa-guide ol {
+    margin: 8px 0 16px 24px;
+    padding-left: 8px;
+}
+
+.pwa-guide ol li {
+    margin-bottom: 4px;
+}
+
+/* 说明文字 */
+.pwa-guide p {
+    color: #444;
+    margin-bottom: 12px;
+}
+
+/* 小提示文字 */
+.pwa-guide .note {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* 浅蓝色信息框（测试页用） */
+.pwa-guide.beta {
+    border-left: 4px solid #0078ff;
+    background: #eef6ff;
+}
+
+/* 蓝色强调文字 */
+.pwa-guide.beta strong {
+    color: #0057cc;
+}

@@ -19,6 +19,7 @@
 
     <!-- ===== CSS & Scripts ===== -->
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/pwa-guide.css">
     <script defer src="/socket.io/socket.io.js"></script>
     <script defer src="/js/app.js"></script>
     <script src="https://kit.fontawesome.com/a2e0b6a3f1.js" crossorigin="anonymous"></script>
@@ -41,6 +42,45 @@
         <button id="postBtn">投稿</button>
         <ul id="msgList"></ul>
     </section>
+
+    <!-- ===== PWAホーム追加チュートリアル ====1= -->
+    <section id="installGuide" class="pwa-guide">
+        <h3>📱 スマホに「Sure Link」を追加する方法</h3>
+        <p>アプリのようにホーム画面から開けるようになります。</p>
+
+        <div class="steps">
+            <h4>📱 Android（Chrome）の場合</h4>
+            <ol>
+                <li>右上の <strong>「⋮」</strong> メニューをタップ</li>
+                <li><strong>「ホーム画面に追加」</strong> を選択</li>
+                <li>「追加」を押して完了！</li>
+            </ol>
+
+            <h4>🍎 iPhone（Safari）の場合</h4>
+            <ol>
+                <li>画面下の <strong>「共有ボタン（⬆️）」</strong> をタップ</li>
+                <li><strong>「ホーム画面に追加」</strong> を選択</li>
+                <li>「追加」を押すとホームにアイコンが表示されます</li>
+            </ol>
+        </div>
+
+        <p class="note">※ アプリ削除時は、ホーム画面のアイコンを長押しして削除してください。</p>
+    </section>
+
+    <!-- ===== テスト案内 ===== -->
+    <section id="betaNotice" class="pwa-guide beta">
+        <h3>🧪 これはテストページです</h3>
+        <p>
+            現在は <strong>βテスト（試験運用）</strong> 中です。<br>
+            一部の機能（すれ違い通知・プロフィール連携など）は今後追加予定です。
+        </p>
+        <p>
+            不具合や改善点がありましたら、<strong>GitHub Issues</strong> や <strong>お問い合わせフォーム</strong> からご連絡ください。
+        </p>
+        <p class="note">このページは PWA 動作検証・リアルタイム通信テストを目的としています。</p>
+    </section>
+
+
 </main>
 
 
