@@ -1,0 +1,133 @@
+/* ====== Map Page (Sure Link Apple風) ====== */
+
+:root {
+    --blue: #007aff;
+    --green: #34c759;
+}
+
+/* 地图容器 */
+#map {
+    width: 100%;
+    height: calc(100vh - 140px);
+    border-radius: 0;
+    z-index: 0;
+}
+
+/* ====== 周囲スキャンボタン ====== */
+#scanBtn {
+    position: fixed;
+    bottom: calc(90px + env(safe-area-inset-bottom));
+    right: 20px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    box-shadow: 0 6px 15px rgba(0, 122, 255, 0.3);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 1000;
+}
+
+#scanBtn:active {
+    transform: scale(0.94);
+    box-shadow: 0 2px 8px rgba(0, 122, 255, 0.4);
+}
+
+/* ====== Toast通知 ====== */
+#toast {
+    position: fixed;
+    bottom: calc(70px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+#toast.show {
+    opacity: 1;
+}
+
+/* ====== 安全区 (刘海适配) ====== */
+@supports(padding: max(0px)) {
+    #scanBtn {
+        margin-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+    #toast {
+        margin-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+}
+/* ====== 昵称标签样式 ====== */
+.name-label {
+    pointer-events: none;
+}
+
+.label-box {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-radius: 12px;
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* ====== iOS風 Toastアニメーション ====== */
+#toast {
+    position: fixed;
+    bottom: calc(70px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(255, 255, 255, 0.8);
+    color: #111;
+    padding: 12px 22px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 999;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    animation: slideUpFade 2.8s ease forwards;
+}
+
+/* 上滑淡出动画 */
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(25px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    85% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-15px);
+    }
+}

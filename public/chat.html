@@ -2,36 +2,53 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <title>Sure Link - チャット</title>
-    <!-- 通用样式 -->
     <link rel="stylesheet" href="css/style.css" />
-    <!-- 聊天专用样式 -->
     <link rel="stylesheet" href="css/chat.css" />
     <script defer src="/socket.io/socket.io.js"></script>
     <script defer src="js/chat.js"></script>
+    <script src="https://kit.fontawesome.com/a2e0b6a3f1.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-<header>
-    <h1>💬 Sure Link Chat</h1>
-    <nav>
-        <a href="index.html">🏠 ホーム</a>
-        <a href="map.html">📍 すれ違い</a>
-        <a href="chat.html">💬 チャット</a>
-        <a href="profile.html">👤 マイページ</a>
-    </nav>
-</header>
+<header>チャット</header>
 
 <main>
     <div class="chat-container">
         <ul id="messages"></ul>
+    </div>
 
-        <div class="input-area">
-            <input type="text" id="messageInput" placeholder="メッセージを入力..." />
-            <button id="sendBtn">送信</button>
-        </div>
+    <div class="input-area">
+        <input id="messageInput" type="text" placeholder="メッセージを入力..." autocomplete="off" />
+        <button id="sendBtn">送信</button>
     </div>
 </main>
+
+<nav>
+    <a href="index.html">
+        <i class="fa-solid fa-house"></i><span>ホーム</span>
+    </a>
+    <a href="chat.html" class="active">
+        <i class="fa-solid fa-comment-dots"></i><span>チャット</span>
+    </a>
+    <a href="map.html">
+        <i class="fa-solid fa-location-dot"></i><span>すれ違い</span>
+    </a>
+    <a href="profile.html">
+        <i class="fa-solid fa-user"></i><span>マイページ</span>
+    </a>
+</nav>
+
+<script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js");
+    }
+</script>
 </body>
 </html>

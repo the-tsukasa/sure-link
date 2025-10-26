@@ -2,44 +2,75 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Sure Link - マイページ</title>
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/profile.css" />
     <script defer src="/socket.io/socket.io.js"></script>
     <script defer src="js/profile.js"></script>
+    <script src="https://kit.fontawesome.com/a2e0b6a3f1.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-<header>
-    <h1>👤 Sure Link マイページ</h1>
-    <nav>
-        <a href="index.html">🏠 ホーム</a>
-        <a href="map.html">📍 すれ違い</a>
-        <a href="chat.html">💬 チャット</a>
-        <a href="profile.html">👤 マイページ</a>
-    </nav>
-</header>
+<header>マイページ</header>
 
 <main>
+    <!-- プロフィールカード -->
     <section class="profile-card">
         <div class="avatar" id="avatar">A</div>
         <h2 id="nickname">User</h2>
+        <button id="editNameBtn" class="edit-btn">✏️ 名前を変更</button>
         <p class="status" id="status">🟢 オンライン</p>
         <p class="joined">登録日：<span id="joinDate"></span></p>
         <p class="encounter">今日のすれ違い回数：<span id="encountCount">0</span></p>
     </section>
 
+    <!-- 一言メッセージ -->
     <section class="status-box">
         <h3>🗒 一言メッセージ</h3>
         <textarea id="statusInput" placeholder="今の気持ちを書いてみよう..."></textarea>
         <button id="saveStatus">保存</button>
     </section>
 
+    <!-- あなたのカラー -->
     <section class="user-data">
         <h3>🎨 あなたのカラー</h3>
         <div class="color-preview" id="colorPreview"></div>
         <p id="colorCode"></p>
     </section>
+    <!-- アカウント設定 -->
+    <section class="account-box">
+        <h3>⚙️ アカウント設定</h3>
+
+        <button id="logoutBtn" class="logout-btn">📤 ログアウト</button>
+        <button id="resetBtn" class="danger-btn">データをリセット</button>
+
+        <p class="hint">※ ローカル保存データ（ニックネーム・登録日・メッセージなど）を削除します。</p>
+    </section>
+
+
 </main>
+
+<nav>
+    <a href="index.html">
+        <i class="fa-solid fa-house"></i><span>ホーム</span>
+    </a>
+    <a href="chat.html">
+        <i class="fa-solid fa-comment-dots"></i><span>チャット</span>
+    </a>
+    <a href="map.html">
+        <i class="fa-solid fa-location-dot"></i><span>すれ違い</span>
+    </a>
+    <a href="profile.html" class="active">
+        <i class="fa-solid fa-user"></i><span>マイページ</span>
+    </a>
+</nav>
 </body>
 </html>

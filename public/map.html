@@ -2,39 +2,49 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Sure Link - すれ違い</title>
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
     <link rel="stylesheet" href="css/style.css" />
-    <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
     <script defer src="/socket.io/socket.io.js"></script>
     <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script defer src="js/map.js"></script>
+    <script src="https://kit.fontawesome.com/a2e0b6a3f1.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/map.css" />
+
 </head>
+
 <body>
-<header>
-    <h1>📍 Sure Link</h1>
-    <nav>
-        <a href="index.html">🏠 ホーム</a>
-        <a href="chat.html">💬 チャット</a>
-        <a href="map.html">📍 すれ違い</a>
-        <a href="profile.html">👤 マイページ</a>
-    </nav>
-</header>
+<header>すれ違いマップ</header>
 
 <main>
-    <h2>現在地マップ</h2>
-    <div id="map" style="height: 500px; border-radius: 12px;"></div>
-
-    <section id="encounterLog" style="margin-top: 20px;">
-        <h3>すれ違い履歴</h3>
-        <ul id="encounterList"></ul>
-    </section>
-
-    <p id="status" style="margin-top: 12px; font-weight: bold; color: #0078ff;"></p>
+    <div id="map"></div>
+    <button id="scanBtn">↻</button>
+    <div id="toast"></div>
 </main>
 
+<nav>
+    <a href="index.html">
+        <i class="fa-solid fa-house"></i><span>ホーム</span>
+    </a>
+    <a href="chat.html">
+        <i class="fa-solid fa-comment-dots"></i><span>チャット</span>
+    </a>
+    <a href="map.html" class="active">
+        <i class="fa-solid fa-location-dot"></i><span>すれ違い</span>
+    </a>
+    <a href="profile.html">
+        <i class="fa-solid fa-user"></i><span>マイページ</span>
+    </a>
+</nav>
 </body>
 </html>

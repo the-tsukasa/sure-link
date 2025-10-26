@@ -1,194 +1,202 @@
-/* ====== Chat Page Style (chat.css) ====== */
-body {
-    font-family: 'Noto Sans JP', 'Segoe UI', sans-serif;
-    background: #f4f5f7;
-    color: #333;
-    margin: 0;
+/* ====== Chat Page (PWA + Apple風) ====== */
+
+:root {
+    --blue: #007aff;
+    --green: #16a34a;
+    --bg: #f8f8f8;
+    --shadow: rgba(0, 0, 0, 0.08);
 }
 
-.chat-container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+/* 基本结构 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: #222;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    height: 75vh;
-    overflow: hidden;
+    height: 100vh;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* ====== message list ====== */
-#messages {
+/* 聊天区域容器 */
+.chat-container {
     flex: 1;
-    list-style: none;
-    margin: 0;
-    padding: 24px;
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
-    background: #f9fafc;
+    padding: 12px;
     scroll-behavior: smooth;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
 }
 
-/* ====== each message row ====== */
-/* 外层一条消息是左右布局（头像 + 气泡块） */
+/* ===== 消息区域 ===== */
+#messages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 每条消息外层 */
 .message {
     display: flex;
     align-items: flex-end;
-    margin-bottom: 20px;
-    max-width: 80%;
+    max-width: 85%;
 }
 
-/* 自己的消息翻转到右边 */
+/* 右对齐（自己） */
 .message.me {
-    margin-left: auto;        /* 整个块推到右侧 */
+    margin-left: auto;
     flex-direction: row-reverse;
 }
 
-/* 头像样式 */
+/* 头像 */
 .avatar {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
     border-radius: 50%;
     background: #ccc;
-    color: white;
-    font-weight: bold;
+    color: #fff;
     font-size: 0.9rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 }
 
-/* 头像和消息气泡之间的水平间距 */
 .message:not(.me) .avatar {
-    margin-right: 10px;
+    margin-right: 8px;
 }
 .message.me .avatar {
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
-/* 容纳昵称 + 气泡 + 时间 的这个列 */
+/* 内容列 */
 .bubble-wrapper {
     display: flex;
     flex-direction: column;
     max-width: 100%;
 }
 
-/* 昵称 */
+/* 用户名 */
 .user-row {
     font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 4px;
-    color: #0078ff;
+    font-size: 0.85rem;
+    margin-bottom: 3px;
+    color: var(--blue);
 }
 .message.me .user-row {
-    color: #16a34a;
+    color: var(--green);
     text-align: right;
 }
 
-/* 气泡 + 时间戳 的一行 */
+/* 气泡 + 时间行 */
 .bubble-line {
     display: flex;
     align-items: flex-end;
-    max-width: 100%;
+    flex-wrap: nowrap;
 }
 
-/* 气泡本体 */
+/* 气泡 */
 .bubble {
-    display: inline-block;
-    background: #fff;
-    border-radius: 16px;
     padding: 10px 14px;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 1px 3px var(--shadow);
     font-size: 0.95rem;
     line-height: 1.5;
     word-break: break-word;
-    color: #222;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     max-width: 100%;
     border-top-left-radius: 6px;
 }
 
-/* 自己的消息气泡（蓝色） */
+/* 自己消息气泡 */
 .message.me .bubble {
-    background: linear-gradient(135deg, #0078ff, #005fd1);
-    color: #fff;
-    border-top-left-radius: 16px;
+    background: linear-gradient(135deg, var(--blue), #005fd1);
+    color: white;
+    border-top-left-radius: 18px;
     border-top-right-radius: 6px;
 }
 
 /* 时间戳 */
 .time {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #999;
-    line-height: 1;
+    margin-left: 6px;
     white-space: nowrap;
-    margin-left: 8px;
-    margin-right: 0;
-    align-self: flex-end;
 }
 
-/* 自己的消息：时间戳应该在气泡左侧 */
+/* 自己的时间戳放左侧 */
 .message.me .bubble-line {
-    flex-direction: row-reverse;   /* 让顺序变成 [time][bubble] */
+    flex-direction: row-reverse;
 }
-
 .message.me .time {
     margin-left: 0;
-    margin-right: 8px;
-    color: #999;
-    text-align: right;
+    margin-right: 6px;
 }
 
-/* ====== input area ====== */
+/* ===== 输入区 ===== */
 .input-area {
+    position: fixed;
+    bottom: calc(60px + env(safe-area-inset-bottom));
+    left: 0;
+    right: 0;
     display: flex;
-    gap: 10px;
-    padding: 14px;
-    background: #fff;
-    border-top: 1px solid #ddd;
     align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid #ddd;
+    z-index: 10;
 }
 
 .input-area input {
     flex: 1;
-    border-radius: 10px;
+    border-radius: 18px;
     border: 1px solid #ccc;
-    padding: 12px 14px;
-    font-size: 15px;
+    padding: 10px 14px;
+    font-size: 1rem;
     background: #fafafa;
     transition: 0.2s;
 }
-
 .input-area input:focus {
     outline: none;
-    border-color: #0078ff;
+    border-color: var(--blue);
     background: #fff;
-    box-shadow: 0 0 0 2px rgba(0,120,255,0.1);
+    box-shadow: 0 0 0 3px rgba(0,122,255,0.1);
 }
 
 .input-area button {
+    background: var(--blue);
+    color: #fff;
     border: none;
-    background: #0078ff;
-    color: white;
-    border-radius: 10px;
-    padding: 12px 20px;
-    cursor: pointer;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
     font-weight: 600;
-    transition: background 0.3s, transform 0.1s;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 8px rgba(0,122,255,0.25);
+    transition: 0.2s;
+}
+.input-area button:active {
+    transform: scale(0.96);
+    opacity: 0.8;
 }
 
-.input-area button:hover {
-    background: #005fd1;
-    transform: translateY(-1px);
-}
-
-/* 滚动条 */
+/* 滚动条隐藏（移动端更自然） */
 #messages::-webkit-scrollbar {
-    width: 6px;
+    display: none;
 }
-#messages::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 6px;
+
+/* iPhone刘海安全区适配 */
+@supports(padding: max(0px)) {
+    .input-area {
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
 }

@@ -4,19 +4,34 @@ const msgList = document.getElementById("messages");
 const input = document.getElementById("messageInput");
 const btn = document.getElementById("sendBtn");
 
+const nickname = localStorage.getItem("nickname") || "匿名";
+
+// ====== 发送消息 ======
 btn.addEventListener("click", sendMsg);
-input.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendMsg();
+input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault(); // 避免换行
+        sendMsg();
+    }
 });
 
 function sendMsg() {
     const text = input.value.trim();
     if (!text) return;
-    socket.emit("chatMessage", text);
+
+    const msgData = {
+        id: socket.id,
+        user: nickname,
+        text,
+    };
+
+    // 本地立即显示（不等服务器回传）
+    renderMessage(msgData, true);
+    socket.emit("chatMessage", msgData);
     input.value = "";
 }
 
-// 稳定生成颜色
+// ====== 颜色生成器 ======
 function getColorFromName(name) {
     let hash = 0;
     for (let i = 0; i < name.length; i++) {
@@ -26,7 +41,7 @@ function getColorFromName(name) {
     return `hsl(${hue}, 70%, 60%)`;
 }
 
-// 生成头像节点
+// ====== 头像节点 ======
 function createAvatar(user) {
     const div = document.createElement("div");
     div.className = "avatar";
@@ -35,13 +50,13 @@ function createAvatar(user) {
     return div;
 }
 
-// 渲染一条消息
-socket.on("chatMessage", (data) => {
+// ====== 渲染消息 ======
+function renderMessage(data, isLocal = false) {
     const li = document.createElement("li");
     li.classList.add("message");
 
-    const myId = socket.id;
-    const isMe = data.id === myId || data.user === "匿名";
+    // 区分是否为自己
+    const isMe = data.id === socket.id || isLocal;
     if (isMe) li.classList.add("me");
 
     // 时间戳
@@ -50,45 +65,57 @@ socket.on("chatMessage", (data) => {
         minute: "2-digit",
     });
 
-    // avatar
+    // 头像
     const avatarEl = createAvatar(data.user);
 
-    // 外层容器（昵称 + 气泡行）
-    const bubbleWrapper = document.createElement("div");
-    bubbleWrapper.classList.add("bubble-wrapper");
+    // 外层容器
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("bubble-wrapper");
 
     // 昵称
-    const userRow = document.createElement("div");
-    userRow.classList.add("user-row");
-    userRow.style.color = getColorFromName(data.user);
-    userRow.textContent = data.user;
+    const nameRow = document.createElement("div");
+    nameRow.classList.add("user-row");
+    nameRow.textContent = data.user;
+    nameRow.style.color = getColorFromName(data.user);
 
-    // 气泡行（气泡 + 时间）
+    // 气泡 + 时间行
     const bubbleLine = document.createElement("div");
     bubbleLine.classList.add("bubble-line");
 
-    const bubbleEl = document.createElement("div");
-    bubbleEl.classList.add("bubble");
-    bubbleEl.textContent = data.text;
+    const bubble = document.createElement("div");
+    bubble.classList.add("bubble");
+    bubble.textContent = data.text;
 
     const timeEl = document.createElement("div");
     timeEl.classList.add("time");
     timeEl.textContent = timeText;
 
-    // 气泡行拼装
-    // 注意：CSS 会用 row-reverse 翻转顺序，所以我们在 DOM 顺序上固定成 bubble -> time
-    bubbleLine.appendChild(bubbleEl);
+    bubbleLine.appendChild(bubble);
     bubbleLine.appendChild(timeEl);
 
-    // 包装所有
-    bubbleWrapper.appendChild(userRow);
-    bubbleWrapper.appendChild(bubbleLine);
+    wrapper.appendChild(nameRow);
+    wrapper.appendChild(bubbleLine);
 
-    // 最后挂到 li
     li.appendChild(avatarEl);
-    li.appendChild(bubbleWrapper);
-
-    // 插入到消息列表
+    li.appendChild(wrapper);
     msgList.appendChild(li);
-    msgList.scrollTop = msgList.scrollHeight;
+
+    // 平滑滚动到底部
+    msgList.scrollTo({
+        top: msgList.scrollHeight,
+        behavior: "smooth",
+    });
+}
+
+// ====== 接收消息 ======
+socket.on("chatMessage", (data) => {
+    // 如果是自己发的消息（本地已显示），不重复
+    if (data.id === socket.id) return;
+    renderMessage(data, false);
+});
+socket.on("chatMessage", (data) => {
+    if (data.id !== socket.id) {
+        renderMessage(data);
+        navigator.vibrate?.(20);
+    }
 });

@@ -1,102 +1,188 @@
-main {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
+/* ====== Profile Page (Sure Link Apple風) ====== */
+
+:root {
+    --blue: #007aff;
+    --bg: #f5f6f8;
 }
 
-/* ===== プロフィールカード ===== */
+body {
+    background: var(--bg);
+    color: #222;
+    font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif;
+    margin: 0;
+    padding-bottom: 80px;
+}
+
+/* ===== Profile Card ===== */
 .profile-card {
-    text-align: center;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     border-radius: 18px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    padding: 40px 20px;
-    margin-bottom: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    margin: 20px;
+    text-align: center;
+    animation: fadeIn 0.6s ease;
 }
 
 .avatar {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
+    background: var(--blue);
+    color: white;
     font-size: 2rem;
-    color: #fff;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    margin: 0 auto 10px;
+    box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3);
 }
 
 h2 {
-    margin: 8px 0;
-    color: #333;
+    margin: 6px 0;
+    font-size: 1.4rem;
 }
 
 .status {
-    font-size: 1rem;
-    color: #16a34a;
-    font-weight: 500;
+    font-weight: 600;
+    color: #34c759;
+    margin: 6px 0;
 }
 
 .joined, .encounter {
-    color: #666;
     font-size: 0.9rem;
-    margin-top: 4px;
+    color: #666;
+    margin: 2px 0;
 }
 
-/* ===== 一言ボックス ===== */
+/* ===== Edit Name Button ===== */
+.edit-btn {
+    border: none;
+    background: var(--blue);
+    color: white;
+    border-radius: 10px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.edit-btn:hover {
+    background: #005fd1;
+}
+
+/* ===== Status Box ===== */
 .status-box {
-    background: #fff;
+    background: white;
     border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    padding: 20px;
-    margin-bottom: 30px;
+    margin: 16px 20px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-
-.status-box h3 {
-    margin-top: 0;
-}
-
 .status-box textarea {
     width: 100%;
-    height: 100px;
-    border-radius: 8px;
+    min-height: 70px;
+    border-radius: 10px;
     border: 1px solid #ccc;
     padding: 10px;
-    font-size: 1rem;
     resize: none;
-    margin-top: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border 0.2s ease;
 }
-
+.status-box textarea:focus {
+    border-color: var(--blue);
+}
 .status-box button {
-    margin-top: 12px;
-    background: #0078ff;
-    color: #fff;
+    margin-top: 10px;
     border: none;
-    border-radius: 8px;
-    padding: 10px 16px;
-    cursor: pointer;
+    background: var(--blue);
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
     font-weight: 600;
+    cursor: pointer;
+    width: 100%;
     transition: background 0.3s;
 }
-
 .status-box button:hover {
     background: #005fd1;
 }
 
-/* ===== カラー情報 ===== */
+/* ===== Color Data ===== */
 .user-data {
-    background: #fff;
+    background: white;
     border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    padding: 20px;
+    margin: 16px 20px 40px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.color-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 10px auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* ===== Account Box ===== */
+.account-box {
+    background: white;
+    border-radius: 16px;
+    margin: 16px 20px 80px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
 
-.color-preview {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 10px auto;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+.danger-btn {
+    background: #ff3b30;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    max-width: 260px;
+    margin: 8px auto;
+    display: block;
+}
+
+.danger-btn:hover {
+    background: #d6281f;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 8px;
+}
+/* ===== Logout Button ===== */
+.logout-btn {
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    width: 100%;
+    max-width: 260px;
+    margin: 8px auto;
+    display: block;
+}
+
+.logout-btn:hover {
+    background: #005fd1;
+    transform: scale(1.02);
 }
