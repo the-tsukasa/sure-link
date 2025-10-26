@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ===== チャット送信 =====
+    // ===== チャット送信 ======
     postBtn.addEventListener("click", () => {
         const msg = msgInput.value.trim();
         if (!msg) return;
