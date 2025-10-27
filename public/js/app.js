@@ -27,10 +27,38 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ===== チャット送信 =====
+    // ===== 過去のチャット履歴を受信 =====
+    socket.on("chatHistory", (messages) => {
+        console.log("📜 Chat history loaded:", messages.length);
+        msgList.innerHTML = ""; // 一旦クリア
+        messages.forEach((m) => {
+            const li = document.createElement("li");
+            const time = new Date(m.created_at).toLocaleTimeString("ja-JP", {
+                hour: "2-digit",
+                minute: "2-digit",
+            });
+            li.innerHTML = `<span style="color:#777;">[${time}]</span> <strong>${m.username}</strong>：${m.text}`;
+            msgList.appendChild(li);
+        });
+        msgList.scrollTop = msgList.scrollHeight;
+    });
+
+    // ===== 新しいチャットメッセージを受信 =====
+    socket.on("chatMessage", (msgData) => {
+        const li = document.createElement("li");
+        const time = new Date().toLocaleTimeString("ja-JP", {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+        li.innerHTML = `<span style="color:#777;">[${time}]</span> <strong>${msgData.user}</strong>：${msgData.text}`;
+        msgList.appendChild(li);
+        msgList.scrollTop = msgList.scrollHeight; // 自動スクロール
+    });
+
+    // ===== 投稿ボタン =====
     postBtn.addEventListener("click", sendMessage);
     msgInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             sendMessage();
         }
@@ -46,18 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
         socket.emit("chatMessage", msgData);
         msgInput.value = "";
     }
-
-    // ===== チャット受信 =====
-    socket.on("chatMessage", (msgData) => {
-        const li = document.createElement("li");
-        const time = new Date().toLocaleTimeString("ja-JP", {
-            hour: "2-digit",
-            minute: "2-digit",
-        });
-        li.innerHTML = `<span style="color:#777;">[${time}]</span> <strong>${msgData.user}</strong>：${msgData.text}`;
-        msgList.appendChild(li);
-        msgList.scrollTop = msgList.scrollHeight; // 自動スクロール
-    });
 
     // ===== ページタイトルにニックネーム反映 =====
     const name = localStorage.getItem("nickname");
