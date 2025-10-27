@@ -5,6 +5,10 @@ import { Server } from "socket.io";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import pkg from "pg"; // PostgreSQL 用
+import dotenv from "dotenv";
+
+dotenv.config(); // 读取 .env 文件中的 DATABASE_URL
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,15 +20,26 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(express.json());
 
-// ===== Static Files =====
+// ===== 静的ファイル =====
 app.use(express.static(path.join(__dirname, "public")));
 
-// Root Path → welcome.html
+// ===== PostgreSQL 接続 =====
+const { Pool } = pkg;
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
+});
+
+pool.connect()
+    .then(() => console.log("✅ PostgreSQL connected"))
+    .catch((err) => console.error("❌ DB connection error:", err.message));
+
+// ===== Root Path =====
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "welcome.html"));
 });
 
-// ===== Start Socket.io =====
+// ===== Socket.io 設定 =====
 const io = new Server(server, {
     cors: { origin: "*" },
 });
@@ -33,7 +48,7 @@ const io = new Server(server, {
 const users = {};
 
 function calcDistance(lat1, lng1, lat2, lng2) {
-    const R = 6371000; // Earth radius in meters
+    const R = 6371000;
     const phi1 = (lat1 * Math.PI) / 180;
     const phi2 = (lat2 * Math.PI) / 180;
     const dPhi = ((lat2 - lat1) * Math.PI) / 180;
@@ -46,16 +61,25 @@ function calcDistance(lat1, lng1, lat2, lng2) {
     return R * c;
 }
 
-
-// ===== Socket.io Logic =====
-io.on("connection", (socket) => {
+// ===== Socket.io ロジック =====
+io.on("connection", async (socket) => {
     console.log(`🟢 ${socket.id} connected`);
     users[socket.id] = null;
 
-    // === Update Online Count ===
+    // === オンライン人数更新 ===
     io.emit("onlineCount", io.engine.clientsCount);
 
-    // === Handle Location Update ===
+    // === 既存メッセージ履歴を送信 ===
+    try {
+        const result = await pool.query(
+            "SELECT username, text, created_at FROM messages ORDER BY created_at ASC LIMIT 50"
+        );
+        socket.emit("chatHistory", result.rows);
+    } catch (err) {
+        console.error("❌ Failed to load chat history:", err.message);
+    }
+
+    // === 位置情報更新 ===
     socket.on("updateLocation", (pos) => {
         users[socket.id] = pos;
         io.emit("updateUsers", users);
@@ -71,12 +95,20 @@ io.on("connection", (socket) => {
         }
     });
 
-    // === Handle Chat Messages ===
-    socket.on("chatMessage", (msgData) => {
+    // === チャット送信 ===
+    socket.on("chatMessage", async (msgData) => {
         io.emit("chatMessage", msgData);
+        try {
+            await pool.query(
+                "INSERT INTO messages (username, text) VALUES ($1, $2)",
+                [msgData.user, msgData.text]
+            );
+        } catch (err) {
+            console.error("❌ Failed to save message:", err.message);
+        }
     });
 
-    // === Handle Disconnect ===
+    // === 切断処理 ===
     socket.on("disconnect", () => {
         console.log(`🔴 ${socket.id} disconnected`);
         delete users[socket.id];
@@ -85,12 +117,12 @@ io.on("connection", (socket) => {
     });
 });
 
-// ===== Test API =====
+// ===== API テスト =====
 app.get("/api/test", (req, res) => {
     res.json({ message: "Sure-Link backend is running ✅" });
 });
 
-// ===== Start Server =====
+// ===== サーバー起動 =====
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`🌍 Server running on port ${PORT}`);
