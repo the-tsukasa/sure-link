@@ -21,36 +21,74 @@
 <body>
 <header>マイページ</header>
 
-<main>
+<main class="profile-page">
+    <div class="page-accent page-accent--one"></div>
+    <div class="page-accent page-accent--two"></div>
+
     <!-- プロフィールカード -->
-    <section class="profile-card">
-        <div class="avatar" id="avatar">A</div>
-        <h2 id="nickname">User</h2>
-        <button id="editNameBtn" class="edit-btn">✏️ 名前を変更</button>
-        <p class="status" id="status">🟢 オンライン</p>
-        <p class="joined">登録日：<span id="joinDate"></span></p>
-        <p class="encounter">今日のすれ違い回数：<span id="encountCount">0</span></p>
+    <section class="profile-card glass-card">
+        <div class="card-top">
+            <div class="avatar" id="avatar">A</div>
+            <div class="card-intro">
+                <p class="greeting">ようこそ、Sure Link へ</p>
+                <h2 id="nickname">User</h2>
+                <p class="status" id="status">🟢 オンライン</p>
+            </div>
+        </div>
+        <button id="editNameBtn" class="edit-btn"><i class="fa-solid fa-pen-to-square"></i> 名前を変更</button>
+        <div class="stat-grid">
+            <div class="stat-item">
+                <p class="stat-label">登録日</p>
+                <p class="stat-value"><span id="joinDate"></span></p>
+            </div>
+            <div class="stat-item">
+                <p class="stat-label">今日のすれ違い</p>
+                <p class="stat-value"><span id="encountCount">0</span><span class="stat-suffix">回</span></p>
+            </div>
+        </div>
     </section>
 
     <!-- 一言メッセージ -->
-    <section class="status-box">
-        <h3>🗒 一言メッセージ</h3>
+    <section class="status-box glass-card">
+        <div class="section-title">
+            <span class="section-icon">🗒</span>
+            <div>
+                <h3>一言メッセージ</h3>
+                <p class="section-sub">今の気分や近況をみんなにシェアしましょう。</p>
+            </div>
+        </div>
         <textarea id="statusInput" placeholder="今の気持ちを書いてみよう..."></textarea>
-        <button id="saveStatus">保存</button>
+        <button id="saveStatus" class="btn btn-blue"><i class="fa-solid fa-floppy-disk"></i> 保存する</button>
     </section>
 
     <!-- あなたのカラー -->
-    <section class="user-data">
-        <h3>あなたのカラー</h3>
-        <div class="color-preview" id="colorPreview"></div>
-        <p id="colorCode"></p>
+    <section class="user-data glass-card">
+        <div class="section-title">
+            <span class="section-icon">🎨</span>
+            <div>
+                <h3>あなたのカラー</h3>
+                <p class="section-sub">ニックネームから生まれた、あなただけのテーマカラーです。</p>
+            </div>
+        </div>
+        <div class="color-display">
+            <div class="color-preview" id="colorPreview"></div>
+            <p id="colorCode" class="color-code"></p>
+        </div>
     </section>
     <!-- アカウント設定 -->
-    <section class="account-box">
-        <h3>アカウント設定</h3>
+    <section class="account-box glass-card">
+        <div class="section-title">
+            <span class="section-icon">⚙️</span>
+            <div>
+                <h3>アカウント設定</h3>
+                <p class="section-sub">端末に保存されたデータの管理ができます。</p>
+            </div>
+        </div>
 
-        <button id="logoutBtn" class="logout-btn">ログアウト</button>
-        <button id="resetBtn" class="danger-btn">データをリセット</button>
+        <div class="account-actions">
+            <button id="logoutBtn" class="btn btn-blue"><i class="fa-solid fa-right-from-bracket"></i> ログアウト</button>
+            <button id="resetBtn" class="btn btn-red"><i class="fa-solid fa-rotate-left"></i> データをリセット</button>
+        </div>
 
         <p class="hint">※ ローカル保存データ（ニックネーム・登録日・メッセージなど）を削除します。</p>
     </section>
