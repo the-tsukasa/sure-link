@@ -39,7 +39,7 @@
     <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512.png">
 
     <!-- ===== CSS & Scripts ===== -->
-    <link rel="stylesheet" href="/css/style.css?v=2.1.0">
+    <link rel="stylesheet" href="/css/style.css?v=2.2.0">
     <link rel="stylesheet" href="/css/pwa-guide.css">
     <script defer src="/socket.io/socket.io.js"></script>
     <script type="module" src="/js/config.js"></script>
@@ -53,74 +53,165 @@
 <div class="page-bg-accent page-bg-accent-1"></div>
 <div class="page-bg-accent page-bg-accent-2"></div>
 
-<main role="main">
-    <div class="server-status" role="status" aria-live="polite">
-        <span id="userCount">現在オンライン人数：0人</span>
-        <span class="divider" aria-hidden="true">｜</span>
-        <span id="serverState">サーバー：🟡 接続中...</span>
-    </div>
-
-    <section id="messageBoard" aria-labelledby="board-title">
-        <h3 id="board-title">コミュニティボード</h3>
-        <textarea 
-            id="msgInput" 
-            placeholder="メッセージを入力してください..."
-            aria-label="メッセージ入力欄"
-            maxlength="500"
-        ></textarea>
-        <button 
-            id="postBtn" 
-            aria-label="メッセージを投稿"
-        >送信</button>
-        <ul id="msgList" role="log" aria-live="polite" aria-atomic="false"></ul>
-    </section>
-
-    <!-- ===== PWAインストールガイド ===== -->
-    <section id="installGuide" class="pwa-guide">
-        <h3>📱 アプリケーションのインストール</h3>
-        <p>Sure Link を Progressive Web App (PWA) としてデバイスにインストールすることで、<br>
-        ネイティブアプリケーションのような快適な体験をお楽しみいただけます。</p>
-
-        <div class="steps">
-            <h4>📱 Android デバイス（Chrome ブラウザ）</h4>
-            <ol>
-                <li>ブラウザ右上のメニューアイコン <strong>「⋮」</strong> をタップ</li>
-                <li><strong>「ホーム画面に追加」</strong> を選択</li>
-                <li>「追加」をタップしてインストールを完了</li>
-            </ol>
-
-            <h4>iOS デバイス（Safari ブラウザ）</h4>
-            <ol>
-                <li>画面下部の <strong>「共有」ボタン</strong> をタップ</li>
-                <li><strong>「ホーム画面に追加」</strong> を選択</li>
-                <li>「追加」をタップするとホーム画面にアイコンが追加されます</li>
-            </ol>
+<main role="main" class="app-home">
+    <!-- 欢迎区域 -->
+    <section class="welcome-banner">
+        <div class="welcome-content">
+            <h1 id="welcomeTitle">ようこそ、Sure Link へ</h1>
+            <p id="welcomeSubtitle">すれ違いが、つながりになる</p>
         </div>
-
-        <p class="note">※ アンインストールする場合は、ホーム画面のアイコンを長押しして削除してください。</p>
+        <div class="server-status-mini">
+            <i class="fas fa-circle status-dot"></i>
+            <span id="userCountMini">0人オンライン</span>
+        </div>
     </section>
 
-    <!-- ===== サービス概要 ===== -->
-    <section id="betaNotice" class="pwa-guide beta">
-        <h3>Sure Link について</h3>
-        <p>
-            Sure Link は、リアルタイム位置情報共有とチャット機能を統合した<br>
-            次世代型ソーシャルネットワーキングサービスです。
-        </p>
-        <h4>主な機能</h4>
-        <ul class="feature-list">
-            <li><strong>リアルタイムメッセージング</strong> - WebSocket による即時通信</li>
-            <li><strong>位置情報共有</strong> - Geolocation API を活用したマップ表示</li>
-            <li><strong>すれ違い検出システム</strong> - 近隣ユーザーとの遭遇を通知</li>
-            <li><strong>プロフィール管理</strong> - カスタマイズ可能なユーザー情報</li>
-            <li><strong>PWA 対応</strong> - オフライン動作とプッシュ通知をサポート</li>
-        </ul>
-        <p class="note">
-            本サービスは現在ベータ版として運用されております。<br>
-            ご意見・ご要望は開発チームまでお寄せください。
-        </p>
+    <!-- 主要功能卡片 -->
+    <section class="feature-cards">
+        <a href="chat.html" class="feature-card card-chat">
+            <div class="card-icon">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <div class="card-content">
+                <h3>リアルタイムチャット</h3>
+                <p>今すぐ会話を始めよう</p>
+            </div>
+            <i class="fas fa-chevron-right card-arrow"></i>
+        </a>
+
+        <a href="map.html" class="feature-card card-map">
+            <div class="card-icon">
+                <i class="fas fa-location-dot"></i>
+            </div>
+            <div class="card-content">
+                <h3>すれ違いマップ</h3>
+                <p>近くの人を発見</p>
+            </div>
+            <div class="card-badge">NEW</div>
+            <i class="fas fa-chevron-right card-arrow"></i>
+        </a>
+
+        <a href="encounter.html" class="feature-card card-encounter">
+            <div class="card-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="card-content">
+                <h3>すれ違い履歴</h3>
+                <p>出会いの記録を振り返る</p>
+            </div>
+            <i class="fas fa-chevron-right card-arrow"></i>
+        </a>
+
+        <a href="profile.html" class="feature-card card-profile">
+            <div class="card-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="card-content">
+                <h3>マイページ</h3>
+                <p>プロフィール設定</p>
+            </div>
+            <i class="fas fa-chevron-right card-arrow"></i>
+        </a>
     </section>
 
+    <!-- 快捷功能 -->
+    <section class="quick-actions">
+        <h2 class="section-title">クイックアクション</h2>
+        <div class="quick-grid">
+            <button class="quick-btn" onclick="shareLocation()">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>位置共有</span>
+            </button>
+            <button class="quick-btn" onclick="viewNotifications()">
+                <i class="fas fa-bell"></i>
+                <span>通知</span>
+                <span class="quick-badge">3</span>
+            </button>
+            <button class="quick-btn" onclick="openSettings()">
+                <i class="fas fa-cog"></i>
+                <span>設定</span>
+            </button>
+            <button class="quick-btn" onclick="openHelp()">
+                <i class="fas fa-question-circle"></i>
+                <span>ヘルプ</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- 最近的活动 -->
+    <section class="recent-activity">
+        <h2 class="section-title">最近のアクティビティ</h2>
+        <div class="activity-list">
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="activity-content">
+                    <p class="activity-title">新しいすれ違い</p>
+                    <p class="activity-time" id="lastEncounter">まだありません</p>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-message"></i>
+                </div>
+                <div class="activity-content">
+                    <p class="activity-title">最新メッセージ</p>
+                    <p class="activity-time" id="lastMessage">まだありません</p>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="activity-content">
+                    <p class="activity-title">今日のすれ違い</p>
+                    <p class="activity-time"><span id="todayEncounters">0</span> 回</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计信息 -->
+    <section class="stats-section">
+        <h2 class="section-title">統計情報</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-value" id="totalUsers">--</div>
+                <div class="stat-label">総ユーザー数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💬</div>
+                <div class="stat-value" id="totalMessages">--</div>
+                <div class="stat-label">メッセージ数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👋</div>
+                <div class="stat-value" id="totalEncounters">--</div>
+                <div class="stat-label">すれ違い数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🟢</div>
+                <div class="stat-value" id="onlineUsers">0</div>
+                <div class="stat-label">オンライン中</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于应用 -->
+    <section class="about-section">
+        <div class="about-card">
+            <h3>✨ Sure Link について</h3>
+            <p>リアルタイム位置情報共有とチャット機能を統合した次世代型SNS</p>
+            <div class="about-features">
+                <span class="feature-tag">PWA対応</span>
+                <span class="feature-tag">リアルタイム</span>
+                <span class="feature-tag">位置共有</span>
+                <span class="feature-tag">すれ違い検出</span>
+            </div>
+        </div>
+    </section>
 
 </main>
 
@@ -167,17 +258,13 @@
 }
 </script>
 
+<script defer src="/js/home.js"></script>
 <script>
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("/sw.js")
             .then(() => console.log("✅ Service Worker registered"))
             .catch(console.error);
     }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const name = localStorage.getItem("nickname");
-        if (name) document.title = `Sure Link - ようこそ ${name}さん`;
-    });
 </script>
 </body>
 </html>

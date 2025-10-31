@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-2.2.0-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
@@ -18,21 +18,23 @@
 
 ### 💬 Real-time Chat
 - Instant messaging with Socket.io
-- Message history persistence
-- XSS protection
-- Rate limiting
+- **Message history persistence** (localStorage, up to 100 messages)
+- Automatic history loading on page refresh
+- XSS protection and rate limiting
 
 ### 📍 Location-based Features
 - Real-time location sharing
-- Encounter detection (within 50m)
+- **Encounter detection** (within 50m)
 - Interactive map with Leaflet
+- **Encounter history & collection** with like function
 - Location history tracking
 
 ### 📱 Progressive Web App
+- **APP-style home screen** with feature cards and quick actions
 - Installable on mobile and desktop
 - Offline support with Service Worker
-- Apple-style UI design
-- Responsive layout
+- **Dark mode Apple-style UI** (blue + purple theme)
+- Fully responsive layout
 
 ### 🔐 Security
 - CORS restrictions
@@ -127,13 +129,15 @@ sure-link/
 │   ├── 001_initial_schema.sql
 │   └── migrate.js
 ├── public/                 # Frontend files
-│   ├── index.html
-│   ├── chat.html
-│   ├── map.html
-│   ├── profile.html
-│   ├── css/
-│   ├── js/
-│   └── sw.js
+│   ├── index.html         # APP home screen
+│   ├── chat.html          # Chat with history
+│   ├── map.html           # Location sharing
+│   ├── profile.html       # Profile + encounters
+│   ├── encounter.html     # Encounter system
+│   ├── welcome.html       # Welcome screen
+│   ├── css/               # Stylesheets (v2.2.0)
+│   ├── js/                # JavaScript modules
+│   └── sw.js              # Service Worker (v6)
 └── logs/                   # Log files (auto-generated)
 ```
 
@@ -204,10 +208,26 @@ ADMIN_SECRET=your_secret_key
 
 ## 📚 Documentation
 
-- [📘 Migration Guide](MIGRATION_GUIDE.md) - Upgrade from v1.0 to v2.0
-- [🏗️ Architecture Optimization](ARCHITECTURE_OPTIMIZATION.md) - Detailed architecture analysis
-- [🎨 Design System](DESIGN_SYSTEM.md) - UI/UX guidelines
-- [📝 Refactoring Summary](REFACTORING_SUMMARY.md) - What's new in v2.0
+### Available Docs
+- [🛠️ Local Development Guide](LOCAL_DEVELOPMENT.md) - Complete setup guide for local development
+
+### Latest Updates
+
+**v2.2.0** (2024-10-31)
+- 🏠 APP-style home screen with feature cards
+- 💬 Chat history persistence (100 messages)
+- 📊 Real-time statistics and activity feed
+- 🚀 Quick action buttons
+
+**v2.1.0** (2024-10-31)
+- 👋 Encounter history & collection feature
+- 🌙 Dark mode as default theme
+- 🎨 Unified blue + purple color scheme
+
+**v2.0.0** (2024-10-30)
+- 🏗️ MVC architecture refactoring
+- 🔐 Enhanced security (CORS, rate limiting)
+- 📊 PostgreSQL database with migrations
 
 ---
 
@@ -305,6 +325,34 @@ Returns:
 
 ---
 
+## 🎯 Features Overview
+
+### Home Screen (index.html)
+- Personalized welcome banner
+- 4 feature cards (Chat, Map, Encounters, Profile)
+- Quick action buttons (Location, Notifications, Settings, Help)
+- Recent activity feed
+- Real-time statistics
+
+### Chat (chat.html)
+- Real-time messaging
+- **Persistent history** (localStorage)
+- Auto-load on refresh
+- Clear history function: `clearChatHistory()`
+
+### Profile (profile.html)
+- User information
+- **Encounter history cards** with avatars
+- Like function with animation
+- Statistics display
+
+### Map (map.html)
+- Real-time user locations
+- Encounter detection (50m radius)
+- Interactive Leaflet map
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please:
@@ -312,7 +360,7 @@ Contributions are welcome! Please:
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
+4. Update CSS/JS versions (see [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md))
 5. Submit a pull request
 
 ---
@@ -339,11 +387,34 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ---
 
+## 🔧 Quick Commands
+
+### View Chat History
+```javascript
+// Browser console
+const history = JSON.parse(localStorage.getItem('chatHistory'));
+console.log(history);
+```
+
+### Clear Chat History
+```javascript
+clearChatHistory(); // or
+localStorage.removeItem('chatHistory');
+```
+
+### Check Version
+```javascript
+// Check Service Worker cache version
+caches.keys().then(keys => console.log(keys)); // Should show: surelink-v6
+```
+
+---
+
 ## 📞 Support
 
-- 📧 Email: support@surelink.example.com
 - 🐛 Issues: [GitHub Issues](https://github.com/yourusername/sure-link/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/sure-link/discussions)
+- 📖 Docs: See [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md) for detailed guides
 
 ---
 
