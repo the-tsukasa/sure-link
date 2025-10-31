@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v15"; // ← 每次更新时改版本号 (2.4.0 - 修复CSS选择器冲突，确保按钮正确显示)
+const CACHE_NAME = "surelink-v17"; // ← 每次更新时改版本号 (2.4.2 - 修复图标类名兼容性)
 
 const URLS_TO_CACHE = [
     "/",
