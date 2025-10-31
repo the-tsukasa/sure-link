@@ -1,17 +1,16 @@
-/* ====== Chat Page (PWA + Apple風 最終版) ====== */
+/* ====== Chat Page (Apple风格聊天页) ====== */
 
+/* 使用全局变量，局部补充 */
 :root {
-    --blue: #007aff;
-    --green: #16a34a;
-    --bg: #f8f8f8;
-    --shadow: rgba(0, 0, 0, 0.08);
+    --chat-bubble-bg: #ffffff;
+    --chat-bubble-me: linear-gradient(135deg, var(--primary), var(--primary-dark));
 }
 
 /* ===== 全局設定 ===== */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif;
+    font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif);
     background: var(--bg);
-    color: #222;
+    color: var(--text-primary);
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -89,7 +88,7 @@ body {
     font-weight: 600;
     font-size: 0.85rem;
     margin-bottom: 3px;
-    color: var(--blue);
+    color: var(--primary);
 }
 .message.me .user-row {
     color: var(--green);
@@ -107,8 +106,8 @@ body {
 .bubble {
     padding: 10px 14px;
     border-radius: 18px;
-    background: #fff;
-    box-shadow: 0 1px 3px var(--shadow);
+    background: var(--chat-bubble-bg);
+    box-shadow: var(--shadow-sm);
     font-size: 0.95rem;
     line-height: 1.5;
     word-break: break-word;
@@ -118,7 +117,7 @@ body {
 
 /* 自己的消息气泡 */
 .message.me .bubble {
-    background: linear-gradient(135deg, var(--blue), #005fd1);
+    background: var(--chat-bubble-me);
     color: #fff;
     border-top-left-radius: 18px;
     border-top-right-radius: 6px;
@@ -169,13 +168,13 @@ body {
 }
 .input-area input:focus {
     outline: none;
-    border-color: var(--blue);
-    background: #fff;
+    border-color: var(--primary);
+    background: var(--bg-light);
     box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 
 .input-area button {
-    background: var(--blue);
+    background: var(--primary);
     color: #fff;
     border: none;
     border-radius: 50%;

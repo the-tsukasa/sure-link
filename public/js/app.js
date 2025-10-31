@@ -1,7 +1,12 @@
 // ========== app.js ==========
 
 document.addEventListener("DOMContentLoaded", () => {
-    const socket = io("https://sure-link.onrender.com"); // Render環境用
+    // 动态检测环境：本地开发 or 生产环境
+    const serverUrl = window.location.hostname === 'localhost' 
+        ? 'http://localhost:3000' 
+        : 'https://sure-link.onrender.com';
+    
+    const socket = io(serverUrl);
 
     const userCountEl = document.getElementById("userCount");
     const msgInput = document.getElementById("msgInput");

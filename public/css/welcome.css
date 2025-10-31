@@ -1,0 +1,233 @@
+/* ====== Welcome Page - Apple风格启动页 ====== */
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #eef2ff 0%, #f8faff 50%, #ffffff 100%);
+    color: var(--text-primary);
+    font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 0 20px;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+}
+
+/* 背景装饰 */
+.bg-accent {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.bg-accent-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 122, 255, 0.3), transparent);
+    top: -100px;
+    right: -100px;
+}
+
+.bg-accent-2 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(52, 199, 89, 0.25), transparent);
+    bottom: -80px;
+    left: -80px;
+}
+
+/* Logo区域 */
+.welcome-container {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 24px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+}
+
+p {
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* 开始按钮 */
+.start-btn {
+    background: var(--primary);
+    border: none;
+    color: white;
+    padding: 16px 48px;
+    border-radius: var(--radius-lg);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3);
+    min-width: 200px;
+}
+
+.start-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 122, 255, 0.4);
+}
+
+.start-btn:active {
+    transform: translateY(0);
+    opacity: 0.9;
+}
+
+/* Toast 提示 */
+#toast {
+    position: fixed;
+    bottom: calc(40px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    color: var(--text-primary);
+    padding: 12px 24px;
+    border-radius: var(--radius-lg);
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    z-index: 100;
+    pointer-events: none;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 淡出动画 */
+.fade-out {
+    animation: fadeOut 0.6s ease forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 650px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    p {
+        font-size: 0.95rem;
+    }
+    
+    .logo {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+        border-radius: 20px;
+    }
+    
+    .start-btn {
+        font-size: 1rem;
+        padding: 14px 40px;
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    #toast {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+        max-width: 80vw;
+    }
+}
+
+@media (max-width: 420px) {
+    h1 {
+        font-size: 1.3rem;
+    }
+    
+    .logo {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+    
+    .start-btn {
+        font-size: 0.95rem;
+        padding: 12px 32px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: radial-gradient(circle at top, #1a2332, #0f1419);
+        color: #f5f5f7;
+    }
+    
+    h1 {
+        color: #f5f5f7;
+    }
+    
+    p {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    #toast {
+        background: rgba(30, 30, 32, 0.9);
+        color: #f5f5f7;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+}
+

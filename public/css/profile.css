@@ -5,23 +5,19 @@
    - 夜間モード対応を強化
 ===================================================== */
 
-/* ====== 基础变量 ====== */
+/* ====== Profile页面特定变量 ====== */
 :root {
-    --blue: #007aff;
-    --red: #ff3b30;
-    --bg: #f5f6f8;
-    --radius: 18px;
+    --profile-radius: 18px;
     --shadow-light: 0 10px 30px rgba(15, 35, 95, 0.08);
     --shadow-strong: 0 25px 50px rgba(32, 56, 117, 0.18);
-    --font: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif;
     --glass-border: rgba(255, 255, 255, 0.65);
 }
 
 /* ====== 全体設定 ====== */
 body {
     background: linear-gradient(180deg, #eef2ff 0%, #f8faff 40%, var(--bg) 100%);
-    color: #222;
-    font-family: var(--font);
+    color: var(--text-primary);
+    font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif);
     line-height: 1.6;
     margin: 0;
     padding-bottom: calc(72px + env(safe-area-inset-bottom));
@@ -73,11 +69,11 @@ body {
     transition: all 0.3s ease;
 }
 .btn-blue {
-    background: var(--blue);
+    background: var(--primary);
     color: white;
 }
 .btn-blue:hover {
-    background: #005fd1;
+    background: var(--primary-dark);
     transform: translateY(-1px);
 }
 .btn-red {
@@ -97,7 +93,7 @@ body {
     background: linear-gradient(145deg, rgba(255,255,255,0.88), rgba(245,247,252,0.75));
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-    border-radius: var(--radius);
+    border-radius: var(--profile-radius);
     border: 1px solid var(--glass-border);
     box-shadow: var(--shadow-light);
     padding: 24px;
@@ -148,7 +144,7 @@ body {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    background: var(--blue);
+    background: var(--primary);
     color: white;
     font-size: 2rem;
     font-weight: bold;
@@ -208,7 +204,7 @@ body {
 .edit-btn {
     border: none;
     background: rgba(255,255,255,0.6);
-    color: var(--blue);
+    color: var(--primary);
     border-radius: 999px;
     padding: 10px 18px;
     font-size: 0.9rem;

@@ -104,7 +104,9 @@ function createToast() {
     t.id = "toast";
     t.style = `
     position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);
-    background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);
+    background:rgba(255,255,255,0.9);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
     color:#111;padding:12px 22px;border-radius:20px;font-size:0.9rem;
     box-shadow:0 6px 20px rgba(0,0,0,0.15);
     opacity:0;transition:opacity .4s ease,transform .4s ease;z-index:9999;
@@ -130,7 +132,7 @@ function showConfirm(message) {
         modal.innerHTML = `
       <div style="
         position:fixed;top:0;left:0;width:100%;height:100%;
-        background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);
+        background:rgba(0,0,0,0.4);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
         display:flex;align-items:center;justify-content:center;z-index:3000;
       ">
         <div style="
@@ -165,7 +167,7 @@ function showPrompt(message, placeholder = "") {
         modal.innerHTML = `
       <div style="
         position:fixed;top:0;left:0;width:100%;height:100%;
-        background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);
+        background:rgba(0,0,0,0.4);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
         display:flex;align-items:center;justify-content:center;z-index:3000;
       ">
         <div style="

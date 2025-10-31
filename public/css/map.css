@@ -1,9 +1,6 @@
-/* ====== Map Page (Sure Link Apple風) ====== */
+/* ====== Map Page (Apple风格地图页) ====== */
 
-:root {
-    --blue: #007aff;
-    --green: #34c759;
-}
+/* 使用全局变量 */
 
 /* 地图容器 */
 #map {
@@ -18,7 +15,7 @@
     position: fixed;
     bottom: calc(90px + env(safe-area-inset-bottom));
     right: 20px;
-    background: var(--blue);
+    background: var(--primary);
     color: #fff;
     border: none;
     border-radius: 50%;

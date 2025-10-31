@@ -3,6 +3,7 @@ let map, userMarker;
 let others = {};
 let labels = {}; // 储存昵称标签
 let watchId = null;
+let nickname = "あなた"; // 用户昵称
 
 // ========== 初始化地图 ==========
 function initMap(lat = 35.6812, lng = 139.7671) {
@@ -21,7 +22,14 @@ function initMap(lat = 35.6812, lng = 139.7671) {
         fillOpacity: 0.6,
     }).addTo(map);
 
-    addLabel(socket.id, "あなた", [lat, lng]); // 自己昵称（初始为“あなた”）
+    // 等待 socket 连接后使用 socket.id
+    if (socket.connected) {
+        addLabel(socket.id, nickname, [lat, lng]);
+    } else {
+        socket.on('connect', () => {
+            addLabel(socket.id, nickname, [lat, lng]);
+        });
+    }
 }
 
 // ========== 添加昵称标签 ==========
@@ -62,9 +70,13 @@ function startTracking() {
     watchId = navigator.geolocation.watchPosition(
         (pos) => {
             const { latitude, longitude } = pos.coords;
-            socket.emit("updateLocation", { lat: latitude, lng: longitude });
+            socket.emit("updateLocation", { 
+                lat: latitude, 
+                lng: longitude,
+                nickname: nickname  // 发送昵称到服务器
+            });
             userMarker.setLatLng([latitude, longitude]);
-            updateLabel(socket.id, [latitude, longitude], "あなた");
+            updateLabel(socket.id, [latitude, longitude], nickname);
             map.setView([latitude, longitude]);
         },
         () => showToast("現在地の取得に失敗しました。"),
@@ -87,9 +99,13 @@ function updateLocationOnce() {
     navigator.geolocation.getCurrentPosition(
         (pos) => {
             const { latitude, longitude } = pos.coords;
-            socket.emit("updateLocation", { lat: latitude, lng: longitude });
+            socket.emit("updateLocation", { 
+                lat: latitude, 
+                lng: longitude,
+                nickname: nickname  // 发送昵称
+            });
             userMarker.setLatLng([latitude, longitude]);
-            updateLabel(socket.id, [latitude, longitude], "あなた");
+            updateLabel(socket.id, [latitude, longitude], nickname);
             map.setView([latitude, longitude]);
         },
         () => showToast("位置を取得できません。"),
@@ -145,6 +161,9 @@ function showToast(text) {
 
 // ========== 初始化 ==========
 document.addEventListener("DOMContentLoaded", () => {
+    // 获取用户昵称
+    nickname = localStorage.getItem("nickname") || "あなた";
+    
     navigator.geolocation.getCurrentPosition(
         (pos) => {
             const { latitude, longitude } = pos.coords;

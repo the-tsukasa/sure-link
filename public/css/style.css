@@ -1,10 +1,42 @@
+/* ===== Apple风格统一设计系统 ===== */
 :root {
+    /* === 主题色 === */
+    --primary: #007aff;
+    --primary-dark: #005fd1;
+    --primary-light: #4da3ff;
     --accent: #007aff;
+    
+    /* === 辅助色 === */
+    --green: #34c759;
+    --red: #ff3b30;
+    --orange: #ff9500;
+    --purple: #af52de;
+    
+    /* === 背景色 === */
     --bg: #f8f8f8;
-    --text: #1a1a1a;
-    --shadow: rgba(0,0,0,0.1);
+    --bg-light: #ffffff;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    
+    /* === 文字色 === */
+    --text: #1d1d1f;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-tertiary: #999;
+    
+    /* === 边框和阴影 === */
+    --border: #e5e5ea;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 30px rgba(15, 35, 95, 0.12);
+    
+    /* === 圆角 === */
+    --radius-sm: 12px;
     --radius: 16px;
+    --radius-lg: 20px;
+    
+    /* === 安全区域 === */
     --safe-bottom: env(safe-area-inset-bottom);
+    --safe-top: env(safe-area-inset-top);
 }
 
 * {
@@ -30,10 +62,11 @@ body {
     padding-bottom: calc(60px + var(--safe-bottom));
 }
 
-/* 顶部栏 */
+/* 顶部栏 - Apple风格 */
 header {
-    height: 56px;
-    background: rgba(255,255,255,0.9);
+    height: calc(56px + var(--safe-top));
+    padding-top: var(--safe-top);
+    background: var(--bg-card);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     display: flex;
@@ -41,7 +74,9 @@ header {
     justify-content: center;
     font-weight: 600;
     font-size: 1.1rem;
-    box-shadow: 0 1px 3px var(--shadow);
+    color: var(--text-primary);
+    box-shadow: 0 1px 3px var(--shadow-sm);
+    border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -54,15 +89,16 @@ header {
     align-items: center;
     gap: 8px;
     font-size: 0.9rem;
-    color: #007aff;
+    color: var(--primary);
     background: rgba(255,255,255,0.7);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
     margin: 0 auto 16px;
     padding: 8px 14px;
     width: fit-content;
+    border: 1px solid var(--border);
 }
 .server-status .divider {
     color: #aaa;
@@ -76,50 +112,58 @@ main {
     padding-bottom: calc(80px + var(--safe-bottom));
 }
 
-h2 {
+h2, h3 {
     text-align: center;
-    color: var(--accent);
+    color: var(--text-primary);
     font-size: 1.1rem;
     margin-bottom: 16px;
 }
 
 /* 留言板 */
 #messageBoard {
-    background: white;
+    background: var(--bg-light);
     border-radius: var(--radius);
-    box-shadow: 0 4px 12px var(--shadow);
+    box-shadow: var(--shadow);
     padding: 16px;
+    border: 1px solid var(--border);
 }
 
 #msgInput {
     width: 100%;
     height: 70px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     padding: 10px;
     margin-bottom: 12px;
     font-size: 1rem;
-    background: #fafafa;
+    background: var(--bg);
     outline: none;
+    transition: all 0.2s ease;
 }
 #msgInput:focus {
-    border-color: var(--accent);
-    background: white;
+    border-color: var(--primary);
+    background: var(--bg-light);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 #postBtn {
     width: 100%;
-    background: var(--accent);
+    background: var(--primary);
     color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     padding: 10px 0;
     font-size: 1rem;
     font-weight: 600;
     box-shadow: 0 4px 10px rgba(0,122,255,0.25);
+    transition: all 0.2s ease;
+}
+#postBtn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
 }
 #postBtn:active {
     transform: scale(0.98);
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 #msgList {
@@ -127,20 +171,25 @@ h2 {
     margin-top: 12px;
 }
 #msgList li {
-    background: #fafafa;
-    border-radius: 12px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
     padding: 10px 14px;
     margin-bottom: 8px;
     font-size: 0.95rem;
+    border: 1px solid var(--border);
+    transition: transform 0.2s ease;
+}
+#msgList li:active {
+    transform: scale(0.98);
 }
 
-/* 底部导航 */
+/* 底部导航 - Apple风格 */
 nav {
     height: calc(60px + var(--safe-bottom));
-    background: rgba(255,255,255,0.9);
+    background: var(--bg-card);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -149,24 +198,37 @@ nav {
     bottom: 0;
     width: 100%;
     z-index: 20;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
 }
 
 nav a {
     text-decoration: none;
-    color: #777;
+    color: var(--text-tertiary);
     font-size: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: 0.2s;
+    gap: 4px;
+    transition: all 0.2s ease;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
 }
+
+nav a:active {
+    transform: scale(0.95);
+}
+
 nav a.active {
-    color: var(--accent);
+    color: var(--primary);
     font-weight: 600;
 }
+
+nav a.active i {
+    transform: scale(1.1);
+}
+
 nav i {
     font-size: 1.3rem;
-    margin-bottom: 2px;
 }
 /* === Chat 页面 === */
 #chatWindow {

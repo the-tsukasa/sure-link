@@ -2,147 +2,38 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-    <style>
-        :root {
-            --brand: #66e3ff;
-            --brand-2: #9e7bff;
-            --bg: #0b1020;
-            --fg: #e6f4ff;
-        }
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            background: radial-gradient(circle at 50% 30%, #1a2338, #0b1020);
-            color: var(--fg);
-            font-family: "Noto Sans JP", sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(90deg, var(--brand), var(--brand-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 3s infinite alternate;
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #66e3ff; }
-            to { text-shadow: 0 0 20px #9e7bff; }
-        }
-        p {
-            color: #9bbad1;
-            margin-bottom: 2rem;
-        }
-        button {
-            background: linear-gradient(90deg, var(--brand), var(--brand-2));
-            border: none;
-            color: white;
-            padding: 14px 36px;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s ease, opacity 0.3s;
-        }
-        button:hover {
-            transform: scale(1.05);
-            opacity: 0.9;
-        }
-
-        /* 淡出动画 */
-        .fade-out {
-            animation: fadeOut 0.8s ease forwards;
-        }
-        @keyframes fadeOut {
-            to { opacity: 0; transform: scale(0.98); }
-        }
-
-        /* Toast 提示 */
-        #toast {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            color: var(--fg);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        #toast.show { opacity: 1; }
-        #startBtn {
-            margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
-        }
-@media (max-width: 650px) {
-  h1 { font-size: 1.2rem; }
-  p { font-size: 0.96rem; }
-  button {
-    font-size: 1.03rem;
-    padding: 12px 0;
-    min-width: 75vw; max-width: 96vw;
-  }
-  #toast {
-    font-size: 0.88rem;
-    padding: 11px 7vw;
-    bottom: 18vw;
-  }
-  body { padding-bottom: 18vw; }
-}
-@media (max-width: 420px) {
-  h1 { font-size: 1.02rem; }
-  button {
-    font-size: 0.98rem;
-    min-width: 88vw; padding: 11px 0;
-  }
-  #toast { font-size: 0.85rem; padding: 8px 4vw; }
-}
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Sure Link - ようこそ</title>
+    
+    <!-- PWA Meta -->
+    <meta name="theme-color" content="#007aff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/welcome.css">
 </head>
 
 <body>
-<h1>すれ違いが、つながりになる。</h1>
-<p>共感でつながる新しい世界へ</p>
-<button id="startBtn">始める</button>
-<div id="toast">位置情報を取得中...</div>
+    <!-- 背景装饰 -->
+    <div class="bg-accent bg-accent-1"></div>
+    <div class="bg-accent bg-accent-2"></div>
+    
+    <!-- 主内容 -->
+    <div class="welcome-container">
+        <div class="logo">🔗</div>
+        <h1>すれ違いが、つながりになる。</h1>
+        <p>共感でつながる新しい世界へ</p>
+        <button id="startBtn" class="start-btn">始める</button>
+    </div>
+    
+    <!-- Toast提示 -->
+    <div id="toast">位置情報を取得中...</div>
 
-<script>
-    const btn = document.getElementById("startBtn");
-    const toast = document.getElementById("toast");
-
-    btn.addEventListener("click", () => {
-        toast.textContent = "位置情報を取得中...";
-        toast.classList.add("show");
-
-        // 请求位置信息
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    toast.textContent = "位置情報が許可されました";
-                    setTimeout(() => {
-                        document.body.classList.add("fade-out");
-                        setTimeout(() => location.href = "nickname.html", 800);
-                    }, 1200);
-                },
-                (err) => {
-                    toast.textContent = "位置情報の許可が必要です";
-                    setTimeout(() => toast.classList.remove("show"), 2500);
-                }
-            );
-        } else {
-            toast.textContent = "位置情報がサポートされていません。";
-        }
-    });
-</script>
+    <!-- JavaScript -->
+    <script defer src="/js/welcome.js"></script>
 </body>
 </html>

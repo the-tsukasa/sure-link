@@ -81,15 +81,22 @@ io.on("connection", async (socket) => {
 
     // === 位置情報更新 ===
     socket.on("updateLocation", (pos) => {
-        users[socket.id] = pos;
+        // 存储位置和昵称信息
+        users[socket.id] = {
+            lat: pos.lat,
+            lng: pos.lng,
+            nickname: pos.nickname || socket.id.slice(0, 5)
+        };
         io.emit("updateUsers", users);
 
         for (const [id, u] of Object.entries(users)) {
             if (id !== socket.id && u) {
                 const d = calcDistance(pos.lat, pos.lng, u.lat, u.lng);
                 if (d < 50) {
-                    io.to(id).emit("encounter", { user: socket.id, distance: d });
-                    io.to(socket.id).emit("encounter", { user: id, distance: d });
+                    const userName = u.nickname || id.slice(0, 5);
+                    const myName = users[socket.id].nickname || socket.id.slice(0, 5);
+                    io.to(id).emit("encounter", { user: myName, distance: d });
+                    io.to(socket.id).emit("encounter", { user: userName, distance: d });
                 }
             }
         }
