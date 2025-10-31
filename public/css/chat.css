@@ -175,30 +175,31 @@ body {
     left: 0;
     right: 0;
     display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 12px;
-    background: rgba(255, 255, 255, 0.9);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    border-top: 1px solid #ddd;
+    flex-direction: column;
+    gap: 0;
+    background: linear-gradient(145deg, rgba(28, 28, 30, 0.98), rgba(44, 44, 46, 0.95));
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
     z-index: 10;
 }
 
 .input-area input {
     flex: 1;
     border-radius: 18px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 10px 14px;
     font-size: 1rem;
-    background: #fafafa;
+    background: rgba(255, 255, 255, 0.05);
+    color: #f5f5f7;
     transition: 0.2s;
 }
 .input-area input:focus {
     outline: none;
     border-color: var(--primary);
     background: var(--bg-light);
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.15);
 }
 
 .input-area button {
@@ -210,7 +211,7 @@ body {
     height: 42px;
     font-weight: 600;
     font-size: 0.9rem;
-    box-shadow: 0 4px 8px rgba(0, 122, 255, 0.25);
+    box-shadow: 0 4px 8px rgba(10, 132, 255, 0.3);
     transition: 0.2s;
 }
 .input-area button:active {
@@ -407,19 +408,22 @@ body {
 .quick-reply-btn {
     padding: 8px 16px;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(10, 132, 255, 0.3);
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.15), rgba(191, 90, 242, 0.12));
+    color: var(--primary);
     font-size: 0.9rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
 }
 
 .quick-reply-btn:hover {
-    background: rgba(10, 132, 255, 0.2);
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.25), rgba(191, 90, 242, 0.2));
     border-color: var(--primary);
+    color: #f5f5f7;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.3);
 }
 
 /* 输入工具栏 */
