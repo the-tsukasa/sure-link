@@ -204,10 +204,10 @@ h2, h3 {
 /* === 底部导航栏 - Apple 玻璃态风格 === */
 nav {
     height: calc(60px + var(--safe-bottom));
-    background: linear-gradient(145deg, rgba(255,255,255,0.88), rgba(245,247,252,0.75));
+    background: linear-gradient(145deg, rgba(28, 28, 30, 0.95), rgba(44, 44, 46, 0.9));
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-    border-top: 1px solid rgba(255, 255, 255, 0.65);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -216,12 +216,12 @@ nav {
     bottom: 0;
     width: 100%;
     z-index: 20;
-    box-shadow: 0 -10px 30px rgba(15, 35, 95, 0.08);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
 }
 
 nav a {
     text-decoration: none;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     font-size: 0.75rem;
     display: flex;
     flex-direction: column;
@@ -234,7 +234,8 @@ nav a {
 }
 
 nav a:hover {
-    background: rgba(0, 122, 255, 0.08);
+    background: rgba(10, 132, 255, 0.15);
+    color: var(--text-primary);
 }
 
 nav a:active {
@@ -244,7 +245,7 @@ nav a:active {
 nav a.active {
     color: var(--primary);
     font-weight: 600;
-    background: rgba(0, 122, 255, 0.12);
+    background: rgba(10, 132, 255, 0.2);
 }
 
 nav a.active::before {
