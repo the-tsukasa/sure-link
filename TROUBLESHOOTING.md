@@ -1,8 +1,8 @@
 # 🔧 Sure Link 故障排除指南
 
-> **版本：** 2.4.4  
+> **版本：** 2.4.5  
 > **最后更新：** 2025-10-31  
-> **适用于：** 图标显示问题、按钮显示异常、PWA缓存问题
+> **适用于：** 图标显示问题、按钮显示异常、PWA缓存问题、CDN 403错误
 
 ---
 
@@ -22,12 +22,14 @@
 - **聊天页面顶部按钮**只显示为空的圆圈
 - **地图页面图标**无法正常渲染
 - **Font Awesome图标**显示为方框或乱码
+- **控制台显示 403 错误：** `Failed to load resource: the server responded with a status of 403`
 
 ### 可能原因
 
 #### 1. 代码层面
 ```
-✅ 已修复问题：
+✅ 已修复问题 (v2.4.5)：
+- Font Awesome Kit CDN 返回 403 错误 → 已切换到公共CDN
 - 缺少 font-size 和 line-height 设置
 - CSS选择器权重冲突
 - 图标类名不兼容（fa-user-group → fa-users）
@@ -103,6 +105,40 @@ https://kit.fontawesome.com/a2e0b6a3f1.js
 
 ## 🔍 已实施的代码修复
 
+### v2.4.5 修复内容 ⭐ 最新
+
+#### 关键修复：切换到公共CDN
+**问题：** Font Awesome Kit CDN (`kit.fontawesome.com`) 返回 403 Forbidden
+
+**解决方案：** 使用 cdnjs.cloudflare.com 公共CDN
+
+```html
+<!-- 之前 ❌ -->
+<script src="https://kit.fontawesome.com/a2e0b6a3f1.js"></script>
+
+<!-- 修复后 ✅ -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+```
+
+**优势：**
+- ✅ **无需API Key** - 公共CDN，无访问限制
+- ✅ **更稳定** - Cloudflare全球CDN网络
+- ✅ **无配额限制** - 免费无限制使用
+- ✅ **SRI完整性校验** - 防止CDN篡改
+- ✅ **更快** - CSS直接加载，无需额外JS
+
+**影响范围：**
+- `chat.html` ✅
+- `map.html` ✅
+- `index.html` ✅
+- `profile.html` ✅
+- `encounter.html` ✅
+- `diagnostic.html` ✅
+
+---
+
 ### v2.4.4 修复内容
 
 #### 1. Chat.css - 头部按钮图标
@@ -177,7 +213,8 @@ const CACHE_NAME = "surelink-v19"; // ← 递增版本号
 ### 版本历史
 - `v2.4.2` - 修复图标类名兼容性
 - `v2.4.3` - 修复关闭按钮图标显示
-- `v2.4.4` - 修复头部按钮图标字体大小 ✅ 当前版本
+- `v2.4.4` - 修复头部按钮图标字体大小
+- `v2.4.5` - 切换到公共CDN解决403问题 ✅ 当前版本
 
 ---
 

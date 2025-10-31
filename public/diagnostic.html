@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sure Link - 诊断页面</title>
-    <script src="https://kit.fontawesome.com/a2e0b6a3f1.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome from cdnjs (Public CDN - more reliable) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * {
             margin: 0;
@@ -296,21 +297,44 @@
             <p><strong>Service Worker：</strong> ${'serviceWorker' in navigator ? '<span style="color: #34c759;">✅ 支持</span>' : '<span style="color: #ff375f;">❌ 不支持</span>'}</p>
         `;
 
-        // 检测Font Awesome加载状态
+        // 检测Font Awesome加载状态（CSS版本检测）
         setTimeout(() => {
-            const fontAwesomeLoaded = window.FontAwesome !== undefined;
+            // 检测 Font Awesome CSS 是否加载（通过检查 fa 类的伪元素）
+            const testElement = document.createElement('i');
+            testElement.className = 'fas fa-check';
+            testElement.style.display = 'none';
+            document.body.appendChild(testElement);
+            
+            const computedStyle = window.getComputedStyle(testElement, ':before');
+            const fontAwesomeLoaded = computedStyle.fontFamily && 
+                                     (computedStyle.fontFamily.includes('Font Awesome') || 
+                                      computedStyle.content !== 'none');
+            
+            document.body.removeChild(testElement);
+            
             const statusDiv = document.createElement('div');
             statusDiv.className = `status ${fontAwesomeLoaded ? 'success' : 'error'}`;
-            statusDiv.textContent = fontAwesomeLoaded ? '✅ Font Awesome 已正确加载' : '❌ Font Awesome 加载失败';
+            statusDiv.textContent = fontAwesomeLoaded ? '✅ Font Awesome CSS 已正确加载' : '❌ Font Awesome 加载失败';
             document.querySelector('h1').after(statusDiv);
         }, 1000);
 
         // 控制台提示
         console.log('%c🔍 Sure Link Diagnostic Tool', 'font-size: 20px; color: #0a84ff; font-weight: bold;');
-        console.log('%c检查Font Awesome加载状态:', 'font-size: 14px; color: #bf5af2;');
-        console.log('Font Awesome Object:', window.FontAwesome);
+        console.log('%c检查Font Awesome加载状态 (CSS版本):', 'font-size: 14px; color: #bf5af2;');
+        
+        // 测试图标是否正确渲染
+        const testIcon = document.createElement('i');
+        testIcon.className = 'fas fa-check';
+        testIcon.style.display = 'none';
+        document.body.appendChild(testIcon);
+        const style = window.getComputedStyle(testIcon, ':before');
+        console.log('Font Awesome 字体:', style.fontFamily);
+        console.log('图标内容:', style.content);
+        document.body.removeChild(testIcon);
+        
         console.log('---');
-        console.log('如果看到有效对象，说明Font Awesome已加载成功！');
+        console.log('✅ 如果看到 Font Awesome 字体和图标内容，说明已加载成功！');
+        console.log('📌 当前使用：cdnjs.cloudflare.com (公共CDN)');
     </script>
 </body>
 </html>

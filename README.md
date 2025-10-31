@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-2.4.4-blue.svg)
+![Version](https://img.shields.io/badge/version-2.4.5-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
@@ -211,9 +211,22 @@ ADMIN_SECRET=your_secret_key
 ### Available Docs
 - [🛠️ Local Development Guide](LOCAL_DEVELOPMENT.md) - Complete setup guide for local development
 - [🔧 Troubleshooting Guide](TROUBLESHOOTING.md) - Fix icon display issues, cache problems, and more
+- [🚨 CDN Fix Summary](CDN_FIX_SUMMARY.md) - Font Awesome 403 error fix documentation
 - [🧪 Diagnostic Tool](/diagnostic.html) - Online tool to check Font Awesome and CSS status
 
 ### Latest Updates
+
+**v2.4.5** (2024-10-31) ⭐ **Critical Fix**
+- 🚨 **解决 Font Awesome 403 错误**
+  - 从 `kit.fontawesome.com` 切换到 `cdnjs.cloudflare.com` 公共CDN
+  - 使用 Font Awesome 6.5.1 CSS版本（更稳定）
+  - 添加 SRI 完整性校验
+  - 所有6个HTML文件已更新
+- ✅ **公共CDN优势**
+  - 无需API Key，无配额限制
+  - Cloudflare全球加速
+  - 防篡改安全保护
+- 📊 **Service Worker v20** - 更新缓存策略
 
 **v2.4.4** (2024-10-31)
 - 🔧 **Fixed icon display issues** in chat and map headers

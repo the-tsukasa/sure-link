@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v19"; // ← 每次更新时改版本号 (2.4.4 - 修复头部按钮图标字体大小)
+const CACHE_NAME = "surelink-v20"; // ← 每次更新时改版本号 (2.4.5 - 切换到公共CDN解决403问题)
 
 const URLS_TO_CACHE = [
     "/",
