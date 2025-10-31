@@ -11,8 +11,8 @@
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" href="icons/icon-192.png">
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="css/style.css?v=2.1.0" />
+    <link rel="stylesheet" href="css/profile.css?v=2.1.0" />
     <script defer src="/socket.io/socket.io.js"></script>
     <script type="module" src="/js/config.js"></script>
     <script defer src="js/profile.js"></script>
@@ -34,7 +34,6 @@
                 <p class="status" id="status">🟢 オンライン</p>
             </div>
         </div>
-        <button id="editNameBtn" class="edit-btn"><i class="fa-solid fa-pen-to-square"></i> 名前を変更</button>
         <div class="stat-grid">
             <div class="stat-item">
                 <p class="stat-label">登録日</p>
@@ -45,6 +44,7 @@
                 <p class="stat-value"><span id="encountCount">0</span><span class="stat-suffix">回</span></p>
             </div>
         </div>
+        <button id="editNameBtn" class="edit-btn"><i class="fa-solid fa-pen-to-square"></i> 名前を変更</button>
     </section>
 
     <!-- 一言メッセージ -->
@@ -58,21 +58,6 @@
         </div>
         <textarea id="statusInput" placeholder="今の気持ちを書いてみよう..."></textarea>
         <button id="saveStatus" class="btn btn-blue"><i class="fa-solid fa-floppy-disk"></i> 保存する</button>
-    </section>
-
-    <!-- あなたのカラー -->
-    <section class="user-data glass-card">
-        <div class="section-title">
-            <span class="section-icon">🎨</span>
-            <div>
-                <h3>あなたのカラー</h3>
-                <p class="section-sub">ニックネームから生まれた、あなただけのテーマカラーです。</p>
-            </div>
-        </div>
-        <div class="color-display">
-            <div class="color-preview" id="colorPreview"></div>
-            <p id="colorCode" class="color-code"></p>
-        </div>
     </section>
 
     <!-- すれ違い履歴 -->

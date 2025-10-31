@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v4"; // ← 每次更新时改版本号
+const CACHE_NAME = "surelink-v5"; // ← 每次更新时改版本号 (2.1.0 - 移除颜色功能 + 布局优化)
 
 const URLS_TO_CACHE = [
     "/",

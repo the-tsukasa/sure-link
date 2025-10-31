@@ -2,8 +2,6 @@
 const nicknameEl = document.getElementById("nickname");
 const avatarEl = document.getElementById("avatar");
 const joinDateEl = document.getElementById("joinDate");
-const colorPreview = document.getElementById("colorPreview");
-const colorCode = document.getElementById("colorCode");
 const editBtn = document.getElementById("editNameBtn");
 const toast = createToast();
 
@@ -19,11 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("joinDate", today);
     }
     joinDateEl.textContent = localStorage.getItem("joinDate");
-
-    // 显示颜色
-    const color = getColorFromName(nickname);
-    colorPreview.style.background = color;
-    colorCode.textContent = color;
 });
 
 // ===== 修改昵称 =====
@@ -34,10 +27,6 @@ editBtn.addEventListener("click", async () => {
     localStorage.setItem("nickname", newName);
     nicknameEl.textContent = newName;
     avatarEl.textContent = newName[0].toUpperCase();
-
-    const color = getColorFromName(newName);
-    colorPreview.style.background = color;
-    colorCode.textContent = color;
     showToast(`✨ ${newName} さんに更新しました`);
 });
 
@@ -62,8 +51,6 @@ document.getElementById("resetBtn").addEventListener("click", async () => {
     nicknameEl.textContent = "User";
     avatarEl.textContent = "A";
     joinDateEl.textContent = "";
-    colorPreview.style.background = "#ccc";
-    colorCode.textContent = "";
     document.getElementById("statusInput").value = "";
 
     showToast("🧹 データをリセットしました");
@@ -87,16 +74,6 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
     setTimeout(() => (overlay.style.opacity = "1"), 50);
     setTimeout(() => (window.location.href = "welcome.html"), 700);
 });
-
-// ===== 颜色生成算法 =====
-function getColorFromName(name) {
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) {
-        hash = name.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    const hue = Math.abs(hash % 360);
-    return `hsl(${hue}, 70%, 60%)`;
-}
 
 // ====== iOS风 Toast ======
 function createToast() {
