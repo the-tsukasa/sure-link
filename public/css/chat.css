@@ -12,6 +12,7 @@ body {
     background: linear-gradient(180deg, #eef2ff 0%, #f8faff 40%, var(--bg) 100%);
     color: var(--text-primary);
     margin: 0;
+    padding-top: var(--safe-top, env(safe-area-inset-top));
     display: flex;
     flex-direction: column;
     height: 100vh;

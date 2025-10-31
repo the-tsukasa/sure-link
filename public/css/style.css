@@ -59,6 +59,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-top: var(--safe-top);
     padding-bottom: calc(60px + var(--safe-bottom));
     position: relative;
 }
@@ -89,27 +90,13 @@ body {
     left: -60px;
 }
 
-/* 顶部栏 - Apple风格 */
-header {
-    height: calc(56px + var(--safe-top));
-    padding-top: var(--safe-top);
-    background: var(--bg-card);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--text-primary);
-    box-shadow: 0 1px 3px var(--shadow-sm);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
+/* 顶部栏 - 已移除以实现原生 APP 风格 */
 
 /* 主体内容 */
+main {
+    padding-top: 16px;
+}
+
 .server-status {
     display: flex;
     justify-content: center;
@@ -211,12 +198,13 @@ h2, h3 {
 }
 
 /* 底部导航 - Apple风格 */
+/* === 底部导航栏 - Apple 玻璃态风格 === */
 nav {
     height: calc(60px + var(--safe-bottom));
-    background: var(--bg-card);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border);
+    background: linear-gradient(145deg, rgba(255,255,255,0.88), rgba(245,247,252,0.75));
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    border-top: 1px solid rgba(255, 255, 255, 0.65);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -225,7 +213,7 @@ nav {
     bottom: 0;
     width: 100%;
     z-index: 20;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 -10px 30px rgba(15, 35, 95, 0.08);
 }
 
 nav a {
@@ -236,9 +224,14 @@ nav a {
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 8px 16px;
-    border-radius: var(--radius-sm);
+    border-radius: 12px;
+    position: relative;
+}
+
+nav a:hover {
+    background: rgba(0, 122, 255, 0.08);
 }
 
 nav a:active {
@@ -248,14 +241,28 @@ nav a:active {
 nav a.active {
     color: var(--primary);
     font-weight: 600;
+    background: rgba(0, 122, 255, 0.12);
+}
+
+nav a.active::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 0 0 3px 3px;
 }
 
 nav a.active i {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 nav i {
     font-size: 1.3rem;
+    transition: transform 0.3s ease;
 }
 /* === Chat 页面 === */
 #chatWindow {
@@ -462,4 +469,72 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #eee;
   border-radius: 4px;
+}
+
+/* ====== 暗色模式支持 ====== */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: radial-gradient(circle at top, #1a2332, #0f1419);
+        color: #f5f5f7;
+    }
+    
+    /* 导航栏暗色模式 */
+    nav {
+        background: rgba(34, 34, 36, 0.82);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    nav a {
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    nav a:hover {
+        background: rgba(10, 132, 255, 0.15);
+    }
+    
+    nav a.active {
+        color: #0a84ff;
+        background: rgba(10, 132, 255, 0.2);
+    }
+    
+    nav a.active::before {
+        background: #0a84ff;
+    }
+    
+    /* 服务器状态卡片 */
+    .server-status {
+        background: rgba(34, 34, 36, 0.82);
+        border-color: rgba(255, 255, 255, 0.08);
+        color: #0a84ff;
+    }
+    
+    /* 消息板块 */
+    #messageBoard {
+        background: rgba(34, 34, 36, 0.82);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    #msgInput {
+        background: rgba(255, 255, 255, 0.04);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+    
+    #msgInput::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+    
+    #postBtn {
+        background: #0a84ff;
+    }
+    
+    #postBtn:hover {
+        background: #0066cc;
+    }
+    
+    #msgList li {
+        background: rgba(255, 255, 255, 0.06);
+        color: #f5f5f7;
+    }
 }
