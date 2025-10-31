@@ -1,20 +1,39 @@
 {
   "name": "sure-link",
-  "version": "1.0.0",
-  "description": "PWA SNS demo - real-time Sure Link with PostgreSQL chat board",
-  "main": "server.js",
+  "version": "2.0.0",
+  "description": "PWA SNS demo - Real-time Sure Link with MVC architecture",
+  "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node src/server.js",
+    "dev": "NODE_ENV=development node src/server.js",
+    "migrate": "node migrations/migrate.js",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "lint": "eslint src/**/*.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "pg": "^8.11.5",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "vitest": "^1.1.0"
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "keywords": [
+    "pwa",
+    "websocket",
+    "real-time",
+    "geolocation",
+    "chat"
+  ],
+  "author": "Sure Link Team",
+  "license": "MIT"
 }
