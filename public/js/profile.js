@@ -195,3 +195,231 @@ function showPrompt(message, placeholder = "") {
         };
     });
 }
+
+// ====== すれ違い履歴管理 ======
+class EncounterHistory {
+    constructor() {
+        this.encounters = this.loadEncounters();
+        this.displayLimit = 5;
+        this.init();
+    }
+
+    // 从 localStorage 加载遭遇记录
+    loadEncounters() {
+        const saved = localStorage.getItem('encounters');
+        return saved ? JSON.parse(saved) : [];
+    }
+
+    // 保存遭遇记录
+    saveEncounters() {
+        localStorage.setItem('encounters', JSON.stringify(this.encounters));
+    }
+
+    // 初始化
+    init() {
+        this.renderEncounters();
+        this.updateStats();
+        this.setupEventListeners();
+        
+        // 监听遭遇事件（从其他页面触发）
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'encounters') {
+                this.encounters = this.loadEncounters();
+                this.renderEncounters();
+                this.updateStats();
+            }
+        });
+    }
+
+    // 渲染遭遇卡片
+    renderEncounters() {
+        const container = document.getElementById('encounterCards');
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        
+        if (this.encounters.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">🌟</div>
+                    <p>まだすれ違いがありません</p>
+                    <p class="empty-hint">マップページで位置情報を共有すると、<br>近くの人とすれ違うことができます！</p>
+                </div>
+            `;
+            viewMoreBtn.classList.add('hidden');
+            return;
+        }
+
+        // 显示最近的遭遇
+        const toDisplay = this.encounters.slice(0, this.displayLimit);
+        container.innerHTML = toDisplay.map((enc, index) => this.createEncounterCard(enc, index)).join('');
+        
+        // 显示/隐藏"查看更多"按钮
+        if (this.encounters.length > this.displayLimit) {
+            viewMoreBtn.classList.remove('hidden');
+        } else {
+            viewMoreBtn.classList.add('hidden');
+        }
+    }
+
+    // 创建遭遇卡片 HTML
+    createEncounterCard(encounter, index) {
+        const avatar = encounter.user ? encounter.user[0].toUpperCase() : '?';
+        const time = this.formatTime(encounter.timestamp);
+        const distance = Math.round(encounter.distance);
+        const likes = encounter.likes || 0;
+        const isLiked = encounter.liked || false;
+
+        return `
+            <div class="encounter-card" data-index="${index}">
+                <div class="encounter-avatar">${avatar}</div>
+                <div class="encounter-content">
+                    <div class="encounter-header">
+                        <h4 class="encounter-name">${encounter.user || 'Unknown'}</h4>
+                        <span class="encounter-time">${time}</span>
+                    </div>
+                    <div class="encounter-info">
+                        <div class="encounter-detail">
+                            <i class="fas fa-location-dot"></i>
+                            <span>${encounter.location || '不明な場所'}</span>
+                        </div>
+                        <div class="encounter-detail">
+                            <i class="fas fa-ruler"></i>
+                            <span class="encounter-distance">約 ${distance}m</span>
+                        </div>
+                    </div>
+                    <div class="encounter-actions">
+                        <button class="like-btn ${isLiked ? 'liked' : ''}" data-index="${index}">
+                            <i class="${isLiked ? 'fas' : 'far'} fa-heart"></i>
+                            <span class="like-count">${likes}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // 设置事件监听器
+    setupEventListeners() {
+        // 点赞按钮
+        document.addEventListener('click', (e) => {
+            const likeBtn = e.target.closest('.like-btn');
+            if (likeBtn) {
+                const index = parseInt(likeBtn.dataset.index);
+                this.toggleLike(index);
+            }
+        });
+
+        // 查看更多按钮
+        document.getElementById('viewMoreBtn').addEventListener('click', () => {
+            this.displayLimit += 5;
+            this.renderEncounters();
+        });
+    }
+
+    // 切换点赞状态
+    toggleLike(index) {
+        const encounter = this.encounters[index];
+        if (!encounter) return;
+
+        if (encounter.liked) {
+            encounter.liked = false;
+            encounter.likes = (encounter.likes || 1) - 1;
+        } else {
+            encounter.liked = true;
+            encounter.likes = (encounter.likes || 0) + 1;
+        }
+
+        this.saveEncounters();
+        this.renderEncounters();
+        this.updateStats();
+
+        // 震动反馈
+        if (navigator.vibrate) {
+            navigator.vibrate(encounter.liked ? [10, 10, 10] : 10);
+        }
+    }
+
+    // 更新统计信息
+    updateStats() {
+        const totalEl = document.getElementById('totalEncounters');
+        const favoriteEl = document.getElementById('favoriteCount');
+        
+        if (totalEl) {
+            totalEl.textContent = this.encounters.length;
+        }
+        
+        if (favoriteEl) {
+            const favoriteCount = this.encounters.filter(e => e.liked).length;
+            favoriteEl.textContent = favoriteCount;
+        }
+
+        // 更新今日遭遇数
+        const encountCountEl = document.getElementById('encountCount');
+        if (encountCountEl) {
+            const today = new Date().toDateString();
+            const todayCount = this.encounters.filter(e => 
+                new Date(e.timestamp).toDateString() === today
+            ).length;
+            encountCountEl.textContent = todayCount;
+        }
+    }
+
+    // 格式化时间
+    formatTime(timestamp) {
+        const date = new Date(timestamp);
+        const now = new Date();
+        const diff = now - date;
+
+        // 少于1分钟
+        if (diff < 60000) return 'たった今';
+        
+        // 少于1小时
+        if (diff < 3600000) {
+            const minutes = Math.floor(diff / 60000);
+            return `${minutes}分前`;
+        }
+        
+        // 少于24小时
+        if (diff < 86400000) {
+            const hours = Math.floor(diff / 3600000);
+            return `${hours}時間前`;
+        }
+        
+        // 少于7天
+        if (diff < 604800000) {
+            const days = Math.floor(diff / 86400000);
+            return `${days}日前`;
+        }
+        
+        // 显示具体日期
+        return date.toLocaleDateString('ja-JP', { 
+            month: 'short', 
+            day: 'numeric' 
+        });
+    }
+
+    // 添加新遭遇（供其他页面调用）
+    addEncounter(user, distance, location) {
+        const encounter = {
+            user,
+            distance,
+            location,
+            timestamp: Date.now(),
+            likes: 0,
+            liked: false
+        };
+        
+        this.encounters.unshift(encounter);
+        
+        // 只保留最近100条
+        if (this.encounters.length > 100) {
+            this.encounters = this.encounters.slice(0, 100);
+        }
+        
+        this.saveEncounters();
+        this.renderEncounters();
+        this.updateStats();
+    }
+}
+
+// 初始化遭遇历史
+const encounterHistory = new EncounterHistory();

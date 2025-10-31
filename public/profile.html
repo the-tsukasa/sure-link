@@ -74,6 +74,45 @@
             <p id="colorCode" class="color-code"></p>
         </div>
     </section>
+
+    <!-- すれ違い履歴 -->
+    <section class="encounter-history glass-card">
+        <div class="section-title">
+            <span class="section-icon">👋</span>
+            <div>
+                <h3>すれ違い履歴</h3>
+                <p class="section-sub">これまでの出会いを振り返りましょう。</p>
+            </div>
+        </div>
+
+        <!-- 统计信息 -->
+        <div class="encounter-stats">
+            <div class="stat-mini">
+                <i class="fas fa-users"></i>
+                <span>総数: <strong id="totalEncounters">0</strong></span>
+            </div>
+            <div class="stat-mini">
+                <i class="fas fa-heart"></i>
+                <span>お気に入り: <strong id="favoriteCount">0</strong></span>
+            </div>
+        </div>
+
+        <!-- 遭遇卡片列表 -->
+        <div id="encounterCards" class="encounter-cards">
+            <!-- 默认空状态 -->
+            <div class="empty-state">
+                <div class="empty-icon">🌟</div>
+                <p>まだすれ違いがありません</p>
+                <p class="empty-hint">マップページで位置情報を共有すると、<br>近くの人とすれ違うことができます！</p>
+            </div>
+        </div>
+
+        <!-- 查看更多按钮 -->
+        <button id="viewMoreBtn" class="view-more-btn hidden">
+            <i class="fas fa-chevron-down"></i> もっと見る
+        </button>
+    </section>
+
     <!-- アカウント設定 -->
     <section class="account-box glass-card">
         <div class="section-title">
