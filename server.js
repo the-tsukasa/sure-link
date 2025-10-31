@@ -23,16 +23,28 @@ app.use(express.json());
 // ===== 静的ファイル =====
 app.use(express.static(path.join(__dirname, "public")));
 
-// ===== PostgreSQL 接続 =====
+// ===== PostgreSQL 接続（优化的连接池配置） =====
 const { Pool } = pkg;
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false },
+    max: 20,                      // 最大连接数
+    idleTimeoutMillis: 30000,     // 空闲连接超时
+    connectionTimeoutMillis: 2000, // 连接超时
 });
 
+// 连接测试
 pool.connect()
-    .then(() => console.log("✅ PostgreSQL connected"))
+    .then((client) => {
+        console.log("✅ PostgreSQL connected");
+        client.release();
+    })
     .catch((err) => console.error("❌ DB connection error:", err.message));
+
+// 错误处理
+pool.on('error', (err, client) => {
+    console.error('❌ Unexpected database error:', err);
+});
 
 // ===== Root Path =====
 app.get("/", (req, res) => {
@@ -104,11 +116,39 @@ io.on("connection", async (socket) => {
 
     // === チャット送信 ===
     socket.on("chatMessage", async (msgData) => {
-        io.emit("chatMessage", msgData);
+        // 输入验证
+        if (!msgData || !msgData.user || !msgData.text) {
+            console.warn("⚠️ Invalid message data");
+            return;
+        }
+        
+        // 限制长度
+        if (msgData.text.length > 500) {
+            socket.emit("error", { message: "メッセージは500文字以内にしてください" });
+            return;
+        }
+        
+        if (msgData.user.length > 50) {
+            socket.emit("error", { message: "ニックネームは50文字以内にしてください" });
+            return;
+        }
+        
+        // 清理HTML标签（基本XSS防护）
+        const cleanText = String(msgData.text).replace(/<[^>]*>/g, '');
+        const cleanUser = String(msgData.user).replace(/<[^>]*>/g, '');
+        
+        const cleanedData = {
+            user: cleanUser,
+            text: cleanText,
+            id: msgData.id
+        };
+        
+        io.emit("chatMessage", cleanedData);
+        
         try {
             await pool.query(
                 "INSERT INTO messages (username, text) VALUES ($1, $2)",
-                [msgData.user, msgData.text]
+                [cleanUser, cleanText]
             );
         } catch (err) {
             console.error("❌ Failed to save message:", err.message);
@@ -127,6 +167,24 @@ io.on("connection", async (socket) => {
 // ===== API テスト =====
 app.get("/api/test", (req, res) => {
     res.json({ message: "Sure-Link backend is running ✅" });
+});
+
+// ===== 健康检查 =====
+app.get("/api/health", async (req, res) => {
+    try {
+        const result = await pool.query('SELECT NOW()');
+        res.json({ 
+            status: 'healthy', 
+            database: 'connected',
+            timestamp: result.rows[0].now,
+            connections: pool.totalCount
+        });
+    } catch (err) {
+        res.status(500).json({ 
+            status: 'unhealthy', 
+            error: err.message 
+        });
+    }
 });
 
 // ===== サーバー起動 =====

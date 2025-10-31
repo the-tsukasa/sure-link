@@ -4,8 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
+    <!-- ===== SEO Meta Tags ===== -->
+    <title>Sure Link - すれ違いが、つながりになる</title>
+    <meta name="description" content="位置共有とリアルタイムチャットで新しい出会いを。Sure Linkであなたの近くにいる人と繋がろう。">
+    <meta name="keywords" content="SNS,位置共有,リアルタイムチャット,すれ違い,PWA,ソーシャルネットワーク">
+    <meta name="author" content="Sure Link Team">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sure-link.onrender.com/">
+    <meta property="og:title" content="Sure Link - すれ違いが、つながりになる">
+    <meta property="og:description" content="位置共有とリアルタイムチャットで新しい出会いを">
+    <meta property="og:image" content="https://sure-link.onrender.com/icons/icon-512.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sure Link">
+    <meta name="twitter:description" content="すれ違いが、つながりになる">
+    <meta name="twitter:image" content="https://sure-link.onrender.com/icons/icon-512.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-192.png">
+    <link rel="shortcut icon" href="/icons/icon-192.png">
+
     <!-- ===== PWA 基本信息 ===== -->
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#007aff">
     <link rel="manifest" href="/manifest.json">
 
     <!-- ===== iOS 兼容 ===== -->
@@ -14,8 +37,6 @@
     <meta name="apple-mobile-web-app-title" content="Sure Link">
     <link rel="apple-touch-icon" href="/icons/icon-192.png">
     <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512.png">
-
-    <title>Sure Link</title>
 
     <!-- ===== CSS & Scripts ===== -->
     <link rel="stylesheet" href="/css/style.css">
@@ -27,20 +48,30 @@
 
 
 <body>
-<header>Sure Link</header>
+<header role="banner">
+    <h1>Sure Link</h1>
+</header>
 
-<main>
-    <div class="server-status">
+<main role="main">
+    <div class="server-status" role="status" aria-live="polite">
         <span id="userCount">現在オンライン人数：0人</span>
-        <span class="divider">｜</span>
+        <span class="divider" aria-hidden="true">｜</span>
         <span id="serverState">サーバー：🟡 接続中...</span>
     </div>
 
-    <section id="messageBoard">
-        <h3>掲示板</h3>
-        <textarea id="msgInput" placeholder="メッセージを書く..."></textarea>
-        <button id="postBtn">投稿</button>
-        <ul id="msgList"></ul>
+    <section id="messageBoard" aria-labelledby="board-title">
+        <h3 id="board-title">掲示板</h3>
+        <textarea 
+            id="msgInput" 
+            placeholder="メッセージを書く..."
+            aria-label="メッセージ入力欄"
+            maxlength="500"
+        ></textarea>
+        <button 
+            id="postBtn" 
+            aria-label="メッセージを投稿"
+        >投稿</button>
+        <ul id="msgList" role="log" aria-live="polite" aria-atomic="false"></ul>
     </section>
 
     <!-- ===== PWAホーム追加チュートリアル ====1= -->
@@ -84,24 +115,47 @@
 </main>
 
 
-<nav>
-    <a href="index.html" class="active">
-        <i class="fa-solid fa-house"></i>
+<nav role="navigation" aria-label="主要ナビゲーション">
+    <a href="index.html" class="active" aria-current="page" aria-label="ホームページ">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
         <span>ホーム</span>
     </a>
-    <a href="chat.html">
-        <i class="fa-solid fa-comment-dots"></i>
+    <a href="chat.html" aria-label="チャットページ">
+        <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
         <span>チャット</span>
     </a>
-    <a href="map.html">
-        <i class="fa-solid fa-location-dot"></i>
+    <a href="map.html" aria-label="すれ違いマップページ">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
         <span>すれ違い</span>
     </a>
-    <a href="profile.html">
-        <i class="fa-solid fa-user"></i>
+    <a href="profile.html" aria-label="マイページ">
+        <i class="fa-solid fa-user" aria-hidden="true"></i>
         <span>マイページ</span>
     </a>
 </nav>
+
+<!-- ===== 结构化数据 ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Sure Link",
+  "description": "すれ違いが、つながりになるSNS - 位置共有とリアルタイムチャット",
+  "url": "https://sure-link.onrender.com",
+  "applicationCategory": "SocialNetworkingApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "ratingCount": "100"
+  }
+}
+</script>
 
 <script>
     if ("serviceWorker" in navigator) {

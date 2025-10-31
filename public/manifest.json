@@ -1,28 +1,65 @@
 {
   "name": "Sure Link",
   "short_name": "SureLink",
-  "description": "すれ違いで共感がつながるSNS",
+  "description": "すれ違いで共感がつながるSNS - 位置共有とリアルタイムチャット",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "theme_color": "#007aff",
   "orientation": "portrait",
+  "scope": "/",
+  "lang": "ja",
+  "dir": "ltr",
+  "categories": ["social", "communication"],
   "icons": [
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icons/maskable-icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "label": "Sure Link ホーム画面"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "チャット",
+      "short_name": "Chat",
+      "description": "チャットを開く",
+      "url": "/chat.html",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "マップ",
+      "short_name": "Map",
+      "description": "すれ違いマップを開く",
+      "url": "/map.html",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "プロフィール",
+      "short_name": "Profile",
+      "description": "マイページを開く",
+      "url": "/profile.html",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
