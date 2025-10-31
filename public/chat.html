@@ -9,8 +9,8 @@
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" href="icons/icon-192.png">
     <title>Sure Link - チャット</title>
-    <link rel="stylesheet" href="css/style.css?v=2.2.0" />
-    <link rel="stylesheet" href="css/chat.css?v=2.2.0" />
+    <link rel="stylesheet" href="css/style.css?v=2.3.0" />
+    <link rel="stylesheet" href="css/chat.css?v=2.3.0" />
     <script defer src="/socket.io/socket.io.js"></script>
     <script type="module" src="/js/config.js"></script>
     <script defer src="js/chat.js"></script>
@@ -22,14 +22,154 @@
 <div class="page-bg-accent page-bg-accent-1"></div>
 <div class="page-bg-accent page-bg-accent-2"></div>
 
-<main>
+<main class="chat-app">
+    <!-- 聊天室头部 -->
+    <div class="chat-header">
+        <div class="chat-room-info">
+            <div class="room-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="room-details">
+                <h2 class="room-name">グローバルチャット</h2>
+                <p class="room-status">
+                    <i class="fas fa-circle online-dot"></i>
+                    <span id="onlineCount">0人</span> オンライン
+                </p>
+            </div>
+        </div>
+        <div class="chat-actions">
+            <button class="icon-btn" onclick="showOnlineUsers()">
+                <i class="fas fa-user-group"></i>
+            </button>
+            <button class="icon-btn" onclick="toggleChatSettings()">
+                <i class="fas fa-ellipsis-vertical"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 消息列表 -->
     <div class="chat-container">
         <ul id="messages"></ul>
     </div>
 
+    <!-- 快速回复 -->
+    <div class="quick-replies" id="quickReplies">
+        <button class="quick-reply-btn" onclick="sendQuickReply('こんにちは！👋')">
+            こんにちは！👋
+        </button>
+        <button class="quick-reply-btn" onclick="sendQuickReply('よろしく！😊')">
+            よろしく！😊
+        </button>
+        <button class="quick-reply-btn" onclick="sendQuickReply('ありがとう！🙏')">
+            ありがとう！🙏
+        </button>
+        <button class="quick-reply-btn" onclick="sendQuickReply('またね！👋')">
+            またね！👋
+        </button>
+    </div>
+
+    <!-- 输入区域 -->
     <div class="input-area">
-        <input id="messageInput" type="text" placeholder="メッセージを入力..." autocomplete="off" />
-        <button id="sendBtn">送信</button>
+        <!-- 功能按钮 -->
+        <div class="input-tools">
+            <button class="tool-btn" onclick="selectEmoji()">
+                <i class="fas fa-face-smile"></i>
+            </button>
+            <button class="tool-btn" onclick="attachPhoto()">
+                <i class="fas fa-image"></i>
+            </button>
+            <button class="tool-btn" onclick="voiceMessage()">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button class="tool-btn" onclick="moreOptions()">
+                <i class="fas fa-plus-circle"></i>
+            </button>
+        </div>
+
+        <!-- 输入框 -->
+        <div class="input-row">
+            <input 
+                id="messageInput" 
+                type="text" 
+                placeholder="メッセージを入力..." 
+                autocomplete="off" 
+            />
+            <button id="sendBtn" class="send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+        <!-- 输入提示 -->
+        <div class="input-hint" id="inputHint">
+            <i class="fas fa-info-circle"></i>
+            <span>Enterで送信、Shift+Enterで改行</span>
+        </div>
+    </div>
+
+    <!-- 在线用户侧边栏 -->
+    <div class="online-users-panel" id="onlineUsersPanel">
+        <div class="panel-header">
+            <h3>オンラインユーザー</h3>
+            <button class="close-panel" onclick="hideOnlineUsers()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="users-list">
+            <div class="user-item">
+                <div class="user-avatar">T</div>
+                <div class="user-info">
+                    <span class="user-name">Taro</span>
+                    <span class="user-status">オンライン</span>
+                </div>
+            </div>
+            <!-- 更多用户将动态加载 -->
+        </div>
+    </div>
+
+    <!-- 设置面板 -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="panel-header">
+            <h3>チャット設定</h3>
+            <button class="close-panel" onclick="hideChatSettings()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="settings-list">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i class="fas fa-bell"></i>
+                    <span>通知音</span>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i class="fas fa-eye"></i>
+                    <span>既読表示</span>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i class="fas fa-keyboard"></i>
+                    <span>Enter送信</span>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <button class="danger-btn" onclick="clearChatHistory()">
+                <i class="fas fa-trash"></i>
+                履歴を削除
+            </button>
+        </div>
     </div>
 </main>
 

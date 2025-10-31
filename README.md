@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-2.2.0-blue.svg)
+![Version](https://img.shields.io/badge/version-2.3.0-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
@@ -213,6 +213,14 @@ ADMIN_SECRET=your_secret_key
 
 ### Latest Updates
 
+**v2.3.0** (2024-10-31)
+- 💬 **APP-style chat interface** with rich features
+- 📱 Chat room header with online users
+- ⚡ Quick reply buttons
+- 🛠️ Input toolbar (emoji, photo, voice, more)
+- 👥 Online users sidebar
+- ⚙️ Chat settings panel with toggles
+
 **v2.2.0** (2024-10-31)
 - 🏠 APP-style home screen with feature cards
 - 💬 Chat history persistence (100 messages)
@@ -223,11 +231,6 @@ ADMIN_SECRET=your_secret_key
 - 👋 Encounter history & collection feature
 - 🌙 Dark mode as default theme
 - 🎨 Unified blue + purple color scheme
-
-**v2.0.0** (2024-10-30)
-- 🏗️ MVC architecture refactoring
-- 🔐 Enhanced security (CORS, rate limiting)
-- 📊 PostgreSQL database with migrations
 
 ---
 

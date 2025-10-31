@@ -198,3 +198,96 @@ function showToast(message) {
         setTimeout(() => toast.remove(), 300);
     }, 2000);
 }
+
+// ====== APP功能 ======
+
+// 快速回复
+function sendQuickReply(text) {
+    input.value = text;
+    sendMsg();
+}
+
+// 表情选择（虚拟功能）
+function selectEmoji() {
+    showToast('😊 絵文字パネルは開発中です');
+}
+
+// 附加图片（虚拟功能）
+function attachPhoto() {
+    showToast('📸 画像送信機能は開発中です');
+}
+
+// 语音消息（虚拟功能）
+function voiceMessage() {
+    showToast('🎤 音声メッセージ機能は開発中です');
+}
+
+// 更多选项（虚拟功能）
+function moreOptions() {
+    showToast('➕ その他のオプションは開発中です');
+}
+
+// 显示在线用户侧边栏
+function showOnlineUsers() {
+    const panel = document.getElementById('onlineUsersPanel');
+    const settings = document.getElementById('settingsPanel');
+    settings.classList.remove('show');
+    panel.classList.add('show');
+}
+
+// 隐藏在线用户侧边栏
+function hideOnlineUsers() {
+    const panel = document.getElementById('onlineUsersPanel');
+    panel.classList.remove('show');
+}
+
+// 显示/隐藏设置面板
+function toggleChatSettings() {
+    const panel = document.getElementById('settingsPanel');
+    const users = document.getElementById('onlineUsersPanel');
+    users.classList.remove('show');
+    
+    if (panel.classList.contains('show')) {
+        panel.classList.remove('show');
+    } else {
+        panel.classList.add('show');
+    }
+}
+
+// 隐藏设置面板
+function hideChatSettings() {
+    const panel = document.getElementById('settingsPanel');
+    panel.classList.remove('show');
+}
+
+// 更新在线人数
+socket.on('userCount', (count) => {
+    const countEl = document.getElementById('onlineCount');
+    if (countEl) {
+        countEl.textContent = `${count}人`;
+    }
+});
+
+// 点击背景关闭侧边栏
+document.addEventListener('click', (e) => {
+    const usersPanel = document.getElementById('onlineUsersPanel');
+    const settingsPanel = document.getElementById('settingsPanel');
+    
+    if (!e.target.closest('.online-users-panel') && 
+        !e.target.closest('.settings-panel') &&
+        !e.target.closest('.icon-btn')) {
+        usersPanel.classList.remove('show');
+        settingsPanel.classList.remove('show');
+    }
+});
+
+// 导出到全局
+window.sendQuickReply = sendQuickReply;
+window.selectEmoji = selectEmoji;
+window.attachPhoto = attachPhoto;
+window.voiceMessage = voiceMessage;
+window.moreOptions = moreOptions;
+window.showOnlineUsers = showOnlineUsers;
+window.hideOnlineUsers = hideOnlineUsers;
+window.toggleChatSettings = toggleChatSettings;
+window.hideChatSettings = hideChatSettings;
