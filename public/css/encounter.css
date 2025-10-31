@@ -1,8 +1,8 @@
 /* ====== Sure Link - 遭遇系统样式 ====== */
 
 :root {
-    --encounter-primary: #667eea;
-    --encounter-secondary: #764ba2;
+    --encounter-primary: var(--primary, #0a84ff);
+    --encounter-secondary: var(--purple, #bf5af2);
     --encounter-success: #10b981;
     --encounter-warning: #f59e0b;
     --encounter-danger: #ef4444;

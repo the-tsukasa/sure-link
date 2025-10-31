@@ -4,7 +4,7 @@
 
 /* 页面背景 */
 body {
-    background: linear-gradient(180deg, #eef2ff 0%, #f8faff 30%, #f8f8f8 100%);
+    background: radial-gradient(circle at top, #1a2332, #0f1419);
     padding-top: var(--safe-top, env(safe-area-inset-top));
     position: relative;
 }

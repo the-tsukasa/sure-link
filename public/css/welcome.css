@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    background: linear-gradient(180deg, #eef2ff 0%, #f8faff 50%, #ffffff 100%);
+    background: radial-gradient(circle at top, #1a2332, #0f1419);
     color: var(--text-primary);
     font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif);
     height: 100vh;
