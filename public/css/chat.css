@@ -152,6 +152,7 @@ body {
     gap: 8px;
     padding: 10px 12px;
     background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     border-top: 1px solid #ddd;
     z-index: 10;
