@@ -1,4 +1,7 @@
-const socket = io();
+// 使用全局配置
+const config = window.SureLinkConfig || { serverUrl: 'http://localhost:3000' };
+console.log('📡 Map connecting to:', config.serverUrl);
+const socket = io(config.serverUrl);
 let map, userMarker;
 let others = {};
 let labels = {}; // 储存昵称标签

@@ -3,7 +3,10 @@
 
 class EncounterSystem {
     constructor() {
-        this.socket = io();
+        // 使用全局配置
+        const config = window.SureLinkConfig || { serverUrl: 'http://localhost:3000' };
+        console.log('📡 Encounter connecting to:', config.serverUrl);
+        this.socket = io(config.serverUrl);
         this.nickname = localStorage.getItem('nickname') || 'ゲスト';
         this.encounters = this.loadEncounters() || [];
         this.achievements = this.loadAchievements();

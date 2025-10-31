@@ -1,11 +1,11 @@
 // ========== app.js ==========
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 动态检测环境：本地开发 or 生产环境
-    const serverUrl = window.location.hostname === 'localhost' 
-        ? 'http://localhost:3000' 
-        : 'https://sure-link.onrender.com';
+    // 使用全局配置（config.js 已自动初始化）
+    const config = window.SureLinkConfig;
+    const serverUrl = config.serverUrl;
     
+    console.log('📡 Connecting to:', serverUrl);
     const socket = io(serverUrl);
 
     const userCountEl = document.getElementById("userCount");

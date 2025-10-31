@@ -18,7 +18,7 @@
     "express": "^4.21.2",
     "pg": "^8.11.5",
     "socket.io": "^4.7.5",
-    "winston": "^3.11.0"
+    "winston": "^3.18.3"
   },
   "devDependencies": {
     "eslint": "^8.56.0",

@@ -1,4 +1,7 @@
-const socket = io();
+// 使用全局配置
+const config = window.SureLinkConfig || { serverUrl: 'http://localhost:3000' };
+console.log('📡 Chat connecting to:', config.serverUrl);
+const socket = io(config.serverUrl);
 
 const msgList = document.getElementById("messages");
 const input = document.getElementById("messageInput");

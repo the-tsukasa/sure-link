@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/pwa-guide.css">
     <script defer src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/js/config.js"></script>
     <script defer src="/js/app.js"></script>
     <script src="https://kit.fontawesome.com/a2e0b6a3f1.js" crossorigin="anonymous"></script>
 </head>
@@ -60,55 +61,64 @@
     </div>
 
     <section id="messageBoard" aria-labelledby="board-title">
-        <h3 id="board-title">掲示板</h3>
+        <h3 id="board-title">コミュニティボード</h3>
         <textarea 
             id="msgInput" 
-            placeholder="メッセージを書く..."
+            placeholder="メッセージを入力してください..."
             aria-label="メッセージ入力欄"
             maxlength="500"
         ></textarea>
         <button 
             id="postBtn" 
             aria-label="メッセージを投稿"
-        >投稿</button>
+        >送信</button>
         <ul id="msgList" role="log" aria-live="polite" aria-atomic="false"></ul>
     </section>
 
-    <!-- ===== PWAホーム追加チュートリアル ====1= -->
+    <!-- ===== PWAインストールガイド ===== -->
     <section id="installGuide" class="pwa-guide">
-        <h3>📱 スマホに「Sure Link」を追加する方法</h3>
-        <p>アプリのようにホーム画面から開けるようになります。</p>
+        <h3>📱 アプリケーションのインストール</h3>
+        <p>Sure Link を Progressive Web App (PWA) としてデバイスにインストールすることで、<br>
+        ネイティブアプリケーションのような快適な体験をお楽しみいただけます。</p>
 
         <div class="steps">
-            <h4>📱 Android（Chrome）の場合</h4>
+            <h4>📱 Android デバイス（Chrome ブラウザ）</h4>
             <ol>
-                <li>右上の <strong>「⋮」</strong> メニューをタップ</li>
+                <li>ブラウザ右上のメニューアイコン <strong>「⋮」</strong> をタップ</li>
                 <li><strong>「ホーム画面に追加」</strong> を選択</li>
-                <li>「追加」を押して完了！</li>
+                <li>「追加」をタップしてインストールを完了</li>
             </ol>
 
-            <h4>iPhone（Safari）の場合</h4>
+            <h4>iOS デバイス（Safari ブラウザ）</h4>
             <ol>
-                <li>画面下の <strong>「共有ボタン」</strong> をタップ</li>
+                <li>画面下部の <strong>「共有」ボタン</strong> をタップ</li>
                 <li><strong>「ホーム画面に追加」</strong> を選択</li>
-                <li>「追加」を押すとホームにアイコンが表示されます</li>
+                <li>「追加」をタップするとホーム画面にアイコンが追加されます</li>
             </ol>
         </div>
 
-        <p class="note">※ アプリ削除時は、ホーム画面のアイコンを長押しして削除してください。</p>
+        <p class="note">※ アンインストールする場合は、ホーム画面のアイコンを長押しして削除してください。</p>
     </section>
 
-    <!-- ===== テスト案内 ===== -->
+    <!-- ===== サービス概要 ===== -->
     <section id="betaNotice" class="pwa-guide beta">
-        <h3>これはテストページです</h3>
+        <h3>Sure Link について</h3>
         <p>
-            現在は <strong>βテスト（試験運用）</strong> 中です。<br>
-            一部の機能（すれ違い通知・プロフィール連携など）は今後追加予定です。
+            Sure Link は、リアルタイム位置情報共有とチャット機能を統合した<br>
+            次世代型ソーシャルネットワーキングサービスです。
         </p>
-        <p>
-            不具合や改善点がありましたら、<strong>GitHub Issues</strong> や <strong>Teams</strong> からご連絡ください。
+        <h4>主な機能</h4>
+        <ul class="feature-list">
+            <li><strong>リアルタイムメッセージング</strong> - WebSocket による即時通信</li>
+            <li><strong>位置情報共有</strong> - Geolocation API を活用したマップ表示</li>
+            <li><strong>すれ違い検出システム</strong> - 近隣ユーザーとの遭遇を通知</li>
+            <li><strong>プロフィール管理</strong> - カスタマイズ可能なユーザー情報</li>
+            <li><strong>PWA 対応</strong> - オフライン動作とプッシュ通知をサポート</li>
+        </ul>
+        <p class="note">
+            本サービスは現在ベータ版として運用されております。<br>
+            ご意見・ご要望は開発チームまでお寄せください。
         </p>
-        <p class="note">このページは PWA 動作検証・リアルタイム通信テストを目的としています。</p>
     </section>
 
 
