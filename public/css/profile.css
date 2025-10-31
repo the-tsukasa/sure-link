@@ -10,7 +10,7 @@ body {
     color: #222;
     font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif;
     margin: 0;
-    padding-bottom: 80px;
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
 
 /* ===== Profile Card ===== */
@@ -185,4 +185,53 @@ h2 {
 .logout-btn:hover {
     background: #005fd1;
     transform: scale(1.02);
+}
+
+@media (max-width: 650px) {
+  .profile-card,
+  .status-box,
+  .user-data,
+  .account-box {
+    margin: 8px 2vw 12px;
+    padding: 12px 2vw;
+    border-radius: 12px;
+    max-width: 99vw;
+  }
+  .avatar {
+    width: 65px;
+    height: 65px;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 7px var(--blue);
+  }
+  h2 {
+    font-size: 1.07rem;
+    margin: 6px 0;
+  }
+  textarea {
+    font-size: 0.97rem;
+    padding: 9px;
+    border-radius: 12px;
+  }
+  button, .edit-btn, .danger-btn, .logout-btn {
+    padding: 10px 0 !important;
+    font-size: 1rem !important;
+    border-radius: 19px !important;
+    margin-bottom: 9px;
+    width: 100%;
+    max-width: 300px;
+  }
+  .color-preview {
+    width: 42px; height: 42px; margin-top: 5px;
+  }
+}
+@media (max-width: 420px) {
+  .profile-card, .status-box, .user-data, .account-box {
+    margin: 3px 1vw 9px;
+    padding: 7px 2vw;
+    border-radius: 9px;
+  }
+  .avatar {
+    width: 51px; height: 51px; font-size: 1.1rem;
+  }
+  h2 { font-size: 1rem; }
 }

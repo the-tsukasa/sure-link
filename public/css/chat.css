@@ -200,3 +200,63 @@ body {
         padding-bottom: max(10px, env(safe-area-inset-bottom));
     }
 }
+
+/* 移动端响应式断点优化 */
+@media (max-width: 650px) {
+  .chat-container {
+    padding: 6px 2vw;
+    gap: 2vw;
+    min-height: calc(94vh - 115px);
+  }
+  #messages {
+    gap: 7px;
+  }
+  .bubble {
+    font-size: 1rem;
+    padding: 9px 11px;
+    border-radius: 15px;
+    max-width: 96vw;
+  }
+  .message {
+    max-width: 98vw;
+  }
+  .message.me .bubble {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 7px;
+  }
+  .input-area {
+    padding: 9px 1.5vw;
+    gap: 5px;
+    left: 0;
+    right: 0;
+    height: auto;
+  }
+  .input-area input {
+    font-size: 0.99rem;
+    padding: 8px 9px;
+    border-radius: 14px;
+  }
+  .input-area button {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+    border-radius: 50%;
+  }
+}
+@media (max-width: 420px) {
+  .bubble {
+    font-size: 0.95rem;
+    padding: 8px 7px;
+    border-radius: 12px;
+  }
+  .input-area {
+    padding: 7px 1vw;
+  }
+}
+
+/* 避免底部输入区被手机浏览器UI遮住 */
+@media (max-width: 650px) {
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+}

@@ -81,6 +81,32 @@
             transition: opacity 0.4s ease;
         }
         #toast.show { opacity: 1; }
+        #startBtn {
+            margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+        }
+@media (max-width: 650px) {
+  h1 { font-size: 1.2rem; }
+  p { font-size: 0.96rem; }
+  button {
+    font-size: 1.03rem;
+    padding: 12px 0;
+    min-width: 75vw; max-width: 96vw;
+  }
+  #toast {
+    font-size: 0.88rem;
+    padding: 11px 7vw;
+    bottom: 18vw;
+  }
+  body { padding-bottom: 18vw; }
+}
+@media (max-width: 420px) {
+  h1 { font-size: 1.02rem; }
+  button {
+    font-size: 0.98rem;
+    min-width: 88vw; padding: 11px 0;
+  }
+  #toast { font-size: 0.85rem; padding: 8px 4vw; }
+}
     </style>
 </head>
 

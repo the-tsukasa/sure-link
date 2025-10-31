@@ -27,6 +27,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-bottom: calc(60px + var(--safe-bottom));
 }
 
 /* 顶部栏 */
@@ -264,4 +265,109 @@ nav i {
 #userProfile .stats div span {
     color: var(--accent);
     font-weight: bold;
+}
+
+/* === 全局按钮统一优化 ========== */
+button, .btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(0,122,255,0.12);
+    padding: 10px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.22s, transform 0.15s;
+    cursor: pointer;
+}
+button:active, .btn:active {
+    opacity: 0.83;
+    transform: scale(0.97);
+}
+
+input, textarea {
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: border .15s, background .16s;
+}
+input:focus, textarea:focus {
+    border-color: var(--accent);
+    background: #fff;
+    outline: none;
+}
+
+/* 响应式断点布局提升 */
+@media (max-width: 650px) {
+    main {
+        padding: 6px;
+        padding-bottom: calc(90px + var(--safe-bottom));
+    }
+    header {
+        font-size: 1rem;
+        height: 50px;
+    }
+    nav {
+        height: calc(66px + var(--safe-bottom));
+        font-size: 15px;
+    }
+    .server-status {
+        font-size: 0.93rem;
+        padding: 7px 7vw;
+        box-shadow: 0 0.5px 2.5px var(--shadow);
+    }
+    #messageBoard, #chatWindow, #mapContainer, #userProfile, .profile-card, .status-box, .user-data {
+        border-radius: 10px !important;
+        padding: 10px !important;
+        margin: 7px 2vw !important;
+    }
+    #msgInput {
+        height: 48px;
+        min-height: 38px;
+        font-size: 0.97rem;
+    }
+    #postBtn, #sendBtn, #refreshBtn, #editNameBtn {
+        border-radius: 20px;
+        font-size: 1rem;
+        padding: 10px 0;
+    }
+    #chatInput {
+        font-size: 1rem;
+        padding: 8px 9px;
+    }
+    #userProfile .avatar img {
+        width: 74px;
+        height: 74px;
+    }
+}
+
+@media (max-width: 420px) {
+    header {
+        font-size: 0.98rem;
+        height: 46px;
+    }
+    nav {
+        font-size: 13px;
+    }
+    main {
+        padding-left: 2vw;
+        padding-right: 2vw;
+        padding-bottom: calc(91px + var(--safe-bottom));
+    }
+}
+
+/* 保证底部浮动栏不遮住内容区 */
+body {
+    padding-bottom: calc(60px + var(--safe-bottom));
+}
+
+/* 增加交互便捷性与视觉反馈 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #eee;
+  border-radius: 4px;
 }
