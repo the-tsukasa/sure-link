@@ -2,8 +2,8 @@
 
 body {
     margin: 0;
-    background: linear-gradient(180deg, #eef2ff 0%, #f8faff 50%, #ffffff 100%);
-    color: var(--text-primary, #1d1d1f);
+    background: radial-gradient(circle at top, #1a2332, #0f1419);
+    color: #f5f5f7;
     font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif);
     height: 100vh;
     display: flex;
@@ -66,21 +66,22 @@ h2 {
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 24px;
-    color: var(--text-primary, #1d1d1f);
+    color: #f5f5f7;
 }
 
 input {
     width: 100%;
     padding: 14px 20px;
     border-radius: var(--radius, 16px);
-    border: 2px solid var(--border, #e5e5ea);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     font-size: 1rem;
     margin-bottom: 20px;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(30, 30, 32, 0.9);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    color: #f5f5f7;
 }
 
 input:focus {
@@ -122,14 +123,14 @@ button:active {
 }
 
 button.secondary {
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--primary, #007aff);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(28, 28, 30, 0.9);
+    color: var(--primary, #0a84ff);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 button.secondary:hover {
-    background: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: rgba(44, 44, 46, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 /* 响应式 */
@@ -165,24 +166,5 @@ button.secondary:hover {
 }
 
 /* Dark Mode */
-@media (prefers-color-scheme: dark) {
-    body {
-        background: radial-gradient(circle at top, #1a2332, #0f1419);
-        color: #f5f5f7;
-    }
-    
-    h2 {
-        color: #f5f5f7;
-    }
-    
-    input {
-        background: rgba(30, 30, 32, 0.9);
-        color: #f5f5f7;
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-    
-    input:focus {
-        background: rgba(30, 30, 32, 1);
-    }
-}
+/* 深色模式已应用为默认主题 */
 

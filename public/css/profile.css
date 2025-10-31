@@ -15,7 +15,7 @@
 
 /* ====== 全体設定 ====== */
 body {
-    background: linear-gradient(180deg, #eef2ff 0%, #f8faff 40%, var(--bg) 100%);
+    background: radial-gradient(circle at top, #0f1730, #000);
     color: var(--text-primary);
     font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif);
     line-height: 1.6;
@@ -43,7 +43,7 @@ body {
 .page-accent--one {
     width: 280px;
     height: 280px;
-    background: radial-gradient(circle, rgba(0, 122, 255, 0.3), transparent);
+    background: radial-gradient(circle, rgba(10, 132, 255, 0.15), transparent);
     top: -70px;
     right: -70px;
 }
@@ -51,7 +51,7 @@ body {
 .page-accent--two {
     width: 240px;
     height: 240px;
-    background: radial-gradient(circle, rgba(52, 199, 89, 0.25), transparent);
+    background: radial-gradient(circle, rgba(191, 90, 242, 0.15), transparent);
     bottom: 140px;
     left: -60px;
 }
@@ -94,12 +94,12 @@ body {
 
 /* ====== ガラスカード ====== */
 .glass-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.88), rgba(245,247,252,0.75));
+    background: rgba(34, 34, 36, 0.82);
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
     border-radius: var(--profile-radius);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-light);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 40px rgba(0, 0, 0, 0.4);
     padding: 24px;
     margin: 20px auto;
     max-width: 460px;
@@ -116,7 +116,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, rgba(0,122,255,0.12), rgba(247, 171, 255,0.08));
+    background: linear-gradient(160deg, rgba(10, 132, 255, 0.2), rgba(191, 90, 242, 0.16));
     pointer-events: none;
 }
 
@@ -348,34 +348,7 @@ body {
     to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
-/* ====== 夜間モード対応 ====== */
-@media (prefers-color-scheme: dark) {
-    body { background: radial-gradient(circle at top, #0f1730, #000); color: #f5f5f7; }
-    .glass-card {
-        background: rgba(34,34,36,0.82);
-        border-color: rgba(255,255,255,0.08);
-        box-shadow: 0 24px 40px rgba(0,0,0,0.4);
-    }
-    .profile-card::after {
-        background: linear-gradient(160deg, rgba(10,132,255,0.2), rgba(255,55,95,0.16));
-    }
-    .section-icon { background: rgba(255,255,255,0.08); }
-    .section-title h3 { color: #f5f5f7; }
-    .section-sub { color: rgba(255,255,255,0.6); }
-    .stat-item {
-        background: rgba(255,255,255,0.08);
-        border-color: rgba(255,255,255,0.08);
-        box-shadow: none;
-    }
-    .stat-label { color: rgba(255,255,255,0.55); }
-    .stat-value { color: #fff; }
-    textarea, input {
-        background: rgba(255,255,255,0.04);
-        color: #fff;
-        border: 1px solid rgba(255,255,255,0.18);
-    }
-    .color-code { background: rgba(255,255,255,0.08); color: #fff; }
-}
+/* ====== 深色模式已应用为默认主题 ====== */
 
 /* ====== レスポンシブ調整 ====== */
 @media (min-width: 768px) {

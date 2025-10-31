@@ -1,33 +1,36 @@
-/* ===== Apple风格统一设计系统 ===== */
+/* ===== Apple风格统一设计系统 - 深色模式 ===== */
 :root {
     /* === 主题色 === */
-    --primary: #007aff;
-    --primary-dark: #005fd1;
-    --primary-light: #4da3ff;
-    --accent: #007aff;
+    --primary: #0a84ff;
+    --primary-dark: #0066cc;
+    --primary-light: #409cff;
+    --accent: #0a84ff;
     
     /* === 辅助色 === */
-    --green: #34c759;
-    --red: #ff3b30;
-    --orange: #ff9500;
-    --purple: #af52de;
+    --green: #bf5af2;
+    --red: #ff453a;
+    --orange: #ff9f0a;
+    --purple: #bf5af2;
     
-    /* === 背景色 === */
-    --bg: #f8f8f8;
-    --bg-light: #ffffff;
-    --bg-card: rgba(255, 255, 255, 0.9);
+    /* === 背景色（深色） === */
+    --bg: #000000;
+    --bg-light: #1c1c1e;
+    --bg-card: rgba(28, 28, 30, 0.9);
     
-    /* === 文字色 === */
-    --text: #1d1d1f;
-    --text-primary: #1d1d1f;
-    --text-secondary: #6e6e73;
-    --text-tertiary: #999;
+    /* === 文字色（深色） === */
+    --text: #f5f5f7;
+    --text-primary: #f5f5f7;
+    --text-secondary: #98989d;
+    --text-tertiary: #636366;
     
-    /* === 边框和阴影 === */
-    --border: #e5e5ea;
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 10px 30px rgba(15, 35, 95, 0.12);
+    /* === 边框和阴影（深色） === */
+    --border: #38383a;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+    
+    /* === 聊天气泡 === */
+    --chat-bubble-bg: #1c1c1e;
     
     /* === 圆角 === */
     --radius-sm: 12px;
@@ -55,7 +58,7 @@ html, body {
 }
 
 body {
-    background: linear-gradient(180deg, #eef2ff 0%, #f8faff 50%, var(--bg) 100%);
+    background: radial-gradient(circle at top, #1a2332, #0f1419);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -77,7 +80,7 @@ body {
 .page-bg-accent-1 {
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(0, 122, 255, 0.3), transparent);
+    background: radial-gradient(circle, rgba(10, 132, 255, 0.15), transparent);
     top: -80px;
     right: -80px;
 }
@@ -85,7 +88,7 @@ body {
 .page-bg-accent-2 {
     width: 250px;
     height: 250px;
-    background: radial-gradient(circle, rgba(52, 199, 89, 0.25), transparent);
+    background: radial-gradient(circle, rgba(191, 90, 242, 0.12), transparent);
     bottom: 100px;
     left: -60px;
 }
@@ -471,73 +474,7 @@ body {
   border-radius: 4px;
 }
 
-/* ====== 暗色模式支持 ====== */
-@media (prefers-color-scheme: dark) {
-    body {
-        background: radial-gradient(circle at top, #1a2332, #0f1419);
-        color: #f5f5f7;
-    }
-    
-    /* 导航栏暗色模式 */
-    nav {
-        background: rgba(34, 34, 36, 0.82);
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.4);
-    }
-    
-    nav a {
-        color: rgba(255, 255, 255, 0.6);
-    }
-    
-    nav a:hover {
-        background: rgba(10, 132, 255, 0.15);
-    }
-    
-    nav a.active {
-        color: #0a84ff;
-        background: rgba(10, 132, 255, 0.2);
-    }
-    
-    nav a.active::before {
-        background: #0a84ff;
-    }
-    
-    /* 服务器状态卡片 */
-    .server-status {
-        background: rgba(34, 34, 36, 0.82);
-        border-color: rgba(255, 255, 255, 0.08);
-        color: #0a84ff;
-    }
-    
-    /* 消息板块 */
-    #messageBoard {
-        background: rgba(34, 34, 36, 0.82);
-        border-color: rgba(255, 255, 255, 0.08);
-    }
-    
-    #msgInput {
-        background: rgba(255, 255, 255, 0.04);
-        color: #fff;
-        border-color: rgba(255, 255, 255, 0.12);
-    }
-    
-    #msgInput::placeholder {
-        color: rgba(255, 255, 255, 0.4);
-    }
-    
-    #postBtn {
-        background: #0a84ff;
-    }
-    
-    #postBtn:hover {
-        background: #0066cc;
-    }
-    
-    #msgList li {
-        background: rgba(255, 255, 255, 0.06);
-        color: #f5f5f7;
-    }
-}
+/* ====== 深色模式已应用为默认主题 ====== */
 
 /* ====== 機能リスト（サービス概要用） ====== */
 .feature-list {

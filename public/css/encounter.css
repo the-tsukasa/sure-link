@@ -52,7 +52,7 @@
 }
 
 .stat-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    background: linear-gradient(145deg, rgba(28, 28, 30, 0.9), rgba(44, 44, 46, 0.8));
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     border-radius: 16px;
@@ -60,7 +60,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -112,7 +112,7 @@
 
 .stat-content p {
     font-size: 0.85rem;
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.6);
     margin: 0;
 }
 
@@ -271,13 +271,13 @@
 }
 
 .encounter-item {
-    background: white;
+    background: rgba(28, 28, 30, 0.9);
     border-radius: 16px;
     padding: 16px;
     display: flex;
     align-items: center;
     gap: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -354,13 +354,13 @@
 .achievement-badge {
     aspect-ratio: 1;
     border-radius: 16px;
-    background: white;
+    background: rgba(28, 28, 30, 0.9);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -385,7 +385,7 @@
     font-size: 0.75rem;
     font-weight: 600;
     text-align: center;
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 /* 遭遇模态框 */
@@ -412,7 +412,8 @@
 }
 
 .modal-content {
-    background: white;
+    background: #1e1e20;
+    color: #f5f5f7;
     border-radius: 24px;
     padding: 40px 30px;
     max-width: 400px;
@@ -468,7 +469,7 @@
 }
 
 .encounter-details {
-    background: #f9fafb;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     padding: 20px;
     margin-bottom: 20px;
@@ -556,47 +557,7 @@
     opacity: 0.9;
 }
 
-/* 暗色模式 */
-@media (prefers-color-scheme: dark) {
-    .stat-card {
-        background: rgba(30, 30, 32, 0.9);
-    }
-    
-    .stat-content p {
-        color: rgba(255, 255, 255, 0.6);
-    }
-    
-    .encounter-item {
-        background: rgba(30, 30, 32, 0.9);
-    }
-    
-    .achievement-badge {
-        background: rgba(30, 30, 32, 0.9);
-    }
-    
-    .achievement-name {
-        color: rgba(255, 255, 255, 0.6);
-    }
-    
-    .modal-content {
-        background: #1e1e20;
-        color: #f5f5f7;
-    }
-    
-    .encounter-details {
-        background: rgba(255, 255, 255, 0.05);
-    }
-    
-    .modal-close-btn {
-        background: rgba(255, 255, 255, 0.1);
-        color: rgba(255, 255, 255, 0.6);
-    }
-    
-    .modal-close-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: #f5f5f7;
-    }
-}
+/* 深色模式已应用为默认主题 */
 
 /* 响应式 */
 @media (max-width: 768px) {
