@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sure Link - 诊断页面</title>
+    <script src="https://kit.fontawesome.com/a2e0b6a3f1.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #1a1a1a;
+            color: #f5f5f7;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(28, 28, 30, 0.95);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            color: #0a84ff;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        h2 {
+            color: #bf5af2;
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid rgba(191, 90, 242, 0.3);
+            padding-bottom: 8px;
+        }
+        .test-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .test-item h3 {
+            color: #0a84ff;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .icon-test {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(10, 132, 255, 0.1);
+            border: 2px solid rgba(10, 132, 255, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #0a84ff;
+        }
+        .icon-label {
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 5px;
+        }
+        .icon-wrapper {
+            text-align: center;
+        }
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .status.success {
+            background: rgba(52, 199, 89, 0.2);
+            color: #34c759;
+            border: 1px solid rgba(52, 199, 89, 0.4);
+        }
+        .status.error {
+            background: rgba(255, 55, 95, 0.2);
+            color: #ff375f;
+            border: 1px solid rgba(255, 55, 95, 0.4);
+        }
+        .info-block {
+            background: rgba(10, 132, 255, 0.1);
+            border-left: 4px solid #0a84ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #bf5af2;
+        }
+        .button-test {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(10, 132, 255, 0.2);
+            border: 1px solid rgba(10, 132, 255, 0.4);
+            border-radius: 10px;
+            color: #0a84ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .button-test:hover {
+            background: rgba(10, 132, 255, 0.3);
+            transform: scale(1.05);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #0a84ff;
+            text-decoration: none;
+            padding: 10px 16px;
+            background: rgba(10, 132, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .back-link:hover {
+            background: rgba(10, 132, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="chat.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            返回聊天页面
+        </a>
+
+        <h1>🔍 Sure Link 诊断页面</h1>
+
+        <div class="info-block">
+            <strong>💡 用途：</strong>此页面用于检测Font Awesome图标库是否正确加载，以及CSS样式是否正常工作。
+        </div>
+
+        <h2>1. Font Awesome 图标测试</h2>
+        
+        <div class="test-item">
+            <h3>基础图标显示</h3>
+            <div class="icon-test">
+                <div class="icon-wrapper">
+                    <div class="icon-box">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="icon-label">fa-users</div>
+                </div>
+                <div class="icon-wrapper">
+                    <div class="icon-box">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="icon-label">fa-cog</div>
+                </div>
+                <div class="icon-wrapper">
+                    <div class="icon-box">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="icon-label">fa-times</div>
+                </div>
+                <div class="icon-wrapper">
+                    <div class="icon-box">
+                        <i class="fas fa-rotate"></i>
+                    </div>
+                    <div class="icon-label">fa-rotate</div>
+                </div>
+                <div class="icon-wrapper">
+                    <div class="icon-box">
+                        <i class="fas fa-location-crosshairs"></i>
+                    </div>
+                    <div class="icon-label">fa-location-crosshairs</div>
+                </div>
+                <div class="icon-wrapper">
+                    <div class="icon-box">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div class="icon-label">fa-bullseye</div>
+                </div>
+            </div>
+            <p><strong>✅ 如果您能看到清晰的图标，说明Font Awesome已正确加载。</strong></p>
+            <p><strong>❌ 如果看到空白方框或乱码，说明Font Awesome加载失败。</strong></p>
+        </div>
+
+        <div class="test-item">
+            <h3>实际按钮样式测试（Chat页面头部按钮）</h3>
+            <div style="display: flex; gap: 12px; margin: 15px 0;">
+                <button class="button-test" onclick="alert('在线用户按钮点击测试')">
+                    <i class="fas fa-users"></i>
+                    在线用户
+                </button>
+                <button class="button-test" onclick="alert('设置按钮点击测试')">
+                    <i class="fas fa-cog"></i>
+                    设置
+                </button>
+            </div>
+            <p><strong>这些按钮应该显示图标+文字。</strong></p>
+        </div>
+
+        <h2>2. 可能导致图标不显示的问题</h2>
+
+        <div class="test-item">
+            <h3>📌 代码层面的问题</h3>
+            <ul style="line-height: 2; margin-left: 20px;">
+                <li>Font Awesome CDN 加载失败（网络问题）</li>
+                <li>CSS 冲突（<code>font-size: 0</code> 或 <code>display: none</code>）</li>
+                <li>图标类名拼写错误（例如：<code>fa-user</code> vs <code>fa-users</code>）</li>
+                <li>Font Awesome版本不兼容（使用了新版本不支持的图标）</li>
+                <li>浏览器缓存问题（旧版本CSS未更新）</li>
+            </ul>
+        </div>
+
+        <div class="test-item">
+            <h3>🌐 非代码层面的问题</h3>
+            <ul style="line-height: 2; margin-left: 20px;">
+                <li><strong>网络连接问题：</strong>CDN无法访问（防火墙、DNS问题）</li>
+                <li><strong>浏览器扩展：</strong>广告拦截器阻止了Font Awesome CDN</li>
+                <li><strong>PWA缓存：</strong>Service Worker缓存了旧版本</li>
+                <li><strong>企业网络限制：</strong>公司防火墙阻止外部CDN</li>
+                <li><strong>浏览器兼容性：</strong>旧版本浏览器不支持某些CSS属性</li>
+                <li><strong>CORS策略：</strong>跨域资源加载被阻止</li>
+            </ul>
+        </div>
+
+        <h2>3. 诊断步骤</h2>
+
+        <div class="test-item">
+            <h3>🔧 如何排查</h3>
+            <div style="line-height: 2;">
+                <p><strong>步骤1：</strong>打开浏览器开发者工具（F12）</p>
+                <p><strong>步骤2：</strong>切换到 <code>Console</code> 标签</p>
+                <p><strong>步骤3：</strong>运行以下命令：</p>
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                    <code style="display: block; color: #34c759;">
+                        console.log(window.FontAwesome);
+                    </code>
+                </div>
+                <p>• 如果显示 <code style="color: #34c759;">Object {...}</code>，说明Font Awesome已加载✅</p>
+                <p>• 如果显示 <code style="color: #ff375f;">undefined</code>，说明加载失败❌</p>
+            </div>
+        </div>
+
+        <div class="test-item">
+            <h3>🚀 解决方案</h3>
+            <ol style="line-height: 2; margin-left: 20px;">
+                <li><strong>清除缓存：</strong>强制刷新（Ctrl+Shift+R / Cmd+Shift+R）</li>
+                <li><strong>检查网络：</strong>确保可以访问 <code>kit.fontawesome.com</code></li>
+                <li><strong>禁用广告拦截器：</strong>临时关闭浏览器扩展</li>
+                <li><strong>更新Service Worker：</strong>在开发者工具中清除PWA缓存</li>
+                <li><strong>使用离线Font Awesome：</strong>下载Font Awesome文件到本地</li>
+            </ol>
+        </div>
+
+        <h2>4. 浏览器检测</h2>
+        <div class="test-item">
+            <h3>当前环境信息</h3>
+            <div id="browserInfo" style="line-height: 2;"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+                Sure Link - Version 2.4.4 | Diagnostic Tool
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 检测浏览器信息
+        document.getElementById('browserInfo').innerHTML = `
+            <p><strong>用户代理：</strong> ${navigator.userAgent}</p>
+            <p><strong>浏览器语言：</strong> ${navigator.language}</p>
+            <p><strong>在线状态：</strong> ${navigator.onLine ? '<span style="color: #34c759;">✅ 在线</span>' : '<span style="color: #ff375f;">❌ 离线</span>'}</p>
+            <p><strong>屏幕分辨率：</strong> ${window.screen.width} x ${window.screen.height}</p>
+            <p><strong>窗口大小：</strong> ${window.innerWidth} x ${window.innerHeight}</p>
+            <p><strong>Service Worker：</strong> ${'serviceWorker' in navigator ? '<span style="color: #34c759;">✅ 支持</span>' : '<span style="color: #ff375f;">❌ 不支持</span>'}</p>
+        `;
+
+        // 检测Font Awesome加载状态
+        setTimeout(() => {
+            const fontAwesomeLoaded = window.FontAwesome !== undefined;
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status ${fontAwesomeLoaded ? 'success' : 'error'}`;
+            statusDiv.textContent = fontAwesomeLoaded ? '✅ Font Awesome 已正确加载' : '❌ Font Awesome 加载失败';
+            document.querySelector('h1').after(statusDiv);
+        }, 1000);
+
+        // 控制台提示
+        console.log('%c🔍 Sure Link Diagnostic Tool', 'font-size: 20px; color: #0a84ff; font-weight: bold;');
+        console.log('%c检查Font Awesome加载状态:', 'font-size: 14px; color: #bf5af2;');
+        console.log('Font Awesome Object:', window.FontAwesome);
+        console.log('---');
+        console.log('如果看到有效对象，说明Font Awesome已加载成功！');
+    </script>
+</body>
+</html>
+

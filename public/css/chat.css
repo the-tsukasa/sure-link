@@ -388,6 +388,13 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 1.1rem;
+    padding: 0;
+}
+
+.icon-btn i {
+    font-size: 1.1rem;
+    line-height: 1;
 }
 
 .icon-btn:hover {

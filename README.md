@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-2.3.0-blue.svg)
+![Version](https://img.shields.io/badge/version-2.4.4-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
@@ -210,8 +210,25 @@ ADMIN_SECRET=your_secret_key
 
 ### Available Docs
 - [🛠️ Local Development Guide](LOCAL_DEVELOPMENT.md) - Complete setup guide for local development
+- [🔧 Troubleshooting Guide](TROUBLESHOOTING.md) - Fix icon display issues, cache problems, and more
+- [🧪 Diagnostic Tool](/diagnostic.html) - Online tool to check Font Awesome and CSS status
 
 ### Latest Updates
+
+**v2.4.4** (2024-10-31)
+- 🔧 **Fixed icon display issues** in chat and map headers
+  - Added explicit font-size and line-height for all icon buttons
+  - Fixed `.close-panel` button icon rendering
+  - Improved `.icon-btn` CSS specificity
+- 🧪 **New diagnostic tool** (`/diagnostic.html`)
+  - Visual Font Awesome icon test
+  - Real-time browser environment detection
+  - Troubleshooting guidance
+- 📖 **Comprehensive troubleshooting guide** ([TROUBLESHOOTING.md](TROUBLESHOOTING.md))
+  - Decision tree for icon display issues
+  - PWA cache management strategies
+  - Network connectivity debugging
+- ✅ **Service Worker v19** with improved caching
 
 **v2.3.0** (2024-10-31)
 - 💬 **APP-style chat interface** with rich features
