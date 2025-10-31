@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v8"; // ← 每次更新时改版本号 (2.3.0 - APP风格界面统一 + 深色主题)
+const CACHE_NAME = "surelink-v9"; // ← 每次更新时改版本号 (2.3.0 - Navigation深色主题修复)
 
 const URLS_TO_CACHE = [
     "/",
