@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v20"; // ← 每次更新时改版本号 (2.4.5 - 切换到公共CDN解决403问题)
+const CACHE_NAME = "surelink-v21"; // ← 每次更新时改版本号 (2.4.6 - 桌面端响应式布局优化)
 
 const URLS_TO_CACHE = [
     "/",

@@ -492,9 +492,31 @@ body {
 
 /* ====== APP主页样式 ====== */
 .app-home {
-    max-width: 1200px;
+    max-width: 100%; /* 移动端全宽 */
     margin: 0 auto;
     padding: 0 20px 100px;
+}
+
+/* 桌面端响应式布局 */
+@media (min-width: 768px) {
+    .app-home {
+        max-width: 900px; /* 平板端 */
+        padding: 0 40px 100px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .app-home {
+        max-width: 1200px; /* 桌面端 */
+        padding: 0 60px 120px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .app-home {
+        max-width: 1400px; /* 大屏幕 */
+        padding: 0 80px 120px;
+    }
 }
 
 /* 欢迎横幅 */

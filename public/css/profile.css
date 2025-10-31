@@ -102,8 +102,27 @@ body {
     box-shadow: 0 24px 40px rgba(0, 0, 0, 0.4);
     padding: 24px;
     margin: 20px auto;
-    max-width: 460px;
+    max-width: 460px; /* 移动端默认宽度 */
     position: relative;
+}
+
+/* 桌面端响应式布局 */
+@media (min-width: 768px) {
+    .glass-card {
+        max-width: 600px; /* 平板端 */
+    }
+}
+
+@media (min-width: 1024px) {
+    .glass-card {
+        max-width: 800px; /* 桌面端 */
+    }
+}
+
+@media (min-width: 1440px) {
+    .glass-card {
+        max-width: 1000px; /* 大屏幕 */
+    }
 }
 
 /* ====== プロフィールカード ====== */

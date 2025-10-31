@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-2.4.5-blue.svg)
+![Version](https://img.shields.io/badge/version-2.4.6-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
@@ -215,6 +215,15 @@ ADMIN_SECRET=your_secret_key
 - [🧪 Diagnostic Tool](/diagnostic.html) - Online tool to check Font Awesome and CSS status
 
 ### Latest Updates
+
+**v2.4.6** (2024-10-31)
+- 📱 **桌面端响应式布局优化**
+  - 修复 `index.html` 和 `profile.html` 在桌面浏览器上显示为手机大小的问题
+  - 新增桌面端媒体查询：768px（平板）、1024px（桌面）、1440px（大屏）
+  - `profile.css` - `.glass-card` 桌面端最大宽度：1000px
+  - `style.css` - `.app-home` 桌面端最大宽度：1400px
+- ✅ **Service Worker v21** - 更新缓存策略
+- 🎯 **与 chat/map 页面布局统一** - 所有页面现在都能在桌面端正常平铺
 
 **v2.4.5** (2024-10-31) ⭐ **Critical Fix**
 - 🚨 **解决 Font Awesome 403 错误**
