@@ -1,6 +1,7 @@
 // src/controllers/socketController.js
 import { ChatController } from './chatController.js';
 import { LocationController } from './locationController.js';
+import { EncounterController } from './encounterController.js';
 import { logger } from '../utils/logger.js';
 import { socketMonitor } from '../middleware/monitoring.js';
 
@@ -14,7 +15,11 @@ export class SocketController {
         
         // 初始化子控制器
         this.chatController = new ChatController(io, pool);
-        this.locationController = new LocationController(io);
+        this.encounterController = new EncounterController(io, pool);
+        
+        // LocationController 需要 encounterService
+        const encounterService = this.encounterController.getService();
+        this.locationController = new LocationController(io, encounterService);
         
         // 绑定 Socket.io 事件
         this.initializeSocketEvents();
@@ -47,6 +52,7 @@ export class SocketController {
 
         // 初始化各个控制器的事件
         this.chatController.initializeEvents(socket);
+        this.encounterController.initializeEvents(socket);
         this.locationController.initializeEvents(socket);
 
         // 监听断开连接

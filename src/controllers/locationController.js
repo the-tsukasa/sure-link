@@ -8,9 +8,10 @@ import { rateLimiters } from '../middleware/rateLimit.js';
  * 位置控制器 - 处理位置更新和遭遇检测
  */
 export class LocationController {
-    constructor(io) {
+    constructor(io, encounterService = null) {
         this.io = io;
         this.locationService = new LocationService();
+        this.encounterService = encounterService; // 遭遇服务（可选）
 
         // 定期清理不活跃用户（每5分钟）
         setInterval(() => {
@@ -39,7 +40,7 @@ export class LocationController {
      * @param {Object} socket - Socket 实例
      * @param {Object} position - 位置数据 { lat, lng, nickname }
      */
-    handleLocationUpdate(socket, position) {
+    async handleLocationUpdate(socket, position) {
         try {
             // 速率限制检查
             if (!rateLimiters.location.check(socket.id, 'updateLocation')) {
@@ -60,19 +61,45 @@ export class LocationController {
             const encounters = this.locationService.checkEncounters(socket.id);
             
             // 通知遭遇
-            encounters.forEach(encounter => {
+            for (const encounter of encounters) {
+                // 如果有遭遇服务，保存到数据库
+                if (this.encounterService) {
+                    const currentUser = this.locationService.users[socket.id];
+                    const otherUser = this.locationService.users[encounter.userId];
+                    
+                    if (currentUser && otherUser) {
+                        await this.encounterService.detectEncounter(
+                            {
+                                socketId: socket.id,
+                                nickname: currentUser.nickname,
+                                lat: currentUser.lat,
+                                lng: currentUser.lng
+                            },
+                            {
+                                socketId: encounter.userId,
+                                nickname: otherUser.nickname,
+                                lat: otherUser.lat,
+                                lng: otherUser.lng
+                            },
+                            encounter.distance
+                        );
+                    }
+                }
+                
                 // 通知当前用户
                 socket.emit('encounter', {
                     user: encounter.nickname,
-                    distance: encounter.distance
+                    distance: encounter.distance,
+                    location: encounter.location
                 });
                 
                 // 通知被遭遇的用户
                 this.io.to(encounter.userId).emit('encounter', {
                     user: position.nickname || socket.id.slice(0, 5),
-                    distance: encounter.distance
+                    distance: encounter.distance,
+                    location: position
                 });
-            });
+            }
             
         } catch (error) {
             SocketErrorHandler.handleError(socket, error, 'updateLocation');

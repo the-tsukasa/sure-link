@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>すれ違い - Sure Link</title>
+    
+    <!-- Meta -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="リアルタイムすれ違い検出">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/encounter.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a2e0b6a3f1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 背景装饰 -->
+    <div class="page-bg-accent page-bg-accent-1"></div>
+    <div class="page-bg-accent page-bg-accent-2"></div>
+
+    <!-- 顶部状态栏 -->
+    <div class="encounter-status-bar">
+        <div class="status-item">
+            <i class="fas fa-radar"></i>
+            <span id="scanStatus">スキャン中...</span>
+        </div>
+        <div class="status-item">
+            <i class="fas fa-users"></i>
+            <span id="nearbyCount">0</span>人が近くにいます
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main class="encounter-main">
+        <!-- 统计卡片 -->
+        <div class="stats-section">
+            <div class="stat-card" onclick="window.location.href='/encounter-history.html'">
+                <div class="stat-icon">👋</div>
+                <div class="stat-content">
+                    <h3 id="totalEncounters">0</h3>
+                    <p>総すれ違い</p>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <h3 id="todayEncounters">0</h3>
+                    <p>今日のすれ違い</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-content">
+                    <h3 id="achievementCount">0</h3>
+                    <p>獲得バッジ</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 地图容器 -->
+        <div class="map-container">
+            <div id="encounterMap"></div>
+            
+            <!-- 地图控制按钮 -->
+            <div class="map-controls">
+                <button class="map-btn" id="centerBtn" title="現在地に戻る">
+                    <i class="fas fa-crosshairs"></i>
+                </button>
+                <button class="map-btn" id="heatmapBtn" title="ヒートマップ">
+                    <i class="fas fa-fire"></i>
+                </button>
+                <button class="map-btn" id="refreshBtn" title="周囲をスキャン">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            
+            <!-- 遭遇雷达动画 -->
+            <div class="radar-pulse" id="radarPulse">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+            </div>
+        </div>
+
+        <!-- 最近的遭遇列表 -->
+        <div class="recent-encounters">
+            <div class="section-header">
+                <h2>最近のすれ違い</h2>
+                <button class="view-all-btn" onclick="window.location.href='/encounter-history.html'">
+                    すべて見る <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <div id="recentList" class="encounter-list">
+                <p style="text-align:center;color:#9ca3af;padding:20px;">まだすれ違いがありません</p>
+            </div>
+        </div>
+
+        <!-- 成就展示 -->
+        <div class="achievements-section">
+            <h2>バッジコレクション</h2>
+            <div id="achievementGrid" class="achievement-grid">
+                <!-- 动态加载 -->
+            </div>
+        </div>
+    </main>
+
+    <!-- 遭遇通知模态框 -->
+    <div id="encounterModal" class="encounter-modal">
+        <div class="modal-content">
+            <div class="encounter-animation">
+                <div class="encounter-emoji">👋</div>
+                <div class="sparkles">✨✨✨</div>
+            </div>
+            <h2>すれ違い発生！</h2>
+            <div id="encounterDetails" class="encounter-details">
+                <!-- 动态填充 -->
+            </div>
+            <button class="modal-close-btn" onclick="closeEncounterModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <nav role="navigation" aria-label="主要ナビゲーション">
+        <a href="/index.html">
+            <i class="fas fa-comments"></i>
+            <span>チャット</span>
+        </a>
+        <a href="/map.html">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>マップ</span>
+        </a>
+        <a href="/encounter.html" class="active">
+            <i class="fas fa-people-arrows"></i>
+            <span>すれ違い</span>
+        </a>
+        <a href="/profile.html">
+            <i class="fas fa-user"></i>
+            <span>プロフィール</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="/js/encounter-main.js"></script>
+</body>
+</html>
+

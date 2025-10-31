@@ -1,0 +1,639 @@
+/* ====== Sure Link - 遭遇系统样式 ====== */
+
+:root {
+    --encounter-primary: #667eea;
+    --encounter-secondary: #764ba2;
+    --encounter-success: #10b981;
+    --encounter-warning: #f59e0b;
+    --encounter-danger: #ef4444;
+}
+
+/* 顶部状态栏 */
+.encounter-status-bar {
+    position: fixed;
+    top: var(--safe-top, env(safe-area-inset-top));
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, var(--encounter-primary), var(--encounter-secondary));
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.status-item i {
+    font-size: 1.1rem;
+}
+
+/* 主内容 */
+.encounter-main {
+    padding-top: calc(50px + var(--safe-top, env(safe-area-inset-top)));
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
+/* 统计卡片 */
+.stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.stat-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--encounter-primary), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.stat-card:hover::before {
+    opacity: 0.1;
+}
+
+.stat-card:active {
+    transform: scale(0.98);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--encounter-primary), var(--encounter-secondary));
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-content h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    background: linear-gradient(135deg, var(--encounter-primary), var(--encounter-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-content p {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.stat-card .fa-chevron-right {
+    color: #9ca3af;
+    font-size: 1rem;
+}
+
+/* 地图容器 */
+.map-container {
+    position: relative;
+    margin: 0 16px 24px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+#encounterMap {
+    width: 100%;
+    height: 400px;
+    z-index: 1;
+}
+
+/* 地图控制按钮 */
+.map-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+}
+
+.map-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--encounter-primary);
+    transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+    background: var(--encounter-primary);
+    color: white;
+    transform: scale(1.1);
+}
+
+.map-btn:active {
+    transform: scale(0.95);
+}
+
+.map-btn#refreshBtn.rotating {
+    animation: spin 0.8s ease;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 雷达脉冲动画 */
+.radar-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 5;
+    display: none;
+}
+
+.radar-pulse.active {
+    display: block;
+}
+
+.pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    border: 3px solid var(--encounter-primary);
+    border-radius: 50%;
+    animation: pulsate 2s ease-out infinite;
+    opacity: 0;
+}
+
+.pulse-ring:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.pulse-ring:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes pulsate {
+    0% {
+        transform: scale(0.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* 最近遭遇列表 */
+.recent-encounters {
+    padding: 0 16px;
+    margin-bottom: 24px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.view-all-btn {
+    background: none;
+    border: none;
+    color: var(--encounter-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s;
+}
+
+.view-all-btn:hover {
+    gap: 10px;
+}
+
+.encounter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.encounter-item {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.encounter-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+}
+
+.encounter-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--encounter-primary), var(--encounter-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.encounter-info {
+    flex: 1;
+}
+
+.encounter-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.encounter-distance {
+    color: var(--encounter-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0 0 4px 0;
+}
+
+.encounter-time {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.encounter-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* 成就部分 */
+.achievements-section {
+    padding: 0 16px;
+    margin-bottom: 24px;
+}
+
+.achievements-section h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+}
+
+.achievement-badge {
+    aspect-ratio: 1;
+    border-radius: 16px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 12px;
+}
+
+.achievement-badge.locked {
+    opacity: 0.4;
+    filter: grayscale(1);
+}
+
+.achievement-badge:not(.locked):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+}
+
+.achievement-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: #6b7280;
+}
+
+/* 遭遇模态框 */
+.encounter-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s;
+}
+
+.encounter-modal.show {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.encounter-animation {
+    margin-bottom: 24px;
+}
+
+.encounter-emoji {
+    font-size: 5rem;
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.sparkles {
+    font-size: 2rem;
+    margin-top: -20px;
+    animation: sparkle 1.5s ease infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    margin: 0 0 20px 0;
+    background: linear-gradient(135deg, var(--encounter-primary), var(--encounter-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.encounter-details {
+    background: #f9fafb;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.encounter-details p {
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+.encounter-details strong {
+    color: var(--encounter-primary);
+    font-size: 1.2rem;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    transition: all 0.3s;
+}
+
+.modal-close-btn:hover {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+/* 成就解锁通知 */
+.achievement-notification {
+    position: fixed;
+    top: 100px;
+    right: -400px;
+    z-index: 10000;
+    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.achievement-notification.show {
+    right: 20px;
+}
+
+.achievement-unlock {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 280px;
+}
+
+.unlock-icon {
+    font-size: 3rem;
+    animation: rotate 2s ease infinite;
+}
+
+@keyframes rotate {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    75% { transform: rotate(15deg); }
+}
+
+.unlock-text {
+    color: white;
+}
+
+.unlock-text h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.2rem;
+}
+
+.unlock-text p {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+    .stat-card {
+        background: rgba(30, 30, 32, 0.9);
+    }
+    
+    .stat-content p {
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .encounter-item {
+        background: rgba(30, 30, 32, 0.9);
+    }
+    
+    .achievement-badge {
+        background: rgba(30, 30, 32, 0.9);
+    }
+    
+    .achievement-name {
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .modal-content {
+        background: #1e1e20;
+        color: #f5f5f7;
+    }
+    
+    .encounter-details {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .modal-close-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .modal-close-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #f5f5f7;
+    }
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+    
+    #encounterMap {
+        height: 300px;
+    }
+    
+    .encounter-status-bar {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 420px) {
+    .stat-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+    }
+    
+    .stat-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .encounter-avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .achievement-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+}
+
