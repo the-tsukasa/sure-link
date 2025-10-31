@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v12"; // ← 每次更新时改版本号 (2.3.3 - 按钮emoji/图标优化)
+const CACHE_NAME = "surelink-v14"; // ← 每次更新时改版本号 (2.3.5 - 修复emoji按钮显示，移除颜色覆盖)
 
 const URLS_TO_CACHE = [
     "/",
