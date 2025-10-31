@@ -551,11 +551,20 @@ body {
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.close-panel i {
+    font-size: 1rem;
 }
 
 .close-panel:hover {
     background: rgba(255, 55, 95, 0.2);
     color: #ff375f;
+    transform: scale(1.1);
 }
 
 .nearby-list {

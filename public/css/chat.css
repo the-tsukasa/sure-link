@@ -600,11 +600,17 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.close-panel i {
+    font-size: 1rem;
 }
 
 .close-panel:hover {
     background: rgba(255, 55, 95, 0.2);
     color: #ff375f;
+    transform: scale(1.1);
 }
 
 /* 用户列表 */
