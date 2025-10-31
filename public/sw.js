@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v7"; // ← 每次更新时改版本号 (2.3.0 - APP风格聊天界面重构)
+const CACHE_NAME = "surelink-v8"; // ← 每次更新时改版本号 (2.3.0 - APP风格聊天界面重构)
 
 const URLS_TO_CACHE = [
     "/",

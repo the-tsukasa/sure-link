@@ -12,9 +12,9 @@
     <link rel="apple-touch-icon" href="icons/icon-192.png">
 
     <!-- 样式文件 -->
-    <link rel="stylesheet" href="css/style.css?v=2.2.0" />
+    <link rel="stylesheet" href="css/style.css?v=2.3.0" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="css/map.css?v=2.2.0" />
+    <link rel="stylesheet" href="css/map.css?v=2.3.0" />
 
     <!-- JS文件 -->
     <script defer src="/socket.io/socket.io.js"></script>
@@ -28,9 +28,156 @@
 <div class="page-bg-accent page-bg-accent-1"></div>
 <div class="page-bg-accent page-bg-accent-2"></div>
 
-<main>
+<main class="map-app">
+    <!-- 地图头部 -->
+    <div class="map-header">
+        <div class="map-info">
+            <div class="map-icon">
+                <i class="fas fa-location-dot"></i>
+            </div>
+            <div class="map-details">
+                <h2 class="map-title">すれ違いマップ</h2>
+                <p class="map-status">
+                    <i class="fas fa-circle gps-dot"></i>
+                    <span id="locationStatus">位置情報取得中...</span>
+                </p>
+            </div>
+        </div>
+        <div class="map-actions">
+            <button class="icon-btn" onclick="showNearbyUsers()">
+                <i class="fas fa-users"></i>
+                <span class="badge" id="nearbyCount">0</span>
+            </button>
+            <button class="icon-btn" onclick="toggleMapSettings()">
+                <i class="fas fa-sliders"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 地图容器 -->
     <div id="map"></div>
-    <button id="scanBtn">↻</button>
+
+    <!-- 浮动控制按钮组 -->
+    <div class="map-controls">
+        <button class="control-btn" id="scanBtn" title="位置を更新">
+            <i class="fas fa-rotate"></i>
+        </button>
+        <button class="control-btn" onclick="centerMap()" title="現在地に移動">
+            <i class="fas fa-location-crosshairs"></i>
+        </button>
+        <button class="control-btn" onclick="toggleTracking()" title="追跡モード">
+            <i class="fas fa-bullseye"></i>
+        </button>
+        <button class="control-btn" onclick="viewEncounterHistory()" title="履歴を表示">
+            <i class="fas fa-clock-rotate-left"></i>
+        </button>
+    </div>
+
+    <!-- 统计信息卡片 -->
+    <div class="stats-card">
+        <div class="stat-item-mini">
+            <i class="fas fa-user-group"></i>
+            <span id="onlineUsersCount">0</span>
+        </div>
+        <div class="stat-item-mini">
+            <i class="fas fa-handshake"></i>
+            <span id="todayEncounters">0</span>
+        </div>
+        <div class="stat-item-mini">
+            <i class="fas fa-map-location-dot"></i>
+            <span id="accuracyLevel">高</span>
+        </div>
+    </div>
+
+    <!-- 遭遇通知卡片 -->
+    <div class="encounter-notification" id="encounterNotification" style="display: none;">
+        <div class="encounter-card-mini">
+            <div class="encounter-icon-animated">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <div class="encounter-text">
+                <h4 id="encounterUserName">--</h4>
+                <p id="encounterDistance">-- m</p>
+            </div>
+            <button class="encounter-close" onclick="closeEncounterNotification()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 附近用户侧边栏 -->
+    <div class="nearby-users-panel" id="nearbyUsersPanel">
+        <div class="panel-header">
+            <h3>付近のユーザー</h3>
+            <button class="close-panel" onclick="hideNearbyUsers()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="nearby-list" id="nearbyList">
+            <div class="empty-nearby">
+                <i class="fas fa-user-slash"></i>
+                <p>付近にユーザーがいません</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 地图设置面板 -->
+    <div class="map-settings-panel" id="mapSettingsPanel">
+        <div class="panel-header">
+            <h3>マップ設定</h3>
+            <button class="close-panel" onclick="hideMapSettings()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="settings-list">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i class="fas fa-bell"></i>
+                    <span>遭遇通知</span>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" checked id="encounterNotifications">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i class="fas fa-location-arrow"></i>
+                    <span>自動追跡</span>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" id="autoTracking">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i class="fas fa-eye"></i>
+                    <span>他人に表示</span>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" checked id="visibleToOthers">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i class="fas fa-map"></i>
+                    <span>地図スタイル</span>
+                </div>
+                <select class="style-select" id="mapStyle">
+                    <option value="standard">標準</option>
+                    <option value="dark">ダーク</option>
+                    <option value="satellite">衛星</option>
+                </select>
+            </div>
+            <button class="action-btn" onclick="goToEncounterPage()">
+                <i class="fas fa-chart-line"></i>
+                詳細統計を見る
+            </button>
+        </div>
+    </div>
+
     <div id="toast"></div>
 </main>
 

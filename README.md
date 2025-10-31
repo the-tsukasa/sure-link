@@ -135,9 +135,9 @@ sure-link/
 │   ├── profile.html       # Profile + encounters
 │   ├── encounter.html     # Encounter system
 │   ├── welcome.html       # Welcome screen
-│   ├── css/               # Stylesheets (v2.2.0)
+│   ├── css/               # Stylesheets (v2.3.0)
 │   ├── js/                # JavaScript modules
-│   └── sw.js              # Service Worker (v6)
+│   └── sw.js              # Service Worker (v8)
 └── logs/                   # Log files (auto-generated)
 ```
 
@@ -215,11 +215,17 @@ ADMIN_SECRET=your_secret_key
 
 **v2.3.0** (2024-10-31)
 - 💬 **APP-style chat interface** with rich features
-- 📱 Chat room header with online users
-- ⚡ Quick reply buttons
-- 🛠️ Input toolbar (emoji, photo, voice, more)
-- 👥 Online users sidebar
-- ⚙️ Chat settings panel with toggles
+  - Chat room header with online users
+  - Quick reply buttons
+  - Input toolbar (emoji, photo, voice, more)
+  - Online users sidebar & chat settings panel
+- 🗺️ **APP-style map interface** with enhanced controls
+  - Modern map header with GPS status
+  - Floating control buttons (scan, center, track, history)
+  - Nearby users panel with real-time list
+  - Map settings panel with toggles
+  - Encounter notification cards with animations
+  - Real-time statistics (online users, encounters, accuracy)
 
 **v2.2.0** (2024-10-31)
 - 🏠 APP-style home screen with feature cards
