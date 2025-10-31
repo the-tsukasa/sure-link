@@ -435,24 +435,39 @@ body {
 }
 
 .tool-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    min-width: 50px;
+    padding: 8px 10px;
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.05);
     color: var(--primary);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.tool-btn i {
     font-size: 1.1rem;
+}
+
+.tool-btn span {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
 }
 
 .tool-btn:hover {
     background: rgba(10, 132, 255, 0.15);
     border-color: var(--primary);
-    transform: scale(1.1);
+    transform: translateY(-2px);
+}
+
+.tool-btn:hover span {
+    color: var(--primary);
 }
 
 /* 输入行 */
@@ -759,9 +774,16 @@ body {
     }
     
     .tool-btn {
-        width: 36px;
-        height: 36px;
+        min-width: 46px;
+        padding: 6px 8px;
+    }
+    
+    .tool-btn i {
         font-size: 1rem;
+    }
+    
+    .tool-btn span {
+        font-size: 0.65rem;
     }
 }
 

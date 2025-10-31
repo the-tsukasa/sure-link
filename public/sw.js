@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v10"; // ← 每次更新时改版本号 (2.3.1 - Chat页面配色优化)
+const CACHE_NAME = "surelink-v11"; // ← 每次更新时改版本号 (2.3.2 - 按钮添加文字标签)
 
 const URLS_TO_CACHE = [
     "/",

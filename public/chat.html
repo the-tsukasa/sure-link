@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" href="icons/icon-192.png">
     <title>Sure Link - チャット</title>
     <link rel="stylesheet" href="css/style.css?v=2.3.0" />
-    <link rel="stylesheet" href="css/chat.css?v=2.3.1" />
+    <link rel="stylesheet" href="css/chat.css?v=2.3.2" />
     <script defer src="/socket.io/socket.io.js"></script>
     <script type="module" src="/js/config.js"></script>
     <script defer src="js/chat.js"></script>
@@ -74,15 +74,19 @@
         <div class="input-tools">
             <button class="tool-btn" onclick="selectEmoji()">
                 <i class="fas fa-face-smile"></i>
+                <span>表情</span>
             </button>
             <button class="tool-btn" onclick="attachPhoto()">
                 <i class="fas fa-image"></i>
+                <span>写真</span>
             </button>
             <button class="tool-btn" onclick="voiceMessage()">
                 <i class="fas fa-microphone"></i>
+                <span>音声</span>
             </button>
             <button class="tool-btn" onclick="moreOptions()">
                 <i class="fas fa-plus-circle"></i>
+                <span>その他</span>
             </button>
         </div>
 
