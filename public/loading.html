@@ -2,33 +2,119 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>入場中...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#007aff">
+    <title>入場中... - Sure Link</title>
     <style>
         body {
-            background: radial-gradient(circle, #1a2338, #0b1020);
-            color: #fff;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+            margin: 0;
+            background: linear-gradient(180deg, #eef2ff 0%, #f8faff 50%, #ffffff 100%);
+            color: #1d1d1f;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
-            font-family: 'Noto Sans JP', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif;
+            position: relative;
+            overflow: hidden;
         }
-        .loader {
-            width: 60px; height: 60px;
-            border: 6px solid rgba(255,255,255,0.2);
-            border-top: 6px solid #66e3ff;
+        
+        /* 背景装饰 */
+        .bg-accent {
+            position: fixed;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
         }
+        
+        .bg-accent-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 122, 255, 0.3), transparent);
+            top: -100px;
+            right: -100px;
+        }
+        
+        .bg-accent-2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(52, 199, 89, 0.25), transparent);
+            bottom: -80px;
+            left: -80px;
+        }
+        
+        .loading-container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(0, 122, 255, 0.15);
+            border-top: 5px solid #007aff;
+            border-radius: 50%;
+            animation: spin 0.9s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            margin: 0 auto 24px;
+        }
+        
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1d1d1f;
+            margin: 0;
+        }
+        
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: radial-gradient(circle at top, #1a2332, #0f1419);
+                color: #f5f5f7;
+            }
+            
+            .loader {
+                border: 5px solid rgba(10, 132, 255, 0.2);
+                border-top: 5px solid #0a84ff;
+            }
+            
+            p {
+                color: #f5f5f7;
+            }
         }
     </style>
 </head>
 <body>
-<div class="loader"></div>
-<p>世界を読み込み中...</p>
+    <!-- 背景装饰 -->
+    <div class="bg-accent bg-accent-1"></div>
+    <div class="bg-accent bg-accent-2"></div>
+    
+    <!-- 加载内容 -->
+    <div class="loading-container">
+        <div class="loader"></div>
+        <p>世界を読み込み中...</p>
+    </div>
 <script>
     setTimeout(() => {
         location.href = "index.html";

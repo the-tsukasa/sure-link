@@ -29,27 +29,30 @@ body {
     padding-top: 6px;
 }
 
+/* 背景装饰（统一主题 - 蓝色+绿色） */
 .page-accent {
-    position: absolute;
-    z-index: -1;
-    filter: blur(60px);
-    opacity: 0.7;
+    position: fixed;
+    z-index: 0;
+    filter: blur(80px);
+    opacity: 0.35;
+    pointer-events: none;
+    border-radius: 50%;
 }
 
 .page-accent--one {
-    width: 240px;
-    height: 240px;
-    background: radial-gradient(circle at center, rgba(0,122,255,0.35), rgba(0,122,255,0));
-    top: -60px;
-    right: -40px;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(0, 122, 255, 0.3), transparent);
+    top: -70px;
+    right: -70px;
 }
 
 .page-accent--two {
-    width: 220px;
-    height: 220px;
-    background: radial-gradient(circle at center, rgba(255,105,180,0.25), rgba(255,105,180,0));
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(52, 199, 89, 0.25), transparent);
     bottom: 140px;
-    left: -80px;
+    left: -60px;
 }
 
 /* ====== 通用按钮样式 ====== */

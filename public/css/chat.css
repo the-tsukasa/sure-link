@@ -9,13 +9,40 @@
 /* ===== 全局設定 ===== */
 body {
     font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif);
-    background: var(--bg);
+    background: linear-gradient(180deg, #eef2ff 0%, #f8faff 40%, var(--bg) 100%);
     color: var(--text-primary);
     margin: 0;
     display: flex;
     flex-direction: column;
     height: 100vh;
     -webkit-tap-highlight-color: transparent;
+    position: relative;
+}
+
+/* 背景装饰（统一主题） */
+.page-bg-accent {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.page-bg-accent-1 {
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(0, 122, 255, 0.3), transparent);
+    top: -70px;
+    right: -70px;
+}
+
+.page-bg-accent-2 {
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(52, 199, 89, 0.25), transparent);
+    bottom: 150px;
+    left: -50px;
 }
 
 /* ===== 聊天主容器 ===== */

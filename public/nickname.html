@@ -2,40 +2,36 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ニックネーム設定</title>
-    <style>
-        body {
-            background: #0b1020;
-            color: white;
-            font-family: 'Noto Sans JP', sans-serif;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            height: 100vh;
-        }
-        input {
-            padding: 10px 16px;
-            border-radius: 6px;
-            border: none;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-        button {
-            background: linear-gradient(90deg, #66e3ff, #9e7bff);
-            border: none; padding: 10px 24px;
-            color: white; border-radius: 50px;
-            cursor: pointer;
-        }
-        button:hover { opacity: 0.9; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>ニックネーム設定 - Sure Link</title>
+    
+    <!-- Meta -->
+    <meta name="theme-color" content="#007aff">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nickname.css">
 </head>
 <body>
-<h2>ニックネームを入力してください</h2>
-<input id="nickname" type="text" placeholder="例：ツカサ" />
-<div>
-    <button onclick="autoSet()">自動決定</button>
-    <button onclick="start()">確認</button>
-</div>
+    <!-- 背景装饰 -->
+    <div class="bg-accent bg-accent-1"></div>
+    <div class="bg-accent bg-accent-2"></div>
+    
+    <!-- 主内容 -->
+    <div class="nickname-container">
+        <h2>ニックネームを入力してください</h2>
+        <input 
+            id="nickname" 
+            type="text" 
+            placeholder="例：ツカサ" 
+            maxlength="20"
+            aria-label="ニックネーム入力"
+        />
+        <div class="button-group">
+            <button class="secondary" onclick="autoSet()">自動決定</button>
+            <button onclick="start()">確認</button>
+        </div>
+    </div>
 
 <script>
     function autoSet() {
