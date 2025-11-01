@@ -1,0 +1,528 @@
+/* ===================================================
+   Sure Link - Home Page Styles
+   首页样式：特定于index.html的样式
+   v3.0.0 - 2024-10-31
+   =================================================== */
+
+/* ===== 旧版留言板（保留兼容） ===== */
+#messageBoard {
+    background: var(--bg-light);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+    border: 1px solid var(--border);
+}
+
+#msgInput {
+    width: 100%;
+    height: 70px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    background: var(--bg);
+    outline: none;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+}
+
+#msgInput:focus {
+    border-color: var(--primary);
+    background: var(--bg-light);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+#postBtn {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0,122,255,0.25);
+    transition: all 0.2s ease;
+}
+
+#postBtn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+#postBtn:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+#msgList {
+    list-style: none;
+    margin-top: 12px;
+}
+
+#msgList li {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    border: 1px solid var(--border);
+    transition: transform 0.2s ease;
+}
+
+#msgList li:active {
+    transform: scale(0.98);
+}
+
+/* ===== 功能列表 ===== */
+.feature-list {
+    text-align: left;
+    max-width: 600px;
+    margin: 16px auto;
+    padding-left: 20px;
+}
+
+.feature-list li {
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+/* ===== APP主页容器 ===== */
+.app-home {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+}
+
+/* 桌面端响应式布局 */
+@media (min-width: 768px) {
+    .app-home {
+        max-width: 900px;
+        padding: 0 40px 100px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .app-home {
+        max-width: 1200px;
+        padding: 0 60px 120px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .app-home {
+        max-width: 1400px;
+        padding: 0 80px 120px;
+    }
+}
+
+/* ===== 欢迎横幅 ===== */
+.welcome-banner {
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome-content h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.welcome-content p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== 功能卡片 ===== */
+.feature-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.feature-card {
+    background: linear-gradient(145deg, rgba(28, 28, 30, 0.9), rgba(44, 44, 46, 0.8));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.05), rgba(191, 90, 242, 0.03));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(10, 132, 255, 0.3);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.card-chat .card-icon {
+    background: linear-gradient(135deg, #0a84ff, #0066cc);
+}
+
+.card-map .card-icon {
+    background: linear-gradient(135deg, #ff375f, #ff1744);
+}
+
+.card-encounter .card-icon {
+    background: linear-gradient(135deg, #bf5af2, #9f4ace);
+}
+
+.card-profile .card-icon {
+    background: linear-gradient(135deg, #34c759, #28a745);
+}
+
+.card-icon i {
+    color: white;
+}
+
+.card-content {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.card-content h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-align: left;
+}
+
+.card-content p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+.card-arrow {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.card-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #ff375f, #ff1744);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    z-index: 2;
+}
+
+/* ===== 区域标题 ===== */
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #f5f5f7;
+}
+
+/* ===== 快捷功能 ===== */
+.quick-actions {
+    margin-bottom: 32px;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.quick-btn {
+    background: rgba(28, 28, 30, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    color: var(--text);
+}
+
+.quick-btn:hover {
+    background: rgba(44, 44, 46, 0.9);
+    border-color: rgba(10, 132, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.quick-btn i {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.quick-btn span {
+    font-size: 0.85rem;
+}
+
+.quick-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #ff375f;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== 最近活动 ===== */
+.recent-activity {
+    margin-bottom: 32px;
+}
+
+.activity-list {
+    background: rgba(28, 28, 30, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(10, 132, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.activity-time {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* ===== 统计信息 ===== */
+.stats-section {
+    margin-bottom: 32px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.stat-card {
+    background: linear-gradient(145deg, rgba(28, 28, 30, 0.9), rgba(44, 44, 46, 0.8));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(10, 132, 255, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== 关于应用 ===== */
+.about-section {
+    margin-bottom: 32px;
+}
+
+.about-card {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), rgba(191, 90, 242, 0.05));
+    border: 1px solid rgba(10, 132, 255, 0.2);
+    border-radius: 20px;
+    padding: 24px;
+}
+
+.about-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.about-card p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.about-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.feature-tag {
+    background: rgba(10, 132, 255, 0.2);
+    border: 1px solid rgba(10, 132, 255, 0.3);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ===== 响应式布局 ===== */
+@media (max-width: 768px) {
+    .feature-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .welcome-content h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 650px) {
+    main {
+        padding: 6px;
+        padding-bottom: calc(90px + var(--safe-bottom));
+    }
+    
+    #messageBoard {
+        border-radius: 10px !important;
+        padding: 10px !important;
+        margin: 7px 2vw !important;
+    }
+    
+    #msgInput {
+        height: 48px;
+        min-height: 38px;
+        font-size: 0.97rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-home {
+        padding: 0 12px 100px;
+    }
+    
+    .feature-card {
+        padding: 16px;
+    }
+    
+    .card-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .quick-btn {
+        padding: 16px 8px;
+    }
+    
+    .quick-btn i {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 420px) {
+    main {
+        padding-left: 2vw;
+        padding-right: 2vw;
+        padding-bottom: calc(91px + var(--safe-bottom));
+    }
+}
+

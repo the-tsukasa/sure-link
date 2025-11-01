@@ -1,0 +1,110 @@
+/* ===================================================
+   Sure Link - Component Styles
+   组件样式：按钮、卡片、表单、状态指示等
+   v3.0.0 - 2024-10-31
+   =================================================== */
+
+/* ===== 按钮样式 ===== */
+button, .btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(0,122,255,0.12);
+    padding: 10px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.22s, transform 0.15s;
+    cursor: pointer;
+}
+
+button:active, .btn:active {
+    opacity: 0.83;
+    transform: scale(0.97);
+}
+
+button:hover, .btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+/* ===== 表单元素 ===== */
+input, textarea {
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: border .15s, background .16s;
+    color: var(--text-primary);
+}
+
+input:focus, textarea:focus {
+    border-color: var(--accent);
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+/* ===== 服务器状态指示器 ===== */
+.server-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--primary);
+    background: rgba(255,255,255,0.7);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    margin: 0 auto 16px;
+    padding: 8px 14px;
+    width: fit-content;
+    border: 1px solid var(--border);
+}
+
+.server-status .divider {
+    color: #aaa;
+}
+
+.server-status-mini {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    width: fit-content;
+    font-size: 0.9rem;
+}
+
+.status-dot {
+    color: #34c759;
+    font-size: 0.6rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ===== 响应式按钮 ===== */
+@media (max-width: 650px) {
+    .server-status {
+        font-size: 0.93rem;
+        padding: 7px 7vw;
+        box-shadow: 0 0.5px 2.5px var(--shadow);
+    }
+    
+    #postBtn, #sendBtn, #refreshBtn, #editNameBtn,
+    button:not(.icon-btn):not(.quick-reply-btn):not(.tool-btn) {
+        border-radius: 20px;
+        font-size: 1rem;
+        padding: 10px 0;
+    }
+}
+

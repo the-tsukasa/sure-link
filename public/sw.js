@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v21"; // ← 每次更新时改版本号 (2.4.6 - 桌面端响应式布局优化)
+const CACHE_NAME = "surelink-v3.0.0"; // ← 每次更新时改版本号 (3.0.0 - CSS轻量拆分)
 
 const URLS_TO_CACHE = [
     "/",
@@ -12,12 +12,21 @@ const URLS_TO_CACHE = [
     "/profile.html",
     "/diagnostic.html",
     
-    // CSS 文件
-    "/css/style.css",
-    "/css/welcome.css",
-    "/css/chat.css",
-    "/css/map.css",
-    "/css/profile.css",
+    // CSS 核心文件
+    "/css/core.css",
+    "/css/layout.css",
+    "/css/components.css",
+    
+    // CSS 页面特定文件
+    "/css/pages/home.css",
+    "/css/pages/chat.css",
+    "/css/pages/map.css",
+    "/css/pages/profile.css",
+    "/css/pages/encounter.css",
+    "/css/pages/welcome.css",
+    "/css/pages/nickname.css",
+    
+    // CSS 其他文件
     "/css/pwa-guide.css",
     
     // JavaScript 文件

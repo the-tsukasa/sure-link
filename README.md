@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-2.4.6-blue.svg)
+![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
@@ -211,10 +211,25 @@ ADMIN_SECRET=your_secret_key
 ### Available Docs
 - [🛠️ Local Development Guide](LOCAL_DEVELOPMENT.md) - Complete setup guide for local development
 - [🔧 Troubleshooting Guide](TROUBLESHOOTING.md) - Fix icon display issues, cache problems, and more
+- [🎨 CSS Refactoring v3.0](CSS_REFACTORING_V3.md) - CSS architecture refactoring documentation ⭐ NEW
 - [🚨 CDN Fix Summary](CDN_FIX_SUMMARY.md) - Font Awesome 403 error fix documentation
 - [🧪 Diagnostic Tool](/diagnostic.html) - Online tool to check Font Awesome and CSS status
 
 ### Latest Updates
+
+**v3.0.0** (2024-10-31) 🎉 **Major Refactoring**
+- 🎨 **CSS轻量拆分架构重构**
+  - 新增 `core.css` (134行) - CSS变量、重置、基础样式
+  - 新增 `layout.css` (82行) - 导航栏、容器布局
+  - 新增 `components.css` (117行) - 按钮、表单、通用组件
+  - 页面CSS移至 `pages/` 文件夹（chat, map, profile, encounter等）
+- ✅ **架构优势**
+  - 职责清晰分离（核心、布局、组件、页面）
+  - 易于维护和扩展
+  - 提高代码复用性
+  - 为HTML组件化打基础
+- 📖 **完整文档** - [CSS_REFACTORING_V3.md](CSS_REFACTORING_V3.md)
+- 🔄 **Service Worker v3.0.0** - 更新缓存策略
 
 **v2.4.6** (2024-10-31)
 - 📱 **桌面端响应式布局优化**

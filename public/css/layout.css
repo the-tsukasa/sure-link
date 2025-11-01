@@ -1,0 +1,88 @@
+/* ===================================================
+   Sure Link - Layout Styles
+   布局样式：导航栏、容器、安全区域
+   v3.0.0 - 2024-10-31
+   =================================================== */
+
+/* ===== 底部导航栏 - Apple 玻璃态风格 ===== */
+nav {
+    height: calc(60px + var(--safe-bottom));
+    background: linear-gradient(145deg, rgba(28, 28, 30, 0.95), rgba(44, 44, 46, 0.9));
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: var(--safe-bottom);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 20;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 8px 16px;
+    border-radius: 12px;
+    position: relative;
+}
+
+nav a:hover {
+    background: rgba(10, 132, 255, 0.15);
+    color: var(--text-primary);
+}
+
+nav a:active {
+    transform: scale(0.95);
+}
+
+nav a.active {
+    color: var(--primary);
+    font-weight: 600;
+    background: rgba(10, 132, 255, 0.2);
+}
+
+nav a.active::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 0 0 3px 3px;
+}
+
+nav a.active i {
+    transform: scale(1.15);
+}
+
+nav i {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+}
+
+/* ===== 响应式导航栏 ===== */
+@media (max-width: 650px) {
+    nav {
+        height: calc(66px + var(--safe-bottom));
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 420px) {
+    nav {
+        font-size: 13px;
+    }
+}
+
