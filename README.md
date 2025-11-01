@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
@@ -216,6 +216,19 @@ ADMIN_SECRET=your_secret_key
 - [🧪 Diagnostic Tool](/diagnostic.html) - Online tool to check Font Awesome and CSS status
 
 ### Latest Updates
+
+**v3.1.0** (2024-11-01) 💬 **Chat Layout Optimization**
+- 🎨 **聊天页面布局重构**
+  - ✅ 修复对方消息气泡白底白字问题（改为深色文字）
+  - ✅ 优化消息布局：昵称+头像垂直堆叠在一侧，气泡在另一侧
+  - ✅ 本人消息完全靠右对齐
+  - ✅ 采用CSS Grid布局：2列x2行结构
+- 🎯 **布局特点**
+  - **对方消息**：左上"昵称" + 左下"头像" | 右侧"气泡"
+  - **本人消息**：左侧"气泡" | 右上"昵称" + 右下"头像"
+  - 头像尺寸增大至40px，提升可见性
+  - 昵称和头像颜色区分（对方：蓝色，本人：紫色）
+- 🔄 **Service Worker v3.1.0** - 更新缓存策略
 
 **v3.0.0** (2024-10-31) 🎉 **Major Refactoring**
 - 🎨 **CSS轻量拆分架构重构**

@@ -1,5 +1,5 @@
 // ========== sw.js ==========
-const CACHE_NAME = "surelink-v3.0.0"; // ← 每次更新时改版本号 (3.0.0 - CSS轻量拆分)
+const CACHE_NAME = "surelink-v3.1.0"; // ← 每次更新时改版本号 (3.1.0 - 聊天布局优化)
 
 const URLS_TO_CACHE = [
     "/",
@@ -19,7 +19,7 @@ const URLS_TO_CACHE = [
     
     // CSS 页面特定文件
     "/css/pages/home.css",
-    "/css/pages/chat.css",
+    "/css/pages/chat.css?v=3.1.0",
     "/css/pages/map.css",
     "/css/pages/profile.css",
     "/css/pages/encounter.css",

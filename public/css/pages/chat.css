@@ -2,8 +2,10 @@
 
 /* 使用全局变量，局部补充 */
 :root {
-    --chat-bubble-bg: #ffffff;
-    --chat-bubble-me: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    --chat-bubble-bg: rgba(255, 255, 255, 0.95); /* 对方消息：白色气泡 */
+    --chat-bubble-text: #1c1c1e; /* 对方消息：深色文字 */
+    --chat-bubble-me: linear-gradient(135deg, var(--primary), var(--primary-dark)); /* 本人消息：蓝色渐变 */
+    --chat-bubble-me-text: #ffffff; /* 本人消息：白色文字 */
 }
 
 /* ===== 全局設定 ===== */
@@ -71,56 +73,95 @@ body {
 
 /* ===== 單條消息 ===== */
 .message {
-    display: flex;
-    align-items: center; /* 垂直居中头像与气泡 */
+    display: grid;
+    grid-template-columns: auto 1fr; /* 两列：用户信息列 | 气泡列 */
+    grid-template-rows: auto auto; /* 两行：昵称行 | 头像/气泡行 */
+    gap: 4px 10px;
     max-width: 85%;
+    align-items: start;
 }
 
+/* 对方的消息：靠左 */
+.message:not(.me) {
+    margin-right: auto;
+}
+
+/* 本人的消息：靠右，列顺序反转 */
 .message.me {
     margin-left: auto;
-    flex-direction: row-reverse;
+    margin-right: 0; /* 完全靠右 */
+    grid-template-columns: 1fr auto; /* 反转：气泡列 | 用户信息列 */
 }
 
 /* ===== 头像 ===== */
 .avatar {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    min-height: 36px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     border-radius: 50%;
     background: #ccc;
     color: #fff;
-    font-size: 0.9rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    grid-row: 2; /* 头像在第2行 */
+    align-self: start;
 }
 
+/* 对方消息：头像在左列 */
 .message:not(.me) .avatar {
-    margin-right: 8px;
+    grid-column: 1;
 }
+
+/* 本人消息：头像在右列 */
 .message.me .avatar {
-    margin-left: 8px;
+    grid-column: 2;
 }
 
 /* ===== 气泡外层 ===== */
 .bubble-wrapper {
     display: flex;
     flex-direction: column;
+    gap: 4px;
     max-width: 100%;
+    grid-row: 2; /* 气泡在第2行 */
+}
+
+/* 对方消息：气泡在右列 */
+.message:not(.me) .bubble-wrapper {
+    grid-column: 2;
+}
+
+/* 本人消息：气泡在左列 */
+.message.me .bubble-wrapper {
+    grid-column: 1;
 }
 
 /* ===== 用户名 ===== */
 .user-row {
     font-weight: 600;
     font-size: 0.85rem;
-    margin-bottom: 3px;
     color: var(--primary);
+    grid-row: 1; /* 昵称在第1行 */
+    padding-left: 4px;
 }
+
+/* 对方消息：昵称在左列 */
+.message:not(.me) .user-row {
+    grid-column: 1;
+    text-align: left;
+}
+
+/* 本人消息：昵称在右列 */
 .message.me .user-row {
-    color: var(--green);
+    grid-column: 2;
     text-align: right;
+    color: var(--green);
+    padding-left: 0;
+    padding-right: 4px;
 }
 
 /* ===== 气泡 + 时间行 ===== */
@@ -135,6 +176,7 @@ body {
     padding: 10px 14px;
     border-radius: 18px;
     background: var(--chat-bubble-bg);
+    color: var(--chat-bubble-text); /* 对方消息：深色文字 */
     box-shadow: var(--shadow-sm);
     font-size: 0.95rem;
     line-height: 1.5;
@@ -146,7 +188,7 @@ body {
 /* 自己的消息气泡 */
 .message.me .bubble {
     background: var(--chat-bubble-me);
-    color: #fff;
+    color: var(--chat-bubble-me-text); /* 本人消息：白色文字 */
     border-top-left-radius: 18px;
     border-top-right-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
