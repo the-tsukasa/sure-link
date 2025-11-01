@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)
+![Version](https://img.shields.io/badge/version-3.1.1-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
@@ -216,6 +216,18 @@ ADMIN_SECRET=your_secret_key
 - [🧪 Diagnostic Tool](/diagnostic.html) - Online tool to check Font Awesome and CSS status
 
 ### Latest Updates
+
+**v3.1.1** (2024-11-01) 🔧 **Linter Warnings Fix**
+- 🛠️ **修复所有Linter警告（18个 → 0个）**
+  - 删除过时的 `-webkit-overflow-scrolling` 属性（3处）
+  - 移除HTML内联样式，创建CSS类（13处）
+  - 新增通用工具类：`.hidden`、`.empty-state`
+  - 创建 `diagnostic.css` 管理诊断页面样式
+- ✅ **代码质量提升**
+  - 样式与结构完全分离
+  - 提高可维护性和复用性
+  - 优化Service Worker缓存策略
+- 📖 **完整文档** - [LINT_FIXES_V3.1.md](LINT_FIXES_V3.1.md)
 
 **v3.1.0** (2024-11-01) 💬 **Chat Layout Optimization**
 - 🎨 **聊天页面布局重构**

@@ -58,7 +58,6 @@ body {
     scroll-behavior: smooth;
     padding-bottom: calc(80px + env(safe-area-inset-bottom));
     overscroll-behavior-y: contain;
-    -webkit-overflow-scrolling: touch;
 }
 
 /* ===== 消息列表 ===== */
@@ -454,8 +453,7 @@ body {
     overflow-x: auto;
     background: rgba(28, 28, 30, 0.5);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    scrollbar-width: none; /* Firefox支持 */
 }
 
 .quick-replies::-webkit-scrollbar {

@@ -1,0 +1,64 @@
+/* ===================================================
+   Sure Link - Diagnostic Page Styles
+   诊断页面样式
+   v3.1.0 - 2024-11-01
+   =================================================== */
+
+/* 按钮测试容器 */
+.button-test-container {
+    display: flex;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+/* 列表样式 */
+.diagnostic-list {
+    line-height: 2;
+    margin-left: 20px;
+}
+
+/* 诊断步骤容器 */
+.diagnostic-steps {
+    line-height: 2;
+}
+
+/* 代码块容器 */
+.code-block {
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.code-block code {
+    display: block;
+    color: #34c759;
+}
+
+/* 状态指示器 */
+.status-success {
+    color: #34c759;
+}
+
+.status-error {
+    color: #ff375f;
+}
+
+/* 页脚 */
+.diagnostic-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.diagnostic-footer p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+}
+
+/* 浏览器信息容器 */
+.browser-info {
+    line-height: 2;
+}
+

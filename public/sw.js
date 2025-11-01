@@ -19,7 +19,8 @@ const URLS_TO_CACHE = [
     
     // CSS 页面特定文件
     "/css/pages/home.css",
-    "/css/pages/chat.css?v=3.1.0",
+    "/css/pages/chat.css",
+    "/css/diagnostic.css",
     "/css/pages/map.css",
     "/css/pages/profile.css",
     "/css/pages/encounter.css",

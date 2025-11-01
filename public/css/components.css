@@ -4,6 +4,17 @@
    v3.0.0 - 2024-10-31
    =================================================== */
 
+/* ===== 通用工具类 ===== */
+.hidden {
+    display: none !important;
+}
+
+.empty-state {
+    text-align: center;
+    color: #9ca3af;
+    padding: 20px;
+}
+
 /* ===== 按钮样式 ===== */
 button, .btn {
     background: var(--accent);

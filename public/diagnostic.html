@@ -6,6 +6,7 @@
     <title>Sure Link - 诊断页面</title>
     <!-- Font Awesome from cdnjs (Public CDN - more reliable) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/diagnostic.css?v=3.1.0">
     <style>
         * {
             margin: 0;
@@ -206,7 +207,7 @@
 
         <div class="test-item">
             <h3>实际按钮样式测试（Chat页面头部按钮）</h3>
-            <div style="display: flex; gap: 12px; margin: 15px 0;">
+            <div class="button-test-container">
                 <button class="button-test" onclick="alert('在线用户按钮点击测试')">
                     <i class="fas fa-users"></i>
                     在线用户
@@ -223,7 +224,7 @@
 
         <div class="test-item">
             <h3>📌 代码层面的问题</h3>
-            <ul style="line-height: 2; margin-left: 20px;">
+            <ul class="diagnostic-list">
                 <li>Font Awesome CDN 加载失败（网络问题）</li>
                 <li>CSS 冲突（<code>font-size: 0</code> 或 <code>display: none</code>）</li>
                 <li>图标类名拼写错误（例如：<code>fa-user</code> vs <code>fa-users</code>）</li>
@@ -234,7 +235,7 @@
 
         <div class="test-item">
             <h3>🌐 非代码层面的问题</h3>
-            <ul style="line-height: 2; margin-left: 20px;">
+            <ul class="diagnostic-list">
                 <li><strong>网络连接问题：</strong>CDN无法访问（防火墙、DNS问题）</li>
                 <li><strong>浏览器扩展：</strong>广告拦截器阻止了Font Awesome CDN</li>
                 <li><strong>PWA缓存：</strong>Service Worker缓存了旧版本</li>
@@ -248,23 +249,23 @@
 
         <div class="test-item">
             <h3>🔧 如何排查</h3>
-            <div style="line-height: 2;">
+            <div class="diagnostic-steps">
                 <p><strong>步骤1：</strong>打开浏览器开发者工具（F12）</p>
                 <p><strong>步骤2：</strong>切换到 <code>Console</code> 标签</p>
                 <p><strong>步骤3：</strong>运行以下命令：</p>
-                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin: 10px 0;">
-                    <code style="display: block; color: #34c759;">
+                <div class="code-block">
+                    <code>
                         console.log(window.FontAwesome);
                     </code>
                 </div>
-                <p>• 如果显示 <code style="color: #34c759;">Object {...}</code>，说明Font Awesome已加载✅</p>
-                <p>• 如果显示 <code style="color: #ff375f;">undefined</code>，说明加载失败❌</p>
+                <p>• 如果显示 <code class="status-success">Object {...}</code>，说明Font Awesome已加载✅</p>
+                <p>• 如果显示 <code class="status-error">undefined</code>，说明加载失败❌</p>
             </div>
         </div>
 
         <div class="test-item">
             <h3>🚀 解决方案</h3>
-            <ol style="line-height: 2; margin-left: 20px;">
+            <ol class="diagnostic-list">
                 <li><strong>清除缓存：</strong>强制刷新（Ctrl+Shift+R / Cmd+Shift+R）</li>
                 <li><strong>检查网络：</strong>确保可以访问 <code>kit.fontawesome.com</code></li>
                 <li><strong>禁用广告拦截器：</strong>临时关闭浏览器扩展</li>
@@ -276,12 +277,12 @@
         <h2>4. 浏览器检测</h2>
         <div class="test-item">
             <h3>当前环境信息</h3>
-            <div id="browserInfo" style="line-height: 2;"></div>
+            <div id="browserInfo" class="browser-info"></div>
         </div>
 
-        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">
-                Sure Link - Version 2.4.4 | Diagnostic Tool
+        <div class="diagnostic-footer">
+            <p>
+                Sure Link - Version 3.1.0 | Diagnostic Tool
             </p>
         </div>
     </div>
@@ -291,10 +292,10 @@
         document.getElementById('browserInfo').innerHTML = `
             <p><strong>用户代理：</strong> ${navigator.userAgent}</p>
             <p><strong>浏览器语言：</strong> ${navigator.language}</p>
-            <p><strong>在线状态：</strong> ${navigator.onLine ? '<span style="color: #34c759;">✅ 在线</span>' : '<span style="color: #ff375f;">❌ 离线</span>'}</p>
+            <p><strong>在线状态：</strong> ${navigator.onLine ? '<span class="status-success">✅ 在线</span>' : '<span class="status-error">❌ 离线</span>'}</p>
             <p><strong>屏幕分辨率：</strong> ${window.screen.width} x ${window.screen.height}</p>
             <p><strong>窗口大小：</strong> ${window.innerWidth} x ${window.innerHeight}</p>
-            <p><strong>Service Worker：</strong> ${'serviceWorker' in navigator ? '<span style="color: #34c759;">✅ 支持</span>' : '<span style="color: #ff375f;">❌ 不支持</span>'}</p>
+            <p><strong>Service Worker：</strong> ${'serviceWorker' in navigator ? '<span class="status-success">✅ 支持</span>' : '<span class="status-error">❌ 不支持</span>'}</p>
         `;
 
         // 检测Font Awesome加载状态（CSS版本检测）
