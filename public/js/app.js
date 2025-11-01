@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ===== オンライン人数更新 =====
-    socket.on("onlineCount", (count) => {
+    socket.on("userCount", (count) => {
         if (userCountEl) {
             userCountEl.textContent = `現在オンライン人数：${count}人`;
             console.log("👥 Online:", count);

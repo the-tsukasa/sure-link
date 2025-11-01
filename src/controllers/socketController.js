@@ -94,7 +94,7 @@ export class SocketController {
      */
     broadcastOnlineCount() {
         const count = this.io.engine.clientsCount;
-        this.io.emit('onlineCount', count);
+        this.io.emit('userCount', count); // 修复：使用userCount与客户端匹配
         
         logger.debug('Online count broadcasted', { count });
     }

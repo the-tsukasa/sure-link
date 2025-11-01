@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-3.1.1-blue.svg)
+![Version](https://img.shields.io/badge/version-3.1.2-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
@@ -216,6 +216,18 @@ ADMIN_SECRET=your_secret_key
 - [🧪 Diagnostic Tool](/diagnostic.html) - Online tool to check Font Awesome and CSS status
 
 ### Latest Updates
+
+**v3.1.2** (2024-11-01) 🐛 **Online User Count Fix**
+- 🔧 **修复在线人数显示问题**
+  - 统一Socket.io事件名：`onlineCount` → `userCount`
+  - 修复服务器端广播事件名 (`socketController.js`)
+  - 修复客户端监听事件名 (`encounter-main.js`, `app.js`)
+- ✅ **影响页面**
+  - 主页 (`index.html`): 顶部状态栏 + 统计卡片
+  - 聊天页 (`chat.html`): 聊天室头部
+  - 遭遇页 (`encounter.html`): 附近用户数
+- 🎯 **预期效果**: 在线人数实时正确显示，多用户连接时同步更新
+- 📖 **完整文档** - [ONLINE_COUNT_FIX.md](ONLINE_COUNT_FIX.md)
 
 **v3.1.1** (2024-11-01) 🔧 **Linter Warnings Fix**
 - 🛠️ **修复所有Linter警告（18个 → 0个）**

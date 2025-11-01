@@ -47,7 +47,7 @@ class EncounterSystem {
         });
 
         // 在线用户更新
-        this.socket.on('onlineCount', (count) => {
+        this.socket.on('userCount', (count) => {
             document.getElementById('nearbyCount').textContent = count;
         });
 
